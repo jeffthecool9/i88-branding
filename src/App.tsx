@@ -941,19 +941,40 @@ export default function App() {
             transition={{ duration: 1, ease: "easeOut" }}
             className="bg-gradient-to-br from-[#1e293b] to-[#0f172a] border border-cyan-500/30 rounded-none p-10 sm:p-16 text-center shadow-[0_0_50px_rgba(0,191,255,0.1)] relative overflow-hidden group"
           >
-            <div className="relative z-10">
-              <motion.p 
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
-                className="text-xl sm:text-3xl md:text-4xl font-black text-white uppercase tracking-tighter mb-10 italic leading-[1.1] max-w-3xl mx-auto"
-              >
-             Unlock your welcome reward today! 
-<span className="text-white font-bold underline decoration-cyan-500 underline-offset-4">
-Deposit RM100 within 24 hours </span> and instantly activate 
-<span className="text-cyan-400 font-bold">128 FREE TOKENS </span>.
-              </motion.p>
+           <div className="max-w-3xl mx-auto text-center space-y-4">
+
+<motion.h2
+  initial={{ opacity: 0, y: 10 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
+  className="text-3xl sm:text-4xl md:text-5xl font-black text-white uppercase tracking-tight leading-[1.1]"
+>
+  Unlock Your Welcome Reward
+</motion.h2>
+
+<motion.p
+  initial={{ opacity: 0, y: 10 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+  className="text-lg sm:text-xl text-gray-300"
+>
+  Deposit
+  <span className="mx-2 text-white font-bold underline decoration-cyan-500 underline-offset-4">
+    RM100 within 24 hours
+  </span>
+</motion.p>
+
+<motion.p
+  initial={{ opacity: 0, y: 10 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
+  className="text-xl sm:text-2xl font-bold text-cyan-400"
+>
+  Instantly Activate 128 FREE TOKENS
+</motion.p>
               
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
