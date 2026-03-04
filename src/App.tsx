@@ -1,0 +1,1094 @@
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+import React, { useRef, useState, useEffect, useMemo } from 'react';
+import { motion, useScroll, useTransform, useSpring, useVelocity, AnimatePresence } from 'motion/react';
+
+// Sound Utility
+const playSFX = (type: 'click' | 'alert' | 'success') => {
+  const sounds = {
+    click: 'https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3',
+    alert: 'https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3',
+    success: 'https://assets.mixkit.co/active_storage/sfx/1435/1435-preview.mp3'
+  };
+  
+  const audio = new Audio(sounds[type]);
+  audio.volume = 0.2; // Keep it subtle
+  audio.play().catch(() => {
+    // Ignore errors (usually browser blocking autoplay until interaction)
+  });
+};
+
+const CyberBackground = () => {
+  const { scrollY } = useScroll();
+  const y1 = useTransform(scrollY, [0, 500], [0, 200]);
+  const y2 = useTransform(scrollY, [0, 500], [0, -150]);
+
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* Abstract Grid with Fade */}
+      <div 
+        className="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: `linear-gradient(to right, #00BFFF 1px, transparent 1px),
+                           linear-gradient(to bottom, #00BFFF 1px, transparent 1px)`,
+          backgroundSize: '50px 50px',
+          maskImage: 'linear-gradient(to bottom, transparent, black 20%, black 80%, transparent)'
+        }}
+      />
+
+      {/* Floating Glows with Parallax */}
+      <motion.div
+        style={{ y: y1 }}
+        animate={{
+          x: [-50, 50, -50],
+          opacity: [0.1, 0.2, 0.1],
+          scale: [1, 1.1, 1]
+        }}
+        transition={{
+          duration: 15,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+        className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-cyan-500/20 rounded-full blur-[120px]"
+      />
+      
+      <motion.div
+        style={{ y: y2 }}
+        animate={{
+          x: [30, -30, 30],
+          opacity: [0.05, 0.15, 0.05],
+          scale: [1, 1.2, 1]
+        }}
+        transition={{
+          duration: 20,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+        className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-blue-600/20 rounded-full blur-[140px]"
+      />
+
+      {/* Drifting Particles */}
+      {[...Array(8)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute w-1 h-1 bg-cyan-400/40 rounded-full"
+          initial={{
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
+            opacity: 0
+          }}
+          animate={{
+            y: [0, -100],
+            x: [0, 50],
+            opacity: [0, 0.6, 0]
+          }}
+          transition={{
+            duration: Math.random() * 10 + 10,
+            repeat: Infinity,
+            ease: "linear",
+            delay: Math.random() * 5
+          }}
+        />
+      ))}
+    </div>
+  );
+};
+
+const ExperienceBackground = () => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+  
+  const y = useTransform(scrollYProgress, [0, 1], [-50, 50]);
+
+  return (
+    <div ref={ref} className="absolute inset-0 overflow-hidden pointer-events-none">
+      <motion.div 
+        style={{ y }}
+        className="absolute inset-0 opacity-[0.02]"
+        initial={{
+            backgroundImage: `linear-gradient(to right, #00BFFF 1px, transparent 1px),
+                             linear-gradient(to bottom, #00BFFF 1px, transparent 1px)`,
+            backgroundSize: '40px 40px'
+        }}
+      />
+    </div>
+  );
+};
+
+const TrustBackground = () => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+  
+  const y = useTransform(scrollYProgress, [0, 1], [-40, 40]);
+
+  return (
+    <div ref={ref} className="absolute inset-0 overflow-hidden pointer-events-none">
+      <motion.div style={{ y }} className="absolute inset-0">
+        {/* Drifting Particles */}
+        {[...Array(15)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 bg-cyan-400/20 rounded-full"
+            initial={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              opacity: 0
+            }}
+            animate={{
+              y: [0, -30],
+              x: [0, 10],
+              opacity: [0, 0.4, 0]
+            }}
+            transition={{
+              duration: Math.random() * 5 + 5,
+              repeat: Infinity,
+              ease: "linear",
+              delay: Math.random() * 5
+            }}
+          />
+        ))}
+      </motion.div>
+    </div>
+  );
+};
+
+const AnimatedUnderline = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <motion.span 
+      initial={{ opacity: 0, scale: 0.95 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 1, ease: "easeOut" }}
+      className="relative inline-block"
+    >
+      {children}
+      <motion.span
+        className="absolute -bottom-1 left-0 h-[2px] bg-cyan-500"
+        initial={{ width: 0 }}
+        whileInView={{ width: "100%" }}
+        viewport={{ once: true }}
+        transition={{ duration: 1.5, ease: "easeOut", delay: 0.3 }}
+      />
+    </motion.span>
+  );
+};
+
+const PaymentLogo = ({ logo }: { logo: { name: string; src: string; isBank?: boolean }; key?: React.Key }) => {
+  const [hasError, setHasError] = useState(false);
+
+  return (
+    <motion.div 
+      onClick={() => playSFX('click')}
+      whileHover={{ 
+        y: -4,
+        borderColor: "rgba(0, 191, 255, 0.5)",
+        boxShadow: "0 0 25px rgba(0, 191, 255, 0.2)"
+      }}
+      className={`group relative flex-shrink-0 flex items-center justify-center h-12 w-24 sm:h-16 sm:w-32 md:h-20 md:w-40 ${logo.isBank ? 'bg-white' : 'bg-[#1e293b]/50'} border border-white/5 rounded-none p-2 sm:p-3 md:p-4 transition-all duration-300 backdrop-blur-sm cursor-pointer overflow-hidden`}
+    >
+      {/* Hover Background Pulse */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        whileHover={{ 
+          opacity: [0.05, 0.15, 0.05],
+          transition: { duration: 2, repeat: Infinity }
+        }}
+        className="absolute inset-0 bg-[#00BFFF] pointer-events-none"
+      />
+
+      {!hasError ? (
+        <img 
+          src={logo.src} 
+          alt={logo.name} 
+          referrerPolicy="no-referrer"
+          className="h-full w-full object-contain transition-all duration-300 transform group-hover:scale-110 relative z-10" 
+          onError={() => setHasError(true)}
+        />
+      ) : (
+        <div className="flex flex-col items-center justify-center gap-1 relative z-10">
+          <div className="w-6 h-6 rounded-full bg-cyan-500/20 flex items-center justify-center">
+            <div className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+          </div>
+          <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">{logo.name}</span>
+        </div>
+      )}
+    </motion.div>
+  );
+};
+
+const LiveTransactions = () => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+  
+  const yBg = useTransform(scrollYProgress, [0, 1], [-30, 30]);
+
+  const malaysianNames = [
+    "eagle99", "nurifi98", "ahmad1919", "players85", "dragon19", "tiger88", 
+    "siti_92", "ali_king", "lion_sg", "malay_pro", "sg_gamer", "hacker7",
+    "rizal_88", "fatimah_z", "chong_win", "tan_huat", "kumar_v", "meena_p",
+    "syed_top", "wan_boss", "lim_kopi", "abu_bakar", "zulkifli", "leong_88",
+    "fadhli_99", "shafiq_01", "azman_88", "hafiz_z", "khairul_p", "najib_boss",
+    "mahathir_99", "anwar_pm", "muhyiddin_8", "ismail_s", "sabri_99", "zahid_z"
+  ];
+
+  const games = [
+    "Gates of Olympus",
+    "Starlight Princess",
+    "Big Bass Bonanza",
+    "5 Lions",
+    "Candy Bonanza",
+    "Wolf God",
+    "Sugar Rush",
+    "Sweet Bonanza",
+    "Wild West Gold",
+    "Buffalo King",
+  ];
+
+  // Internal logic for amount ranges and distribution
+  const tiers = [
+    { id: 1, min: 500, max: 10000 }, // Tier 1
+    { id: 2, min: 100, max: 500 },   // Tier 2
+    { id: 3, min: 10, max: 100 },    // Tier 3
+  ];
+
+  const generateWinner = (tierIdx: number, timeStr?: string) => {
+    const tier = tiers[tierIdx];
+    
+    // Generate amount with cents (sens)
+    const amount = tier.min + Math.random() * (tier.max - tier.min);
+    
+    // Higher probability for "Gates of Olympus"
+    const game = Math.random() < 0.4 ? "Gates of Olympus" : games[Math.floor(Math.random() * games.length)];
+    
+    return {
+      id: Math.random().toString(36).substr(2, 9),
+      user: malaysianNames[Math.floor(Math.random() * malaysianNames.length)],
+      game: game,
+      amount: parseFloat(amount.toFixed(2)),
+      tierId: tier.id,
+      time: timeStr || "Just now"
+    };
+  };
+
+  const [winners, setWinners] = useState<any[]>([]);
+
+  useEffect(() => {
+    // Initial distribution: 4x Tier 3, 2x Tier 2, 1x Tier 1
+    const initial: any[] = [];
+    for(let i=0; i<1; i++) initial.push(generateWinner(0, `${(i+1)*15} mins ago`)); // Tier 1
+    for(let i=0; i<2; i++) initial.push(generateWinner(1, `${(i+1)*8} mins ago`));  // Tier 2
+    for(let i=0; i<4; i++) initial.push(generateWinner(2, `${(i+1)*3} mins ago`));  // Tier 3
+
+    // Shuffle to mix tiers
+    const shuffled = initial.sort(() => Math.random() - 0.5);
+    setWinners(shuffled);
+
+    const interval = setInterval(() => {
+      setWinners(prev => {
+        const rand = Math.random();
+        let tierIdx = 2; // Default to Tier 3
+        
+        // Probability distribution: 50% Tier 3, 30% Tier 2, 20% Tier 1
+        if (rand < 0.20) tierIdx = 0;      // Tier 1
+        else if (rand < 0.50) tierIdx = 1; // Tier 2
+        else tierIdx = 2;                 // Tier 3
+
+        const newWinner = generateWinner(tierIdx);
+        
+        // Play alert sound for new winner
+        playSFX('alert');
+
+        // Maintain the count of 7 winners
+        let next = [newWinner, ...prev.slice(0, 6)];
+        return next;
+      });
+    }, 12000); 
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const topGames = useMemo(() => {
+    const counts: { [key: string]: number } = {};
+    winners.forEach(w => {
+      counts[w.game] = (counts[w.game] || 0) + 1;
+    });
+    const sorted = Object.entries(counts)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 3)
+      .map(entry => entry[0]);
+    
+    // Always include Gates of Olympus if it's in the winners list, or just force it
+    if (!sorted.includes("Gates of Olympus")) {
+      sorted.push("Gates of Olympus");
+    }
+    return sorted;
+  }, [winners]);
+
+  const maskUser = (user: string) => {
+    return user.substring(0, 5) + "***";
+  };
+
+  const recentActivity = winners.slice(0, 10);
+
+  return (
+    <section ref={ref} className="py-12 sm:py-20 bg-[#0B1120] relative overflow-hidden border-t border-white/5">
+      {/* Parallax Background Element */}
+      <motion.div 
+        style={{ y: yBg }}
+        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+      >
+        <div className="absolute top-0 left-0 w-full h-full" style={{ 
+          backgroundImage: 'radial-gradient(circle at 20% 30%, #00BFFF 0%, transparent 50%)',
+          filter: 'blur(80px)'
+        }} />
+      </motion.div>
+
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <motion.div 
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="text-center mb-12"
+        >
+          <h2 className="text-2xl font-bold text-white">
+            <AnimatedUnderline>Live Winners</AnimatedUnderline>
+          </h2>
+          <p className="mt-2 text-gray-400 text-sm font-sans">Real-time platform winners</p>
+        </motion.div>
+
+        <div className="max-w-2xl mx-auto">
+          <div className="flex items-center gap-2 mb-4 px-2">
+            <div className="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-pulse" />
+            <h3 className="text-base md:text-lg font-bold text-white uppercase tracking-wider">Recent Winners</h3>
+          </div>
+          <div className="rounded-none overflow-hidden border border-white/5">
+            {/* Table Header */}
+            <div className="p-4 sm:p-5 grid grid-cols-2 sm:grid-cols-3 items-center gap-4 bg-white/5 border-b border-white/10">
+              <span className="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em]">Recent Winners</span>
+              <span className="hidden sm:block text-center text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em]">Game</span>
+              <span className="text-right text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em]">Winning Amount</span>
+            </div>
+            <AnimatePresence mode="popLayout">
+              {recentActivity.map((tx, idx) => (
+                  <motion.div
+                    key={tx.id}
+                    layout
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ 
+                      type: "spring",
+                      stiffness: 500,
+                      damping: 30,
+                      opacity: { duration: 0.2 }
+                    }}
+                    className={`p-3 sm:p-5 flex sm:grid sm:grid-cols-3 items-center justify-between gap-4 hover:bg-white/5 transition-all duration-300 group border-b border-white/5 last:border-0 ${
+                      idx % 2 === 0 ? 'bg-[#1e293b]/40' : 'bg-[#1e293b]/10'
+                    } backdrop-blur-sm`}
+                  >
+                    {/* Player Info (Main Point) */}
+                    <div className="flex items-center gap-3 min-w-0">
+                      <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden border border-white/10 bg-[#0B1120] flex-shrink-0 hidden xs:flex">
+                        <img 
+                          src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${tx.user}`} 
+                          alt={tx.user}
+                          className="w-full h-full object-cover"
+                          referrerPolicy="no-referrer"
+                        />
+                      </div>
+                      <div className="flex flex-col min-w-0">
+                        <span className="text-sm sm:text-base md:text-lg font-black text-white uppercase tracking-tight group-hover:text-cyan-400 transition-colors drop-shadow-[0_0_8px_rgba(34,211,238,0.2)]">
+                          {maskUser(tx.user)}
+                        </span>
+                        <div className="flex items-center gap-2 mt-0.5">
+                          <span className="text-[9px] sm:text-[10px] font-bold text-gray-500 uppercase tracking-wider">{tx.time}</span>
+                          <span className="text-[9px] text-gray-700 sm:hidden">•</span>
+                          <span className={`text-[9px] sm:hidden font-bold flex items-center gap-1 ${topGames.includes(tx.game) ? 'text-rose-400' : 'text-gray-600'}`}>
+                            {tx.game}
+                            {topGames.includes(tx.game) && <i className="fas fa-fire text-[8px]"></i>}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Game Name (Middle - Desktop Only) */}
+                    <div className="hidden sm:flex justify-center relative">
+                      <div className="relative">
+                        <span className={`text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em] border px-4 py-1.5 rounded-none transition-all duration-500 ${
+                          topGames.includes(tx.game) 
+                          ? 'text-cyan-400 border-cyan-500/50 bg-cyan-500/10 shadow-[0_0_15px_rgba(34,211,238,0.2)]' 
+                          : 'text-gray-400 border-white/5 bg-white/5'
+                        }`}>
+                          {tx.game}
+                        </span>
+                        {topGames.includes(tx.game) && (
+                          <motion.div
+                            initial={{ scale: 0, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            className="absolute -top-2 -right-2 bg-rose-500 text-[8px] font-black px-1.5 py-0.5 rounded-none shadow-lg z-10 flex items-center gap-1"
+                          >
+                            <i className="fas fa-fire text-[7px]"></i>
+                            HOT
+                          </motion.div>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Amount (Right) */}
+                    <div className="text-right whitespace-nowrap">
+                      <div className="text-sm sm:text-lg md:text-xl font-black text-cyan-400 font-sans tracking-tighter">
+                        RM {tx.amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                      </div>
+                      <div className={`text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.2em] mt-0.5 ${
+                        tx.amount >= 5000 ? 'text-rose-500' : 
+                        tx.amount >= 500 ? 'text-amber-400' : 
+                        tx.amount >= 100 ? 'text-cyan-400' : 
+                        'text-emerald-500/80'
+                      }`}>
+                        {tx.amount >= 5000 ? 'Jackpot' : 
+                         tx.amount >= 500 ? 'Mega Win' : 
+                         tx.amount >= 100 ? 'Big Win' : 
+                         'Win'}
+                      </div>
+                    </div>
+                  </motion.div>
+              ))}
+            </AnimatePresence>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const PaymentRiver = () => {
+  const logos = [
+    { name: "Maybank", src: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Maybank_Logo.svg/1200px-Maybank_Logo.svg.png", isBank: true },
+    { name: "CIMB Bank", src: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/CIMB_Bank_logo.svg/1200px-CIMB_Bank_logo.svg.png", isBank: true },
+    { name: "FPX", src: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/FPX_logo.svg/1200px-FPX_logo.svg.png", isBank: true },
+    { name: "DuitNow", src: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/DuitNow_logo.svg/1200px-DuitNow_logo.svg.png", isBank: true },
+    { name: "Touch 'n Go", src: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Touch_%27n_Go_eWallet_logo.svg/1200px-Touch_%27n_Go_eWallet_logo.svg.png", isBank: true },
+    { name: "GrabPay", src: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Grab_logo.svg/1200px-Grab_logo.svg.png", isBank: true },
+    { name: "Bitcoin", src: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/1200px-Bitcoin.svg.png", isBank: false },
+    { name: "USDT", src: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Tether_USDT.png/1200px-Tether_USDT.png", isBank: false },
+  ];
+
+  const { scrollY } = useScroll();
+  const scrollVelocity = useVelocity(scrollY);
+  
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const isMobile = windowWidth < 640;
+  const isTablet = windowWidth >= 640 && windowWidth < 1024;
+
+  // Map velocity to a horizontal offset
+  // More granular velocity range based on device
+  const getVelocityRange = () => {
+    if (isMobile) return [30, -30];
+    if (isTablet) return [60, -60];
+    return [100, -100];
+  };
+
+  const getDuration = () => {
+    if (isMobile) return 20; // Faster duration for shorter distance
+    if (isTablet) return 35;
+    return 50;
+  };
+
+  const velocityOffset = useTransform(scrollVelocity, [-2000, 2000], getVelocityRange());
+  const xParallax = useSpring(velocityOffset, { stiffness: 100, damping: 30 });
+
+  return (
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8 }}
+      className="w-full bg-[#0B1120]/50 border-y border-white/5 backdrop-blur-sm py-8 md:py-12 overflow-hidden relative z-20"
+    >
+      <div className="max-w-7xl mx-auto px-4 mb-8 md:mb-10 text-center">
+        <p className="text-sm md:text-lg text-[#00BFFF] font-sans uppercase tracking-[0.15em] md:tracking-[0.2em] font-semibold drop-shadow-[0_0_5px_rgba(0,191,255,0.5)]">
+          Supported Payment Methods
+        </p>
+      </div>
+      
+      {/* River Container with Edge Fades */}
+      <div className="relative">
+        <div className="absolute inset-y-0 left-0 w-20 md:w-40 bg-gradient-to-r from-[#0B1120] to-transparent z-10 pointer-events-none" />
+        <div className="absolute inset-y-0 right-0 w-20 md:w-40 bg-gradient-to-l from-[#0B1120] to-transparent z-10 pointer-events-none" />
+        
+        <motion.div style={{ x: xParallax }} className="flex">
+          <motion.div 
+            className="flex gap-4 sm:gap-8 md:gap-12 px-4 items-center"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ 
+              repeat: Infinity, 
+              ease: "linear", 
+              duration: getDuration()
+            }}
+            style={{ width: "fit-content" }}
+          >
+            {[...logos, ...logos, ...logos, ...logos].map((logo, index) => (
+              <PaymentLogo key={index} logo={logo} />
+            ))}
+          </motion.div>
+        </motion.div>
+      </div>
+    </motion.div>
+  );
+};
+
+const LoadingScreen = ({ onComplete }: { onComplete: () => void; key?: string }) => {
+  const [progress, setProgress] = useState(0);
+  const [loadingText, setLoadingText] = useState("Initializing Bridge");
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          clearInterval(interval);
+          return 100;
+        }
+        return prev + 40;
+      });
+    }, 40);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    if (progress >= 100) {
+      onComplete();
+    }
+  }, [progress, onComplete]);
+
+  useEffect(() => {
+    if (progress < 30) setLoadingText("Securing Connection");
+    else if (progress < 60) setLoadingText("Loading Gaming Assets");
+    else if (progress < 90) setLoadingText("Syncing Live Data");
+    else setLoadingText("Ready to Play");
+  }, [progress]);
+
+  const icons = [
+    { icon: "fa-gamepad", delay: 0 },
+    { icon: "fa-dice", delay: 0.1 },
+    { icon: "fa-trophy", delay: 0.2 },
+    { icon: "fa-coins", delay: 0.3 },
+  ];
+
+  return (
+    <motion.div
+      initial={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3, ease: "easeOut" }}
+      className="fixed inset-0 z-[100] bg-[#0B1120] flex flex-col items-center justify-center overflow-hidden"
+    >
+      {/* Background Glows */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-500/10 rounded-full blur-[120px] animate-pulse" />
+      
+      <div className="relative z-10 flex flex-col items-center">
+        {/* Logo Animation */}
+        <motion.div
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="mb-12 relative"
+        >
+          <div className="w-32 h-32 border-2 border-cyan-500/20 rounded-none flex items-center justify-center relative overflow-hidden group">
+            <motion.div 
+              animate={{ rotate: 360 }}
+              transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+              className="absolute inset-0 border-t-2 border-cyan-500 rounded-none"
+            />
+            <span className="text-5xl font-black text-white tracking-tighter italic">i88</span>
+          </div>
+          
+          {/* Scanning Effect */}
+          <motion.div
+            animate={{ top: ["0%", "100%", "0%"] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+            className="absolute left-0 right-0 h-[2px] bg-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.8)] z-20"
+          />
+        </motion.div>
+
+        {/* Gaming Icons */}
+        <div className="flex gap-6 mb-8">
+          {icons.map((item, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ 
+                opacity: 1, 
+                y: 0,
+                scale: [1, 1.2, 1]
+              }}
+              transition={{ 
+                delay: item.delay,
+                scale: { duration: 1.5, repeat: Infinity, ease: "easeInOut" }
+              }}
+              className="text-cyan-500/60 text-2xl"
+            >
+              <i className={`fas ${item.icon}`}></i>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Progress Bar Container */}
+        <div className="w-64 text-center">
+          <motion.h2
+            className="text-sm font-bold text-white uppercase tracking-[0.3em] mb-4 h-5"
+          >
+            {loadingText}
+          </motion.h2>
+          
+          <div className="h-1 w-full bg-white/5 rounded-none overflow-hidden relative border border-white/5">
+            <motion.div
+              initial={{ width: 0 }}
+              animate={{ width: `${progress}%` }}
+              transition={{ type: "spring", stiffness: 50, damping: 20 }}
+              className="absolute inset-y-0 left-0 bg-gradient-to-r from-cyan-600 to-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.5)]"
+            />
+          </div>
+          
+          <motion.p
+            className="mt-3 text-[10px] font-mono text-cyan-500/50 tracking-widest"
+          >
+            {Math.round(progress)}% COMPLETE
+          </motion.p>
+        </div>
+      </div>
+
+      {/* Grid Background */}
+      <div 
+        className="absolute inset-0 opacity-[0.05] pointer-events-none"
+        style={{
+          backgroundImage: `linear-gradient(to right, #00BFFF 1px, transparent 1px),
+                           linear-gradient(to bottom, #00BFFF 1px, transparent 1px)`,
+          backgroundSize: '40px 40px',
+        }}
+      />
+    </motion.div>
+  );
+};
+
+export default function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  const pastEvents = [
+    {
+      id: 1,
+      title: 'The 8 Immortals Treasure',
+      subtitle: 'CNY Special Event',
+      date: 'Feb 2026',
+      icon: 'Coins',
+      color: 'from-red-600 to-amber-500',
+      accent: '#ef4444',
+      prizes: ['RM38,888 Free Credit Pool', 'Limited Edition Gold Tokens', 'Angpow Surprises'],
+      winners: [
+        { name: 'ami**9*', prize: 'RM18,888' },
+        { name: 'lucky**w*', prize: 'RM3,888' },
+        { name: 'u*z***zi*', prize: 'RM2,888' }
+      ],
+      featured: true,
+      desc: 'Our most recent lunar celebration where 8 lucky immortals shared a massive credit pool.'
+    },
+    {
+      id: 2,
+      title: 'Xmas Monopoly Mini Game',
+      subtitle: 'Christmas 2025',
+      date: 'Dec 2025',
+      icon: 'Gift',
+      color: 'from-blue-600 to-cyan-400',
+      accent: '#00BFFF',
+      prizes: ['Rolex Luxury Watch', 'iPhone 17 Pro Max', 'iPad Pro', 'Cruise Tickets', 'Apple Watch', 'TnG eWallet Credits'],
+      winners: [
+        { name: 'rolex_owner', prize: 'Rolex Cosmograph Daytona' },
+        { name: 'cruise_lucky', prize: 'Premium Cruise 2 Pax' },
+        { name: 'apple_fan', prize: 'iPhone 17 Pro Max' }
+      ],
+      featured: false,
+      desc: 'A festive board game experience where players traveled through a winter map to claim luxury physical prizes.'
+    }
+  ];
+
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollContainerRef.current) {
+      const { scrollLeft, clientWidth } = scrollContainerRef.current;
+      const scrollTo = direction === 'left' ? scrollLeft - clientWidth : scrollLeft + clientWidth;
+      scrollContainerRef.current.scrollTo({ left: scrollTo, behavior: 'smooth' });
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-[#0B1120] font-display text-white selection:bg-[#00BFFF] selection:text-white overflow-x-hidden">
+      <AnimatePresence>
+        {isLoading ? (
+          <LoadingScreen key="loader" onComplete={() => setIsLoading(false)} />
+        ) : (
+          <motion.div
+            key="content"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+          >
+            {/* Hero Stats Section */}
+      <section className="relative pt-24 pb-12 sm:pt-32 sm:pb-20 overflow-hidden">
+        <CyberBackground />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center max-w-4xl mx-auto">
+            {/* Stats */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1 }}
+              className="grid grid-cols-2 md:grid-cols-4 gap-8 sm:gap-12 pt-8"
+            >
+              {[
+                { label: "Active Players", value: "50K+" },
+                { label: "Daily Winners", value: "12K+" },
+                { label: "Games Available", value: "1000+" },
+                { label: "Payout Rate", value: "98.5%" }
+              ].map((stat, i) => (
+                <div key={i} className="flex flex-col items-center">
+                  <span className="text-2xl sm:text-3xl font-black text-white tracking-tighter mb-1">{stat.value}</span>
+                  <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">{stat.label}</span>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Payment Partners Section */}
+      <section className="py-8 sm:py-12 bg-[#0B1120] border-y border-white/5 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <PaymentRiver />
+        </div>
+      </section>
+
+      {/* Live Transactions Section */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 1, ease: "easeOut" }}
+      >
+        <LiveTransactions />
+      </motion.div>
+
+      {/* Past Events & Winners Section */}
+      <section className="relative py-24 bg-[#0f172a] overflow-hidden">
+        <ExperienceBackground />
+
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
+        >
+          <motion.div 
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tighter">
+              <AnimatedUnderline>Past Events</AnimatedUnderline>
+            </h2>
+            <p className="mt-4 text-gray-400 font-sans text-lg">Celebrating our past winners and events</p>
+          </motion.div>
+
+          <div className="relative group/carousel">
+            {/* Scroll Buttons */}
+            <div className="absolute top-1/2 left-0 sm:-left-8 -translate-y-1/2 z-20 md:opacity-0 md:group-hover/carousel:opacity-100 transition-opacity duration-300">
+              <button 
+                onClick={() => scroll('left')}
+                className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/60 border border-white/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-cyan-500 hover:border-cyan-400 transition-all shadow-lg"
+              >
+                <i className="fas fa-chevron-left text-sm sm:text-base"></i>
+              </button>
+            </div>
+            <div className="absolute top-1/2 right-0 sm:-right-8 -translate-y-1/2 z-20 md:opacity-0 md:group-hover/carousel:opacity-100 transition-opacity duration-300">
+              <button 
+                onClick={() => scroll('right')}
+                className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/60 border border-white/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-cyan-500 hover:border-cyan-400 transition-all shadow-lg"
+              >
+                <i className="fas fa-chevron-right text-sm sm:text-base"></i>
+              </button>
+            </div>
+
+            {/* Horizontal Scroll Container */}
+            <div 
+              ref={scrollContainerRef}
+              className="flex overflow-x-auto gap-6 pb-12 snap-x snap-mandatory no-scrollbar scroll-smooth"
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            >
+              {pastEvents.map((event, idx) => (
+                <motion.div 
+                  key={event.id}
+                  initial={{ opacity: 0, x: 50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: idx * 0.1 }}
+                  whileHover={{ 
+                    y: -8,
+                    scale: 1.01,
+                    boxShadow: "0 20px 40px rgba(0, 0, 0, 0.4)",
+                    borderColor: "rgba(255, 255, 255, 0.2)"
+                  }}
+                  className={`relative flex-shrink-0 w-[90vw] sm:w-[85vw] md:w-[600px] snap-center group overflow-hidden bg-[#1e293b]/40 border border-white/5 backdrop-blur-xl p-6 sm:p-8 md:p-12 transition-all duration-500`}
+                >
+                  {/* Event Header */}
+                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 sm:mb-8">
+                    <div>
+                      <div className="flex items-center gap-3 mb-2">
+                        <span className={`px-3 py-1 text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-white bg-gradient-to-r ${event.color} shadow-lg`}>
+                          {event.subtitle}
+                        </span>
+                        <span className="text-[10px] sm:text-xs font-mono text-gray-500 uppercase tracking-widest">{event.date}</span>
+                      </div>
+                      <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-white tracking-tighter uppercase group-hover:text-cyan-400 transition-colors">
+                        {event.title}
+                      </h3>
+                    </div>
+                    {event.featured && (
+                      <div className="flex items-center gap-2 text-amber-400">
+                        <i className="fas fa-star animate-pulse text-xs"></i>
+                        <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.2em]">Most Recent</span>
+                      </div>
+                    )}
+                  </div>
+
+                  <p className="text-xs sm:text-sm md:text-base text-gray-400 font-sans mb-6 sm:mb-8 leading-relaxed line-clamp-2">
+                    {event.desc}
+                  </p>
+
+                  {/* Prizes Grid */}
+                  <div className="mb-8 sm:mb-10">
+                    <h4 className="text-[9px] sm:text-[10px] font-black text-gray-500 uppercase tracking-[0.3em] mb-4">Prizes Distributed</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {event.prizes.slice(0, 4).map((prize, pIdx) => (
+                        <span key={pIdx} className="px-3 py-1.5 sm:px-4 sm:py-2 bg-white/5 border border-white/5 text-[9px] sm:text-[10px] font-bold text-white/80 hover:bg-white/10 transition-colors">
+                          {prize}
+                        </span>
+                      ))}
+                      {event.prizes.length > 4 && (
+                        <span className="px-3 py-1.5 sm:px-4 sm:py-2 bg-white/5 border border-white/5 text-[9px] sm:text-[10px] font-bold text-gray-500">
+                          +{event.prizes.length - 4} MORE
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Winners Spotlight */}
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 to-transparent -ml-6 -mr-6 sm:-ml-12 sm:-mr-12 pointer-events-none" />
+                    <h4 className="text-[9px] sm:text-[10px] font-black text-cyan-500 uppercase tracking-[0.3em] mb-4 relative z-10">Top Winners Spotlight</h4>
+                    <div className="space-y-2 sm:space-y-3 relative z-10">
+                      {event.winners.map((winner, wIdx) => (
+                        <motion.div 
+                          key={wIdx}
+                          initial={{ opacity: 0, x: -10 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: idx * 0.1 + wIdx * 0.1 }}
+                          whileHover={{ 
+                            scale: 1.02, 
+                            backgroundColor: "rgba(0, 0, 0, 0.4)",
+                            boxShadow: "0 0 20px rgba(34, 211, 238, 0.15)",
+                            borderColor: "rgba(34, 211, 238, 0.8)"
+                          }}
+                          className="flex items-center justify-between p-2.5 sm:p-3 bg-black/20 border-l-2 border-cyan-500/50 transition-all group/winner cursor-default"
+                        >
+                          <div className="flex items-center gap-2 sm:gap-3">
+                            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/5 flex items-center justify-center text-[9px] sm:text-[10px] font-black text-gray-500">
+                              0{wIdx + 1}
+                            </div>
+                            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full overflow-hidden border border-white/10 bg-[#1e293b] flex-shrink-0">
+                              <img 
+                                src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${winner.name}`} 
+                                alt={winner.name}
+                                className="w-full h-full object-cover"
+                                referrerPolicy="no-referrer"
+                              />
+                            </div>
+                            <span className="text-[10px] sm:text-xs font-black text-white uppercase tracking-tight group-hover/winner:text-cyan-400 transition-colors">{winner.name.substring(0, 3)}***{winner.name.slice(-2)}</span>
+                          </div>
+                          <span className="text-[10px] sm:text-xs font-mono font-bold text-cyan-400">{winner.prize}</span>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Decorative Background Icon */}
+                  <div className="absolute -bottom-10 -right-10 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity duration-700 pointer-events-none">
+                    <i className={`fas fa-${event.icon.toLowerCase()} text-[200px]`}></i>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Scroll Indicator Dots */}
+            <div className="flex justify-center gap-2 mt-4">
+              {pastEvents.map((_, i) => (
+                <div key={i} className="w-1.5 h-1.5 rounded-full bg-white/10" />
+              ))}
+            </div>
+          </div>
+
+          <motion.div 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="mt-16 text-center"
+          >
+            <p className="text-gray-500 text-xs font-sans uppercase tracking-[0.4em]">New events launching every month. Stay tuned.</p>
+          </motion.div>
+        </motion.div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="relative py-24 sm:py-32 px-4 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0B1120] to-[#0f172a]" />
+        
+        {/* Animated Glow Background */}
+        <motion.div 
+          animate={{ 
+            scale: [1, 1.2, 1],
+            opacity: [0.1, 0.2, 0.1] 
+          }}
+          transition={{ duration: 8, repeat: Infinity }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-500/20 rounded-full blur-[120px] pointer-events-none"
+        />
+
+        <div className="max-w-4xl mx-auto relative z-10">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.98, y: 15 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="bg-gradient-to-br from-[#1e293b] to-[#0f172a] border border-cyan-500/30 rounded-none p-10 sm:p-16 text-center shadow-[0_0_50px_rgba(0,191,255,0.1)] relative overflow-hidden group"
+          >
+            <div className="relative z-10">
+              <motion.p 
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
+                className="text-xl sm:text-3xl md:text-4xl font-black text-white uppercase tracking-tighter mb-10 italic leading-[1.1] max-w-3xl mx-auto"
+              >
+                Deposit minimum <span className="text-white font-bold underline decoration-cyan-500 underline-offset-4">RM 50</span> and instantly receive <span className="text-cyan-400 font-bold">88 FREE TOKENS</span>
+              </motion.p>
+              
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
+              >
+                <motion.button
+                  whileHover={{ 
+                    scale: 1.05, 
+                    y: -8,
+                    borderColor: ["#22d3ee", "#3b82f6", "#22d3ee"],
+                    borderWidth: "2px",
+                    boxShadow: [
+                      "0 10px 20px rgba(0,191,255,0.3)",
+                      "0 25px 50px rgba(0,191,255,0.6)",
+                      "0 10px 20px rgba(0,191,255,0.3)"
+                    ]
+                  }}
+                  whileFocus={{ 
+                    scale: 1.05, 
+                    y: -4,
+                    boxShadow: "0 0 30px rgba(0,191,255,0.5)"
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ 
+                    boxShadow: {
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    },
+                    borderColor: {
+                      duration: 1.5,
+                      repeat: Infinity,
+                      ease: "linear"
+                    },
+                    type: "spring", 
+                    stiffness: 400, 
+                    damping: 17 
+                  }}
+                  aria-label="Claim your welcome bonus now"
+                  onClick={() => {
+                    playSFX('success');
+                    // Add logic for claim here if needed
+                  }}
+                  className="bg-cyan-500 hover:bg-cyan-400 text-black font-black text-lg md:text-xl px-12 py-5 rounded-full uppercase tracking-widest transition-all shadow-[0_0_20px_rgba(0,191,255,0.3)] focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-4 focus:ring-offset-[#0B1120] border-2 border-transparent"
+                >
+                  Claim Now
+                </motion.button>
+                
+                <p className="mt-8 text-xs text-gray-500 font-sans uppercase tracking-[0.2em]">
+                  * Limited to New Member only
+                </p>
+              </motion.div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-[#0B1120] border-t border-white/5 py-12 sm:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16 sm:mb-20">
+            <div className="md:col-span-4">
+              <div className="flex items-center gap-2 mb-6 sm:mb-8">
+                <div className="w-8 h-8 border-2 border-cyan-500 flex items-center justify-center">
+                  <span className="text-lg font-black text-white italic">i</span>
+                </div>
+                <span className="text-2xl font-black tracking-tighter text-white italic">i88</span>
+              </div>
+              <p className="text-gray-500 text-sm sm:text-base font-sans max-w-md leading-relaxed mb-8">
+                i88 is the leading online gaming platform in Asia, providing a secure and fair gaming experience for all players. 
+            
+              </p>
+            </div>
+          </div>
+
+          <div className="pt-8 sm:pt-12 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center gap-6">
+            <p className="text-xs sm:text-sm text-gray-600 font-sans">
+              © 2026 i88 Gaming Group. All rights reserved.
+            </p>
+           
+          </div>
+        </div>
+      </footer>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
