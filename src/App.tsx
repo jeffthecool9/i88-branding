@@ -949,14 +949,10 @@ export default function App() {
                 transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
                 className="text-xl sm:text-3xl md:text-4xl font-black text-white uppercase tracking-tighter mb-10 italic leading-[1.1] max-w-3xl mx-auto"
               >
-             Unlock your welcome reward today — deposit 
+             Unlock your welcome reward today! 
 <span className="text-white font-bold underline decoration-cyan-500 underline-offset-4">
-RM100 within 24 hours
-</span> 
-and instantly activate 
-<span className="text-cyan-400 font-bold">
-88 FREE SPINS
-</span>.
+Deposit RM100 within 24 hours </span> and instantly activate 
+<span className="text-cyan-400 font-bold">128 FREE TOKENS </span>.
               </motion.p>
               
               <motion.div
