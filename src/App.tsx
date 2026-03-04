@@ -231,132 +231,87 @@ const LiveTransactions = () => {
     target: ref,
     offset: ["start end", "end start"]
   });
-  
+
   const yBg = useTransform(scrollYProgress, [0, 1], [-30, 30]);
 
   const malaysianNames = [
-    "eagle99", "nurifi98", "ahmad1919", "players85", "dragon19", "tiger88", 
+    "eagle99", "nurifi98", "ahmad1919", "players85", "dragon19", "tiger88",
     "siti_92", "ali_king", "lion_sg", "malay_pro", "sg_gamer", "hacker7",
     "rizal_88", "fatimah_z", "chong_win", "tan_huat", "kumar_v", "meena_p",
     "syed_top", "wan_boss", "lim_kopi", "abu_bakar", "zulkifli", "leong_88",
-    "fadhli_99", "shafiq_01", "azman_88", "hafiz_z", "khairul_p", "najib_boss",
-    "mahathir_99", "anwar_pm", "muhyiddin_8", "ismail_s", "sabri_99", "zahid_z"
+    "fadhli_99", "shafiq_01", "azman_88", "hafiz_z", "khairul_p", "najib_boss"
   ];
 
-  const games = [
-    "Gates of Olympus",
-    "Starlight Princess",
-    "Big Bass Bonanza",
-    "5 Lions",
-    "Candy Bonanza",
-    "Wolf God",
-    "Sugar Rush",
-    "Sweet Bonanza",
-    "Wild West Gold",
-    "Buffalo King",
-  ];
+  // Deposit pool: bias toward RM100 and RM200 since those are your promo tiers
+  const depositPool = [100, 100, 100, 200, 200, 300, 500, 1000];
 
-  // Internal logic for amount ranges and distribution
-  const tiers = [
-    { id: 1, min: 500, max: 10000 }, // Tier 1
-    { id: 2, min: 100, max: 500 },   // Tier 2
-    { id: 3, min: 10, max: 100 },    // Tier 3
-  ];
+  const getSpins = (deposit: number) => {
+    // Promo rules:
+    // RM100 => 128 free spins
+    // RM200+ => 258 free spins (max cap)
+    return deposit >= 200 ? 258 : 128;
+  };
 
-  const generateWinner = (tierIdx: number, timeStr?: string) => {
-    const tier = tiers[tierIdx];
-    
-    // Generate amount with cents (sens)
-    const amount = tier.min + Math.random() * (tier.max - tier.min);
-    
-    // Higher probability for "Gates of Olympus"
-    const game = Math.random() < 0.4 ? "Gates of Olympus" : games[Math.floor(Math.random() * games.length)];
-    
+  const generateMemberActivity = (timeStr?: string) => {
+    const deposit = depositPool[Math.floor(Math.random() * depositPool.length)];
+    const spins = getSpins(deposit);
+
     return {
       id: Math.random().toString(36).substr(2, 9),
       user: malaysianNames[Math.floor(Math.random() * malaysianNames.length)],
-      game: game,
-      amount: parseFloat(amount.toFixed(2)),
-      tierId: tier.id,
+      deposit,
+      spins,
       time: timeStr || "Just now"
     };
   };
 
-  const [winners, setWinners] = useState<any[]>([]);
+  const [activity, setActivity] = useState<any[]>([]);
 
   useEffect(() => {
-    // Initial distribution: 4x Tier 3, 2x Tier 2, 1x Tier 1
+    // Initial list
     const initial: any[] = [];
-    for(let i=0; i<1; i++) initial.push(generateWinner(0, `${(i+1)*15} mins ago`)); // Tier 1
-    for(let i=0; i<2; i++) initial.push(generateWinner(1, `${(i+1)*8} mins ago`));  // Tier 2
-    for(let i=0; i<4; i++) initial.push(generateWinner(2, `${(i+1)*3} mins ago`));  // Tier 3
-
-    // Shuffle to mix tiers
-    const shuffled = initial.sort(() => Math.random() - 0.5);
-    setWinners(shuffled);
+    for (let i = 0; i < 7; i++) {
+      initial.push(generateMemberActivity(`${(i + 1) * 3} mins ago`));
+    }
+    setActivity(initial);
 
     const interval = setInterval(() => {
-      setWinners(prev => {
-        const rand = Math.random();
-        let tierIdx = 2; // Default to Tier 3
-        
-        // Probability distribution: 50% Tier 3, 30% Tier 2, 20% Tier 1
-        if (rand < 0.20) tierIdx = 0;      // Tier 1
-        else if (rand < 0.50) tierIdx = 1; // Tier 2
-        else tierIdx = 2;                 // Tier 3
+      setActivity(prev => {
+        const newEntry = generateMemberActivity();
 
-        const newWinner = generateWinner(tierIdx);
-        
-        // Play alert sound for new winner
+        // subtle alert for “new activity”
         playSFX('alert');
 
-        // Maintain the count of 7 winners
-        let next = [newWinner, ...prev.slice(0, 6)];
-        return next;
+        // Keep 7 rows
+        return [newEntry, ...prev.slice(0, 6)];
       });
-    }, 12000); 
+    }, 12000);
 
     return () => clearInterval(interval);
   }, []);
 
-  const topGames = useMemo(() => {
-    const counts: { [key: string]: number } = {};
-    winners.forEach(w => {
-      counts[w.game] = (counts[w.game] || 0) + 1;
-    });
-    const sorted = Object.entries(counts)
-      .sort((a, b) => b[1] - a[1])
-      .slice(0, 3)
-      .map(entry => entry[0]);
-    
-    // Always include Gates of Olympus if it's in the winners list, or just force it
-    if (!sorted.includes("Gates of Olympus")) {
-      sorted.push("Gates of Olympus");
-    }
-    return sorted;
-  }, [winners]);
+  const maskUser = (user: string) => user.substring(0, 5) + "***";
 
-  const maskUser = (user: string) => {
-    return user.substring(0, 5) + "***";
-  };
-
-  const recentActivity = winners.slice(0, 10);
+  const recentActivity = activity.slice(0, 10);
 
   return (
     <section ref={ref} className="py-12 sm:py-20 bg-[#0B1120] relative overflow-hidden border-t border-white/5">
       {/* Parallax Background Element */}
-      <motion.div 
+      <motion.div
         style={{ y: yBg }}
         className="absolute inset-0 opacity-[0.03] pointer-events-none"
       >
-        <div className="absolute top-0 left-0 w-full h-full" style={{ 
-          backgroundImage: 'radial-gradient(circle at 20% 30%, #00BFFF 0%, transparent 50%)',
-          filter: 'blur(80px)'
-        }} />
+        <div
+          className="absolute top-0 left-0 w-full h-full"
+          style={{
+            backgroundImage: 'radial-gradient(circle at 20% 30%, #00BFFF 0%, transparent 50%)',
+            filter: 'blur(80px)'
+          }}
+        />
       </motion.div>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -364,109 +319,104 @@ const LiveTransactions = () => {
           className="text-center mb-12"
         >
           <h2 className="text-2xl font-bold text-white">
-            <AnimatedUnderline>Live Winners</AnimatedUnderline>
+            <AnimatedUnderline>Live Member Activity</AnimatedUnderline>
           </h2>
-          <p className="mt-2 text-gray-400 text-sm font-sans">Real-time platform winners</p>
+          <p className="mt-2 text-gray-400 text-sm font-sans">
+            Real-time deposits unlocking Free Spins
+          </p>
         </motion.div>
 
         <div className="max-w-2xl mx-auto">
           <div className="flex items-center gap-2 mb-4 px-2">
             <div className="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-pulse" />
-            <h3 className="text-base md:text-lg font-bold text-white uppercase tracking-wider">Recent Winners</h3>
+            <h3 className="text-base md:text-lg font-bold text-white uppercase tracking-wider">
+              Recent Joins & Deposits
+            </h3>
           </div>
+
           <div className="rounded-none overflow-hidden border border-white/5">
             {/* Table Header */}
             <div className="p-4 sm:p-5 grid grid-cols-2 sm:grid-cols-3 items-center gap-4 bg-white/5 border-b border-white/10">
-              <span className="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em]">Recent Winners</span>
-              <span className="hidden sm:block text-center text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em]">Game</span>
-              <span className="text-right text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em]">Winning Amount</span>
+              <span className="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em]">
+                Member
+              </span>
+              <span className="hidden sm:block text-center text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em]">
+                Deposit
+              </span>
+              <span className="text-right text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em]">
+                Free Spins
+              </span>
             </div>
+
             <AnimatePresence mode="popLayout">
               {recentActivity.map((tx, idx) => (
-                  <motion.div
-                    key={tx.id}
-                    layout
-                    initial={{ opacity: 0, y: 15 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ 
-                      type: "spring",
-                      stiffness: 500,
-                      damping: 30,
-                      opacity: { duration: 0.2 }
-                    }}
-                    className={`p-3 sm:p-5 flex sm:grid sm:grid-cols-3 items-center justify-between gap-4 hover:bg-white/5 transition-all duration-300 group border-b border-white/5 last:border-0 ${
-                      idx % 2 === 0 ? 'bg-[#1e293b]/40' : 'bg-[#1e293b]/10'
-                    } backdrop-blur-sm`}
-                  >
-                    {/* Player Info (Main Point) */}
-                    <div className="flex items-center gap-3 min-w-0">
-                      <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden border border-white/10 bg-[#0B1120] flex-shrink-0 hidden xs:flex">
-                        <img 
-                          src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${tx.user}`} 
-                          alt={tx.user}
-                          className="w-full h-full object-cover"
-                          referrerPolicy="no-referrer"
-                        />
-                      </div>
-                      <div className="flex flex-col min-w-0">
-                        <span className="text-sm sm:text-base md:text-lg font-black text-white uppercase tracking-tight group-hover:text-cyan-400 transition-colors drop-shadow-[0_0_8px_rgba(34,211,238,0.2)]">
-                          {maskUser(tx.user)}
-                        </span>
-                        <div className="flex items-center gap-2 mt-0.5">
-                          <span className="text-[9px] sm:text-[10px] font-bold text-gray-500 uppercase tracking-wider">{tx.time}</span>
-                          <span className="text-[9px] text-gray-700 sm:hidden">•</span>
-                          <span className={`text-[9px] sm:hidden font-bold flex items-center gap-1 ${topGames.includes(tx.game) ? 'text-rose-400' : 'text-gray-600'}`}>
-                            {tx.game}
-                            {topGames.includes(tx.game) && <i className="fas fa-fire text-[8px]"></i>}
-                          </span>
-                        </div>
-                      </div>
+                <motion.div
+                  key={tx.id}
+                  layout
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 500,
+                    damping: 30,
+                    opacity: { duration: 0.2 }
+                  }}
+                  className={`p-3 sm:p-5 flex sm:grid sm:grid-cols-3 items-center justify-between gap-4 hover:bg-white/5 transition-all duration-300 group border-b border-white/5 last:border-0 ${
+                    idx % 2 === 0 ? 'bg-[#1e293b]/40' : 'bg-[#1e293b]/10'
+                  } backdrop-blur-sm`}
+                >
+                  {/* Member */}
+                  <div className="flex items-center gap-3 min-w-0">
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden border border-white/10 bg-[#0B1120] flex-shrink-0 hidden xs:flex">
+                      <img
+                        src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${tx.user}`}
+                        alt={tx.user}
+                        className="w-full h-full object-cover"
+                        referrerPolicy="no-referrer"
+                      />
                     </div>
 
-                    {/* Game Name (Middle - Desktop Only) */}
-                    <div className="hidden sm:flex justify-center relative">
-                      <div className="relative">
-                        <span className={`text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em] border px-4 py-1.5 rounded-none transition-all duration-500 ${
-                          topGames.includes(tx.game) 
-                          ? 'text-cyan-400 border-cyan-500/50 bg-cyan-500/10 shadow-[0_0_15px_rgba(34,211,238,0.2)]' 
-                          : 'text-gray-400 border-white/5 bg-white/5'
-                        }`}>
-                          {tx.game}
+                    <div className="flex flex-col min-w-0">
+                      <span className="text-sm sm:text-base md:text-lg font-black text-white uppercase tracking-tight group-hover:text-cyan-400 transition-colors drop-shadow-[0_0_8px_rgba(34,211,238,0.2)]">
+                        {maskUser(tx.user)}
+                      </span>
+                      <div className="flex items-center gap-2 mt-0.5">
+                        <span className="text-[9px] sm:text-[10px] font-bold text-gray-500 uppercase tracking-wider">
+                          {tx.time}
                         </span>
-                        {topGames.includes(tx.game) && (
-                          <motion.div
-                            initial={{ scale: 0, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
-                            className="absolute -top-2 -right-2 bg-rose-500 text-[8px] font-black px-1.5 py-0.5 rounded-none shadow-lg z-10 flex items-center gap-1"
-                          >
-                            <i className="fas fa-fire text-[7px]"></i>
-                            HOT
-                          </motion.div>
-                        )}
+                        <span className="text-[9px] text-gray-700 sm:hidden">•</span>
+                        <span className="text-[9px] sm:hidden font-bold text-gray-400">
+                          Deposited RM {tx.deposit.toLocaleString()}
+                        </span>
                       </div>
                     </div>
+                  </div>
 
-                    {/* Amount (Right) */}
-                    <div className="text-right whitespace-nowrap">
-                      <div className="text-sm sm:text-lg md:text-xl font-black text-cyan-400 font-sans tracking-tighter">
-                        RM {tx.amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                      </div>
-                      <div className={`text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.2em] mt-0.5 ${
-                        tx.amount >= 5000 ? 'text-rose-500' : 
-                        tx.amount >= 500 ? 'text-amber-400' : 
-                        tx.amount >= 100 ? 'text-cyan-400' : 
-                        'text-emerald-500/80'
-                      }`}>
-                        {tx.amount >= 5000 ? 'Jackpot' : 
-                         tx.amount >= 500 ? 'Mega Win' : 
-                         tx.amount >= 100 ? 'Big Win' : 
-                         'Win'}
-                      </div>
+                  {/* Deposit (Desktop Only) */}
+                  <div className="hidden sm:flex justify-center">
+                    <span className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em] border px-4 py-1.5 rounded-none transition-all duration-500 text-white/80 border-white/5 bg-white/5">
+                      RM {tx.deposit.toLocaleString()}
+                    </span>
+                  </div>
+
+                  {/* Free Spins */}
+                  <div className="text-right whitespace-nowrap">
+                    <div className="text-sm sm:text-lg md:text-xl font-black text-cyan-400 font-sans tracking-tighter">
+                      {tx.spins} Free Spins
                     </div>
-                  </motion.div>
+                    <div className="text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.2em] mt-0.5 text-gray-500">
+                      {tx.deposit >= 200 ? "Max Cap" : "RM100 Tier"}
+                    </div>
+                  </div>
+                </motion.div>
               ))}
             </AnimatePresence>
+          </div>
+
+          {/* Small promo note under table (optional but helps clarity) */}
+          <div className="mt-4 text-center text-[10px] sm:text-xs text-gray-500 uppercase tracking-[0.25em]">
+            Deposit RM100 = 128 Spins • Deposit RM200+ = 258 Spins (Max)
           </div>
         </div>
       </div>
