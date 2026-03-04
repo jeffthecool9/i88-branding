@@ -1057,7 +1057,7 @@ export default function App() {
     </motion.div>
   </motion.div>
 
- {/* CTA Section */}
+{/* CTA Section */}
 <section className="relative py-24 sm:py-32 px-4 overflow-hidden">
   <div className="absolute inset-0 bg-gradient-to-b from-[#0B1120] to-[#0f172a]" />
 
@@ -1079,7 +1079,6 @@ export default function App() {
       transition={{ duration: 1, ease: "easeOut" }}
       className="bg-gradient-to-br from-[#1e293b] to-[#0f172a] border border-cyan-500/30 rounded-none p-10 sm:p-16 text-center shadow-[0_0_50px_rgba(0,191,255,0.1)] relative overflow-hidden group"
     >
-      {/* content */}
       <div className="max-w-3xl mx-auto text-center">
         {/* Headline */}
         <motion.h2
@@ -1104,7 +1103,7 @@ export default function App() {
           <span className="text-white font-semibold"> (24-hour window for new members)</span>
         </motion.p>
 
-        {/* Two-tier promo cards */}
+        {/* Promo Cards */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -1112,7 +1111,7 @@ export default function App() {
           transition={{ duration: 0.9, ease: "easeOut", delay: 0.3 }}
           className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-5 text-left"
         >
-          {/* RM50 - Starter */}
+          {/* RM50 Tier */}
           <motion.div
             whileHover={{ y: -6 }}
             transition={{ type: "spring", stiffness: 350, damping: 22 }}
@@ -1124,12 +1123,16 @@ export default function App() {
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wide bg-white/10 text-gray-200 border border-white/10">
                   STARTER
                 </div>
+
                 <h3 className="mt-4 text-xl font-extrabold text-white">
                   Deposit RM50
                 </h3>
+
                 <p className="mt-1 text-sm text-gray-300">
                   Activate{" "}
-                  <span className="text-cyan-400 font-bold">88 FREE SPINS</span>
+                  <span className="text-cyan-400 font-bold">
+                    88 FREE SPINS
+                  </span>
                 </p>
               </div>
 
@@ -1146,15 +1149,18 @@ export default function App() {
             <div className="mt-5 pt-5 border-t border-white/10 flex items-center justify-between">
               <div className="text-xs text-gray-400">
                 Window:{" "}
-                <span className="text-gray-200 font-semibold">24 hours</span>
+                <span className="text-gray-200 font-semibold">
+                  24 hours
+                </span>
               </div>
-              <div className="text-xs text-gray-300">Low risk start</div>
-            </div>
 
-            <div className="pointer-events-none absolute -top-24 -right-24 w-72 h-72 bg-white/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="text-xs text-gray-300">
+                Low risk start
+              </div>
+            </div>
           </motion.div>
 
-          {/* RM100 - Best Value */}
+          {/* RM100 Tier */}
           <motion.div
             whileHover={{ y: -6 }}
             transition={{ type: "spring", stiffness: 350, damping: 22 }}
@@ -1172,18 +1178,23 @@ export default function App() {
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wide bg-cyan-500/10 text-cyan-200 border border-cyan-400/20">
                   BEST VALUE
                 </div>
+
                 <h3 className="mt-4 text-xl font-extrabold text-white">
                   Deposit RM100
                 </h3>
+
                 <p className="mt-1 text-sm text-gray-200">
                   Activate{" "}
                   <span className="text-cyan-400 font-black">
                     168 FREE SPINS
                   </span>
                 </p>
+
                 <p className="mt-2 text-xs text-gray-300">
-                  <span className="text-white font-semibold">+80 spins</span> vs
-                  RM50
+                  <span className="text-white font-semibold">
+                    +80 spins
+                  </span>{" "}
+                  vs RM50
                 </p>
               </div>
 
@@ -1199,18 +1210,20 @@ export default function App() {
 
             <div className="mt-5 pt-5 border-t border-cyan-400/15 flex items-center justify-between">
               <div className="text-xs text-gray-300">
-                Window: <span className="text-white font-semibold">24 hours</span>
+                Window:{" "}
+                <span className="text-white font-semibold">
+                  24 hours
+                </span>
               </div>
+
               <div className="text-xs text-cyan-200 font-semibold">
                 Better value
               </div>
             </div>
-
-            <div className="pointer-events-none absolute -bottom-24 left-1/2 -translate-x-1/2 w-[520px] h-[240px] bg-cyan-500/20 blur-[90px] opacity-80 group-hover:opacity-100 transition-opacity" />
           </motion.div>
         </motion.div>
 
-        {/* CTA Button (keep your original behaviour) */}
+        {/* CTA Button */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -1222,33 +1235,10 @@ export default function App() {
             whileHover={{
               scale: 1.05,
               y: -8,
-              borderColor: ["#22d3ee", "#3b82f6", "#22d3ee"],
-              borderWidth: "2px",
-              boxShadow: [
-                "0 10px 20px rgba(0,191,255,0.3)",
-                "0 25px 50px rgba(0,191,255,0.6)",
-                "0 10px 20px rgba(0,191,255,0.3)",
-              ],
-            }}
-            whileFocus={{
-              scale: 1.05,
-              y: -4,
-              boxShadow: "0 0 30px rgba(0,191,255,0.5)",
             }}
             whileTap={{ scale: 0.95 }}
-            transition={{
-              boxShadow: { duration: 2, repeat: Infinity, ease: "easeInOut" },
-              borderColor: { duration: 1.5, repeat: Infinity, ease: "linear" },
-              type: "spring",
-              stiffness: 400,
-              damping: 17,
-            }}
-            aria-label="Claim your welcome bonus now"
-            onClick={() => {
-              playSFX("success");
-              // Add logic for claim here if needed
-            }}
-            className="bg-cyan-500 hover:bg-cyan-400 text-black font-black text-lg md:text-xl px-12 py-5 rounded-full uppercase tracking-widest transition-all shadow-[0_0_20px_rgba(0,191,255,0.3)] focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-4 focus:ring-offset-[#0B1120] border-2 border-transparent"
+            onClick={() => playSFX("success")}
+            className="bg-cyan-500 hover:bg-cyan-400 text-black font-black text-lg md:text-xl px-12 py-5 rounded-full uppercase tracking-widest transition-all shadow-[0_0_20px_rgba(0,191,255,0.3)]"
           >
             Claim Now
           </motion.button>
