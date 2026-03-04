@@ -999,7 +999,7 @@ export default function App() {
                 transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
                 className="text-xl sm:text-3xl md:text-4xl font-black text-white uppercase tracking-tighter mb-10 italic leading-[1.1] max-w-3xl mx-auto"
               >
-                Deposit minimum <span className="text-white font-bold underline decoration-cyan-500 underline-offset-4">RM 50</span> and instantly receive <span className="text-cyan-400 font-bold">88 FREE TOKENS</span>
+                Deposit minimum <span className="text-white font-bold underline decoration-cyan-500 underline-offset-4">RM 100</span> within 24 hour and instantly receive <span className="text-cyan-400 font-bold">88 FREE TOKENS</span>
               </motion.p>
               
               <motion.div
