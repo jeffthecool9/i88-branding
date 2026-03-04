@@ -1063,10 +1063,7 @@ export default function App() {
 
   {/* Animated Glow Background */}
   <motion.div
-    animate={{
-      scale: [1, 1.2, 1],
-      opacity: [0.1, 0.2, 0.1],
-    }}
+    animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.2, 0.1] }}
     transition={{ duration: 8, repeat: Infinity }}
     className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-500/20 rounded-full blur-[120px] pointer-events-none"
   />
@@ -1124,39 +1121,24 @@ export default function App() {
                   STARTER
                 </div>
 
-                <h3 className="mt-4 text-xl font-extrabold text-white">
-                  Deposit RM50
-                </h3>
+                <h3 className="mt-4 text-xl font-extrabold text-white">Deposit RM50</h3>
 
                 <p className="mt-1 text-sm text-gray-300">
-                  Activate{" "}
-                  <span className="text-cyan-400 font-bold">
-                    88 FREE SPINS
-                  </span>
+                  Activate <span className="text-cyan-400 font-bold">88 FREE SPINS</span>
                 </p>
               </div>
 
               <div className="text-right">
-                <div className="text-3xl font-black text-white leading-none">
-                  88
-                </div>
-                <div className="text-xs text-gray-400 tracking-wider mt-1">
-                  SPINS
-                </div>
+                <div className="text-3xl font-black text-white leading-none">88</div>
+                <div className="text-xs text-gray-400 tracking-wider mt-1">SPINS</div>
               </div>
             </div>
 
             <div className="mt-5 pt-5 border-t border-white/10 flex items-center justify-between">
               <div className="text-xs text-gray-400">
-                Window:{" "}
-                <span className="text-gray-200 font-semibold">
-                  24 hours
-                </span>
+                Window: <span className="text-gray-200 font-semibold">24 hours</span>
               </div>
-
-              <div className="text-xs text-gray-300">
-                Low risk start
-              </div>
+              <div className="text-xs text-gray-300">Low risk start</div>
             </div>
           </motion.div>
 
@@ -1179,46 +1161,28 @@ export default function App() {
                   BEST VALUE
                 </div>
 
-                <h3 className="mt-4 text-xl font-extrabold text-white">
-                  Deposit RM100
-                </h3>
+                <h3 className="mt-4 text-xl font-extrabold text-white">Deposit RM100</h3>
 
                 <p className="mt-1 text-sm text-gray-200">
-                  Activate{" "}
-                  <span className="text-cyan-400 font-black">
-                    168 FREE SPINS
-                  </span>
+                  Activate <span className="text-cyan-400 font-black">168 FREE SPINS</span>
                 </p>
 
                 <p className="mt-2 text-xs text-gray-300">
-                  <span className="text-white font-semibold">
-                    +80 spins
-                  </span>{" "}
-                  vs RM50
+                  <span className="text-white font-semibold">+80 spins</span> vs RM50
                 </p>
               </div>
 
               <div className="text-right">
-                <div className="text-3xl font-black text-white leading-none">
-                  168
-                </div>
-                <div className="text-xs text-cyan-200/80 tracking-wider mt-1">
-                  SPINS
-                </div>
+                <div className="text-3xl font-black text-white leading-none">168</div>
+                <div className="text-xs text-cyan-200/80 tracking-wider mt-1">SPINS</div>
               </div>
             </div>
 
             <div className="mt-5 pt-5 border-t border-cyan-400/15 flex items-center justify-between">
               <div className="text-xs text-gray-300">
-                Window:{" "}
-                <span className="text-white font-semibold">
-                  24 hours
-                </span>
+                Window: <span className="text-white font-semibold">24 hours</span>
               </div>
-
-              <div className="text-xs text-cyan-200 font-semibold">
-                Better value
-              </div>
+              <div className="text-xs text-cyan-200 font-semibold">Better value</div>
             </div>
           </motion.div>
         </motion.div>
@@ -1232,10 +1196,7 @@ export default function App() {
           className="mt-10"
         >
           <motion.button
-            whileHover={{
-              scale: 1.05,
-              y: -8,
-            }}
+            whileHover={{ scale: 1.05, y: -8 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => playSFX("success")}
             className="bg-cyan-500 hover:bg-cyan-400 text-black font-black text-lg md:text-xl px-12 py-5 rounded-full uppercase tracking-widest transition-all shadow-[0_0_20px_rgba(0,191,255,0.3)]"
