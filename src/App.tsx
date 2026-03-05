@@ -943,11 +943,7 @@ export default function App() {
                       className="mt-4 text-base sm:text-lg text-gray-300"
                     >
                       Choose your activation tier. Rewards activate instantly after
-                      deposit.
-                      <span className="text-white font-semibold">
-                        {" "}
-                        (24-hour window for new members)
-                      </span>
+                      deposit
                     </motion.p>
 
                     <motion.div
