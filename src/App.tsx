@@ -982,11 +982,7 @@ const pastEvents = [
             </p>
 
             <div className="mt-5 pt-5 border-t border-white/10 flex items-center justify-between">
-              <div className="text-xs text-gray-400">
-                Window: <span className="text-gray-200 font-semibold">24 hours</span>
-              </div>
-              <div className="text-xs text-gray-300">Low risk start</div>
-            </div>
+            
           </motion.div>
 
           {/* RM100 */}
@@ -1017,16 +1013,10 @@ const pastEvents = [
             <p className="mt-2 text-sm text-gray-200">
               Activate <span className="text-cyan-400 font-black">168 FREE TOKENS</span>
             </p>
-            <p className="mt-2 text-xs text-gray-300">
-              <span className="text-white font-semibold">+80 tokens</span> vs RM50
-            </p>
+          
 
             <div className="mt-5 pt-5 border-t border-cyan-400/15 flex items-center justify-between">
-              <div className="text-xs text-gray-300">
-                Window: <span className="text-white font-semibold">24 hours</span>
-              </div>
-              <div className="text-xs text-cyan-200 font-semibold">Better value</div>
-            </div>
+             
           </motion.div>
         </motion.div>
 
