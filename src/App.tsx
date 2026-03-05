@@ -1013,9 +1013,7 @@ const pastEvents = [
             <p className="mt-2 text-sm text-gray-200">
               Activate <span className="text-cyan-400 font-black">168 FREE TOKENS</span>
             </p>
-          
-
-            <div className="mt-5 pt-5 border-t border-cyan-400/15 flex items-center justify-between">
+        
              
           </motion.div>
         </motion.div>
