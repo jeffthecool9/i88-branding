@@ -606,7 +606,7 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
 
- const pastEvents = [
+const pastEvents = [
   {
     id: 1,
     title: "The 8 Immortals Treasure",
@@ -615,10 +615,15 @@ export default function App() {
     icon: "Coins",
     color: "from-red-600 to-amber-500",
     accent: "#ef4444",
-    image: "/cny.png", // ✅ ADD THIS (put your cny image in /public)
-    winners: [...],
+    image: "/cny.png",
+    prizes: ["RM38,888 Free Credit Pool", "Limited Edition Gold Tokens", "Angpow Surprises"],
+    winners: [
+      { name: "ami**9*", prize: "RM18,888" },
+      { name: "lucky**w*", prize: "RM3,888" },
+      { name: "u*z***zi*", prize: "RM2,888" },
+    ],
     featured: true,
-    desc: "...",
+    desc: "Our most recent lunar celebration where 8 lucky immortals shared a massive credit pool.",
   },
   {
     id: 2,
@@ -628,10 +633,22 @@ export default function App() {
     icon: "Gift",
     color: "from-blue-600 to-cyan-400",
     accent: "#00BFFF",
-    image: "/xmas.png", // ✅ ADD THIS
-    winners: [...],
+    image: "/xmas.png",
+    prizes: [
+      "Rolex Luxury Watch",
+      "iPhone 17 Pro Max",
+      "iPad Pro",
+      "Cruise Tickets",
+      "Apple Watch",
+      "TnG eWallet Credits",
+    ],
+    winners: [
+      { name: "rolex_owner", prize: "Rolex Cosmograph Daytona" },
+      { name: "cruise_lucky", prize: "Premium Cruise 2 Pax" },
+      { name: "apple_fan", prize: "iPhone 17 Pro Max" },
+    ],
     featured: false,
-    desc: "...",
+    desc: "A festive board game experience where players traveled through a winter map to claim luxury physical prizes.",
   },
 ];
       winners: [
