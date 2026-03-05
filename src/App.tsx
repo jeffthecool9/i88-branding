@@ -396,9 +396,9 @@ const LiveTransactions = () => {
 
 const PaymentRiver = () => {
   const logos = [
-  { name: "Maybank", src: "/maybank.png", scale: 0.9 },
+  { name: "Maybank", src: "/maybank.jpg", scale: 0.9 },
     { name: "CIMB", src: "/cimb.png", scale: 0.95 },
- { name: "FPX", src: "/fpx.png", scale: 0.9 },
+ { name: "FPX", src: "/fpx.jpg", scale: 0.9 },
    { name: "DuitNow", src: "/duitnow.png", scale: 0.9 },
     {
       name: "Bitcoin",
