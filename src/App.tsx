@@ -404,9 +404,7 @@ const LiveTransactions = () => {
                     <div className="text-sm sm:text-lg md:text-xl font-black text-cyan-400 font-sans tracking-tighter">
                       {tx.spins} Free Tokens
                     </div>
-                    <div className="text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.2em] mt-0.5 text-gray-500">
-                      {tx.deposit >= 200 ? "Max Cap" : "RM100 Tier"}
-                    </div>
+               
                   </div>
                 </motion.div>
               ))}
