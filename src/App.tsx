@@ -874,83 +874,87 @@ const pastEvents = [
 </motion.div>
 
                         <div className="relative">
-                          <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 to-transparent -ml-6 -mr-6 sm:-ml-12 sm:-mr-12 pointer-events-none" />
-                          <h4 className="text-[9px] sm:text-[10px] font-black text-cyan-500 uppercase tracking-[0.3em] mb-4 relative z-10">
-                            Top Winners Spotlight
-                          </h4>
-                          <div className="space-y-2 sm:space-y-3 relative z-10">
-                            {event.winners.map((winner, wIdx) => (
-  <motion.div
-    key={wIdx}
-    initial={{ opacity: 0, x: -10 }}
-    whileInView={{ opacity: 1, x: 0 }}
-    viewport={{ once: true }}
-    transition={{ delay: idx * 0.1 + wIdx * 0.1 }}
-    whileHover={{
-      scale: 1.015,
-      backgroundColor: "rgba(0, 0, 0, 0.45)",
-      boxShadow: "0 0 26px rgba(34, 211, 238, 0.18)",
-      borderColor: "rgba(34, 211, 238, 0.9)",
-    }}
-    className="
-      flex items-center justify-between
-      px-4 py-3 sm:px-5 sm:py-4
-      bg-black/25
-      border-l-[3px] border-cyan-500/60
-      border border-white/5
-      backdrop-blur-sm
-      transition-all duration-300
-      group/winner cursor-default
-    "
-  >
-    {/* Left: rank + avatar + name */}
-    <div className="flex items-center gap-3 sm:gap-4 min-w-0">
-      {/* Rank */}
-      <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0">
-        <span className="text-[11px] sm:text-xs font-black tracking-widest text-white/70">
-          {String(wIdx + 1).padStart(2, "0")}
-        </span>
-      </div>
+                         {/* Winners */}
+<div className="relative">
+  <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 to-transparent -ml-6 -mr-6 sm:-ml-12 sm:-mr-12 pointer-events-none" />
 
-      {/* Avatar */}
-      <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden border border-white/10 bg-[#1e293b] flex-shrink-0">
-        <img
-          src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${winner.name}`}
-          alt={winner.name}
-          className="w-full h-full object-cover"
-          referrerPolicy="no-referrer"
-        />
-      </div>
+  <h4 className="text-[9px] sm:text-[10px] font-black text-cyan-500 uppercase tracking-[0.3em] mb-4 relative z-10">
+    Top Winners Spotlight
+  </h4>
 
-      {/* Name */}
-      <div className="min-w-0">
-        <div className="text-sm sm:text-base md:text-lg font-black text-white uppercase tracking-tight truncate group-hover/winner:text-cyan-300 transition-colors">
-          {winner.name.substring(0, 3)}***{winner.name.slice(-2)}
+  <div className="space-y-2 sm:space-y-3 relative z-10">
+    {event.winners.map((winner, wIdx) => (
+      <motion.div
+        key={wIdx}
+        initial={{ opacity: 0, x: -10 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: idx * 0.1 + wIdx * 0.1 }}
+        whileHover={{
+          scale: 1.015,
+          backgroundColor: "rgba(0, 0, 0, 0.45)",
+          boxShadow: "0 0 26px rgba(34, 211, 238, 0.18)",
+          borderColor: "rgba(34, 211, 238, 0.9)",
+        }}
+        className="
+          flex items-center justify-between
+          px-4 py-3 sm:px-5 sm:py-4
+          bg-black/25
+          border-l-[3px] border-cyan-500/60
+          border border-white/5
+          backdrop-blur-sm
+          transition-all duration-300
+          group/winner cursor-default
+        "
+      >
+        {/* Left: rank + avatar + name */}
+        <div className="flex items-center gap-3 sm:gap-4 min-w-0">
+          {/* Rank */}
+          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0">
+            <span className="text-[11px] sm:text-xs font-black tracking-widest text-white/70">
+              {String(wIdx + 1).padStart(2, "0")}
+            </span>
+          </div>
+
+          {/* Avatar */}
+          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden border border-white/10 bg-[#1e293b] flex-shrink-0">
+            <img
+              src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${winner.name}`}
+              alt={winner.name}
+              className="w-full h-full object-cover"
+              referrerPolicy="no-referrer"
+            />
+          </div>
+
+          {/* Name */}
+          <div className="min-w-0">
+            <div className="text-sm sm:text-base md:text-lg font-black text-white uppercase tracking-tight truncate group-hover/winner:text-cyan-300 transition-colors">
+              {winner.name.substring(0, 3)}***{winner.name.slice(-2)}
+            </div>
+            <div className="text-[10px] sm:text-[11px] font-bold text-white/45 uppercase tracking-[0.22em] mt-0.5">
+              Winner
+            </div>
+          </div>
         </div>
-        <div className="text-[10px] sm:text-[11px] font-bold text-white/45 uppercase tracking-[0.22em] mt-0.5">
-          Winner
+
+        {/* Right: Prize */}
+        <div className="text-right flex-shrink-0">
+          <div className="text-base sm:text-lg md:text-xl font-black text-cyan-300 tracking-tight tabular-nums">
+            {winner.prize}
+          </div>
+          <div className="text-[10px] sm:text-[11px] font-bold text-white/45 uppercase tracking-[0.22em] mt-0.5">
+            Prize
+          </div>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    ))}
+  </div>
+</div>
 
-    {/* Right: Prize */}
-    <div className="text-right flex-shrink-0">
-      <div className="text-base sm:text-lg md:text-xl font-black text-cyan-300 tracking-tight tabular-nums">
-        {winner.prize}
-      </div>
-      <div className="text-[10px] sm:text-[11px] font-bold text-white/45 uppercase tracking-[0.22em] mt-0.5">
-        Prize
-      </div>
-    </div>
-  </motion.div>
-))}
-                        <div className="absolute -bottom-10 -right-10 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity duration-700 pointer-events-none">
-                          <i className={`fas fa-${event.icon.toLowerCase()} text-[200px]`}></i>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-
+{/* Background Icon */}
+<div className="absolute -bottom-10 -right-10 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity duration-700 pointer-events-none">
+  <i className={`fas fa-${event.icon.toLowerCase()} text-[200px]`}></i>
+</div>
                   <div className="flex justify-center gap-2 mt-4">
                     {pastEvents.map((_, i) => (
                       <div key={i} className="w-1.5 h-1.5 rounded-full bg-white/10" />
