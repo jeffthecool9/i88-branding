@@ -975,7 +975,7 @@ export default function App() {
                             <p className="mt-1 text-sm text-gray-300">
                               Activate{" "}
                               <span className="text-cyan-400 font-bold">
-                                88 FREE SPINS
+                                88 FREE TOKENS
                               </span>
                             </p>
                           </div>
@@ -984,7 +984,7 @@ export default function App() {
                               88
                             </div>
                             <div className="text-xs text-gray-400 tracking-wider mt-1">
-                              SPINS
+                              TOKENS
                             </div>
                           </div>
                         </div>
@@ -1014,7 +1014,7 @@ export default function App() {
                             <p className="mt-1 text-sm text-gray-200">
                               Activate{" "}
                               <span className="text-cyan-400 font-black">
-                                168 FREE SPINS
+                                168 FREE TOKENS
                               </span>
                             </p>
                            
@@ -1029,7 +1029,7 @@ export default function App() {
                               168
                             </div>
                             <div className="text-xs text-cyan-200/80 tracking-wider mt-1">
-                              SPINS
+                              TOKENS
                             </div>
                           </div>
                         </div>
