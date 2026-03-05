@@ -147,52 +147,40 @@ const AnimatedUnderline = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-const PaymentLogo = ({
-  logo,
-}: {
-  logo: { name: string; src: string; isBank?: boolean };
-}) => {
-  const [hasError, setHasError] = useState(false);
+type PayLogo = {
+  name: string;
+  src: string;
+  scale?: number;
+};
+
+const PaymentLogo = ({ logo }: { logo: PayLogo }) => {
+  const scale = logo.scale ?? 0.9;
 
   return (
     <motion.div
-      onClick={() => playSFX("click")}
       whileHover={{
         y: -4,
-        borderColor: "rgba(0, 191, 255, 0.5)",
-        boxShadow: "0 0 25px rgba(0, 191, 255, 0.2)",
+        boxShadow: "0 0 25px rgba(0,191,255,0.18)",
       }}
-      className={`group relative flex-shrink-0 flex items-center justify-center h-12 w-24 sm:h-16 sm:w-32 md:h-20 md:w-40 ${
-        logo.isBank ? "bg-white" : "bg-[#1e293b]/50"
-      } border border-white/5 rounded-none p-2 sm:p-3 md:p-4 transition-all duration-300 backdrop-blur-sm cursor-pointer overflow-hidden`}
+      className="
+        relative flex-shrink-0
+        h-12 w-28 sm:h-16 sm:w-36 md:h-20 md:w-44
+        rounded-xl
+        bg-white
+        border border-white/20
+        flex items-center justify-center
+        px-4 py-3
+        transition-all duration-300
+        shadow-[0_10px_30px_rgba(0,0,0,0.25)]
+      "
     >
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileHover={{
-          opacity: [0.05, 0.15, 0.05],
-          transition: { duration: 2, repeat: Infinity },
-        }}
-        className="absolute inset-0 bg-[#00BFFF] pointer-events-none"
+      <img
+        src={logo.src}
+        alt={logo.name}
+        loading="lazy"
+        className="h-full w-full object-contain"
+        style={{ transform: `scale(${scale})` }}
       />
-
-      {!hasError ? (
-        <img
-          src={logo.src}
-          alt={logo.name}
-          referrerPolicy="no-referrer"
-          className="h-full w-full object-contain transition-all duration-300 transform group-hover:scale-110 relative z-10"
-          onError={() => setHasError(true)}
-        />
-      ) : (
-        <div className="flex flex-col items-center justify-center gap-1 relative z-10">
-          <div className="w-6 h-6 rounded-full bg-cyan-500/20 flex items-center justify-center">
-            <div className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-          </div>
-          <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">
-            {logo.name}
-          </span>
-        </div>
-      )}
     </motion.div>
   );
 };
@@ -408,36 +396,10 @@ const LiveTransactions = () => {
 
 const PaymentRiver = () => {
   const logos = [
-    {
-      name: "Maybank",
-      src: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Maybank_Logo.svg/1200px-Maybank_Logo.svg.png",
-      isBank: true,
-    },
-    {
-      name: "CIMB Bank",
-      src: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/CIMB_Bank_logo.svg/1200px-CIMB_Bank_logo.svg.png",
-      isBank: true,
-    },
-    {
-      name: "FPX",
-      src: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/FPX_logo.svg/1200px-FPX_logo.svg.png",
-      isBank: true,
-    },
-    {
-      name: "DuitNow",
-      src: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/DuitNow_logo.svg/1200px-DuitNow_logo.svg.png",
-      isBank: true,
-    },
-    {
-      name: "Touch 'n Go",
-      src: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Touch_%27n_Go_eWallet_logo.svg/1200px-Touch_%27n_Go_eWallet_logo.svg.png",
-      isBank: true,
-    },
-    {
-      name: "GrabPay",
-      src: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Grab_logo.svg/1200px-Grab_logo.svg.png",
-      isBank: true,
-    },
+  { name: "Maybank", src: "/payments/maybank.png", scale: 0.9 },
+    { name: "CIMB", src: "/payments/cimb.png", scale: 0.95 },
+ { name: "FPX", src: "/payments/fpx.png", scale: 0.9 },
+   { name: "DuitNow", src: "/payments/duitnow.png", scale: 0.9 },
     {
       name: "Bitcoin",
       src: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/1200px-Bitcoin.svg.png",
