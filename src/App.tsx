@@ -811,30 +811,34 @@ export default function App() {
                           )}
                         </div>
 
-                        <p className="text-xs sm:text-sm md:text-base text-gray-400 font-sans mb-6 sm:mb-8 leading-relaxed line-clamp-2">
-                          {event.desc}
-                        </p>
+             {/* Event Showcase Image (REPLACE THIS IMAGE PATH) */}
+<motion.div
+  initial={{ opacity: 0, y: 12 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.7, ease: "easeOut" }}
+  className="mb-8 sm:mb-10"
+>
+  <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/20">
+    {/* NOTE: replace src with your image path */}
+    <img
+      src="/events/xmas-monopoly-showcase.jpg" // <-- REPLACE THIS
+      alt={`${event.title} showcase`}
+      className="w-full h-[160px] sm:h-[220px] md:h-[260px] object-cover"
+      loading="lazy"
+    />
 
-                        <div className="mb-8 sm:mb-10">
-                          <h4 className="text-[9px] sm:text-[10px] font-black text-gray-500 uppercase tracking-[0.3em] mb-4">
-                            Prizes Distributed
-                          </h4>
-                          <div className="flex flex-wrap gap-2">
-                            {event.prizes.slice(0, 4).map((prize, pIdx) => (
-                              <span
-                                key={pIdx}
-                                className="px-3 py-1.5 sm:px-4 sm:py-2 bg-white/5 border border-white/5 text-[9px] sm:text-[10px] font-bold text-white/80 hover:bg-white/10 transition-colors"
-                              >
-                                {prize}
-                              </span>
-                            ))}
-                            {event.prizes.length > 4 && (
-                              <span className="px-3 py-1.5 sm:px-4 sm:py-2 bg-white/5 border border-white/5 text-[9px] sm:text-[10px] font-bold text-gray-500">
-                                +{event.prizes.length - 4} MORE
-                              </span>
-                            )}
-                          </div>
-                        </div>
+    {/* Optional: subtle overlay so text around it still feels premium */}
+    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
+
+    {/* Optional: small label bottom-left */}
+    <div className="absolute bottom-3 left-3">
+      <div className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-[0.25em] bg-black/50 border border-white/10 text-white/90 backdrop-blur">
+        Event Highlight
+      </div>
+    </div>
+  </div>
+</motion.div>
 
                         <div className="relative">
                           <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 to-transparent -ml-6 -mr-6 sm:-ml-12 sm:-mr-12 pointer-events-none" />
