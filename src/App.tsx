@@ -999,9 +999,7 @@ const pastEvents = [
                   MOST CHOSEN
                 </span>
               </div>
-              <span className="text-[11px] font-bold text-cyan-200/80 tracking-wider">
-                +80 vs RM50
-              </span>
+            
             </div>
 
             <div className="flex items-start justify-between gap-4">
