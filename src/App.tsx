@@ -676,8 +676,8 @@ const pastEvents = [
   ],
   winners: [
     { name: "rolex_owner", prize: "Rolex Cosmograph Daytona" },
-    { name: "cruise_lucky", prize: "Premium Cruise 2 Pax" },
-    { name: "apple_fan", prize: "iPhone 17 Pro Max" },
+    { name: "cruise_lucky", prize: "iPhone 17 Pro Max" },
+    { name: "apple_fan", prize: "iPad Pro" },
   ],
   featured: false,
   desc: "A festive board game experience where players traveled through a winter map to claim luxury physical prizes.",
