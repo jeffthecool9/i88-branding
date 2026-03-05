@@ -753,227 +753,213 @@ const pastEvents = [
               <LiveTransactions />
             </motion.div>
 
-            {/* Past Events */}
-            <section className="relative py-24 bg-[#0f172a] overflow-hidden">
-              <ExperienceBackground />
+          {/* Past Events */}
+<section className="relative py-24 bg-[#0f172a] overflow-hidden">
+  <ExperienceBackground />
 
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1.2, ease: "easeOut" }}
-                className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
-              >
-                <motion.div
-                  initial={{ opacity: 0, y: 15 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1, ease: "easeOut" }}
-                  className="text-center mb-16"
-                >
-                  <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tighter">
-                    <AnimatedUnderline>Past Events</AnimatedUnderline>
-                  </h2>
-                  <p className="mt-4 text-gray-400 font-sans text-lg">
-                    Celebrating our past winners and events
-                  </p>
-                </motion.div>
+  <motion.div
+    initial={{ opacity: 0 }}
+    whileInView={{ opacity: 1 }}
+    viewport={{ once: true }}
+    transition={{ duration: 1.2, ease: "easeOut" }}
+    className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
+  >
+    <motion.div
+      initial={{ opacity: 0, y: 15 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 1, ease: "easeOut" }}
+      className="text-center mb-16"
+    >
+      <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tighter">
+        <AnimatedUnderline>Past Events</AnimatedUnderline>
+      </h2>
+      <p className="mt-4 text-gray-400 font-sans text-lg">
+        Celebrating our past winners and events
+      </p>
+    </motion.div>
 
-                <div className="relative group/carousel">
-                  <div className="absolute top-1/2 left-0 sm:-left-8 -translate-y-1/2 z-20 md:opacity-0 md:group-hover/carousel:opacity-100 transition-opacity duration-300">
-                    <button
-                      onClick={() => scroll("left")}
-                      className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/60 border border-white/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-cyan-500 hover:border-cyan-400 transition-all shadow-lg"
-                    >
-                      <i className="fas fa-chevron-left text-sm sm:text-base"></i>
-                    </button>
-                  </div>
-
-                  <div className="absolute top-1/2 right-0 sm:-right-8 -translate-y-1/2 z-20 md:opacity-0 md:group-hover/carousel:opacity-100 transition-opacity duration-300">
-                    <button
-                      onClick={() => scroll("right")}
-                      className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/60 border border-white/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-cyan-500 hover:border-cyan-400 transition-all shadow-lg"
-                    >
-                      <i className="fas fa-chevron-right text-sm sm:text-base"></i>
-                    </button>
-                  </div>
-
-                  <div
-                    ref={scrollContainerRef}
-                    className="flex overflow-x-auto gap-6 pb-12 snap-x snap-mandatory no-scrollbar scroll-smooth"
-                    style={{ scrollbarWidth: "none", msOverflowStyle: "none" } as any}
-                  >
-                    {pastEvents.map((event, idx) => (
-                      <motion.div
-                        key={event.id}
-                        initial={{ opacity: 0, x: 50 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8, delay: idx * 0.1 }}
-                        whileHover={{
-                          y: -8,
-                          scale: 1.01,
-                          boxShadow: "0 20px 40px rgba(0, 0, 0, 0.4)",
-                          borderColor: "rgba(255, 255, 255, 0.2)",
-                        }}
-                        className="relative flex-shrink-0 w-[90vw] sm:w-[85vw] md:w-[600px] snap-center group overflow-hidden bg-[#1e293b]/40 border border-white/5 backdrop-blur-xl p-6 sm:p-8 md:p-12 transition-all duration-500"
-                      >
-                        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 sm:mb-8">
-                          <div>
-                            <div className="flex items-center gap-3 mb-2">
-                              <span
-                                className={`px-3 py-1 text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-white bg-gradient-to-r ${event.color} shadow-lg`}
-                              >
-                                {event.subtitle}
-                              </span>
-                              <span className="text-[10px] sm:text-xs font-mono text-gray-500 uppercase tracking-widest">
-                                {event.date}
-                              </span>
-                            </div>
-                            <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-white tracking-tighter uppercase group-hover:text-cyan-400 transition-colors">
-                              {event.title}
-                            </h3>
-                          </div>
-                          {event.featured && (
-                            <div className="flex items-center gap-2 text-amber-400">
-                              <i className="fas fa-star animate-pulse text-xs"></i>
-                              <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.2em]">
-                                Most Recent
-                              </span>
-                            </div>
-                          )}
-                        </div>
-
-             {/* Event Showcase Image (REPLACE THIS IMAGE PATH) */}
-<motion.div
-  initial={{ opacity: 0, y: 12 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  viewport={{ once: true }}
-  transition={{ duration: 0.7, ease: "easeOut" }}
-  className="mb-8 sm:mb-10"
->
-  <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/20">
-    {/* NOTE: replace src with your image path */}
-   <img
-  src={event.image} // ✅ uses image field from each event
-  alt={`${event.title} showcase`}
-  className="w-full h-[160px] sm:h-[220px] md:h-[260px] object-cover"
-  loading="lazy"
-/>
-
-    {/* Optional: subtle overlay so text around it still feels premium */}
-    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
-
-    {/* Optional: small label bottom-left */}
-    <div className="absolute bottom-3 left-3">
-      <div className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-[0.25em] bg-black/50 border border-white/10 text-white/90 backdrop-blur">
-        Event Highlight
+    <div className="relative group/carousel">
+      {/* Left Arrow */}
+      <div className="absolute top-1/2 left-0 sm:-left-8 -translate-y-1/2 z-20 md:opacity-0 md:group-hover/carousel:opacity-100 transition-opacity duration-300">
+        <button
+          onClick={() => scroll("left")}
+          className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/60 border border-white/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-cyan-500 hover:border-cyan-400 transition-all shadow-lg"
+        >
+          <i className="fas fa-chevron-left text-sm sm:text-base"></i>
+        </button>
       </div>
-    </div>
-  </div>
-</motion.div>
 
-                        <div className="relative">
-                         {/* Winners */}
-<div className="relative">
-  <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 to-transparent -ml-6 -mr-6 sm:-ml-12 sm:-mr-12 pointer-events-none" />
+      {/* Right Arrow */}
+      <div className="absolute top-1/2 right-0 sm:-right-8 -translate-y-1/2 z-20 md:opacity-0 md:group-hover/carousel:opacity-100 transition-opacity duration-300">
+        <button
+          onClick={() => scroll("right")}
+          className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/60 border border-white/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-cyan-500 hover:border-cyan-400 transition-all shadow-lg"
+        >
+          <i className="fas fa-chevron-right text-sm sm:text-base"></i>
+        </button>
+      </div>
 
-  <h4 className="text-[9px] sm:text-[10px] font-black text-cyan-500 uppercase tracking-[0.3em] mb-4 relative z-10">
-    Top Winners Spotlight
-  </h4>
-
-  <div className="space-y-2 sm:space-y-3 relative z-10">
-    {event.winners.map((winner, wIdx) => (
-      <motion.div
-        key={wIdx}
-        initial={{ opacity: 0, x: -10 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: idx * 0.1 + wIdx * 0.1 }}
-        whileHover={{
-          scale: 1.015,
-          backgroundColor: "rgba(0, 0, 0, 0.45)",
-          boxShadow: "0 0 26px rgba(34, 211, 238, 0.18)",
-          borderColor: "rgba(34, 211, 238, 0.9)",
-        }}
-        className="
-          flex items-center justify-between
-          px-4 py-3 sm:px-5 sm:py-4
-          bg-black/25
-          border-l-[3px] border-cyan-500/60
-          border border-white/5
-          backdrop-blur-sm
-          transition-all duration-300
-          group/winner cursor-default
-        "
+      {/* Cards */}
+      <div
+        ref={scrollContainerRef}
+        className="flex overflow-x-auto gap-6 pb-12 snap-x snap-mandatory no-scrollbar scroll-smooth"
+        style={{ scrollbarWidth: "none", msOverflowStyle: "none" } as any}
       >
-        {/* Left: rank + avatar + name */}
-        <div className="flex items-center gap-3 sm:gap-4 min-w-0">
-          {/* Rank */}
-          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0">
-            <span className="text-[11px] sm:text-xs font-black tracking-widest text-white/70">
-              {String(wIdx + 1).padStart(2, "0")}
-            </span>
-          </div>
+        {pastEvents.map((event, idx) => (
+          <motion.div
+            key={event.id}
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: idx * 0.1 }}
+            whileHover={{
+              y: -8,
+              scale: 1.01,
+              boxShadow: "0 20px 40px rgba(0, 0, 0, 0.4)",
+              borderColor: "rgba(255, 255, 255, 0.2)",
+            }}
+            className="relative flex-shrink-0 w-[90vw] sm:w-[85vw] md:w-[600px] snap-center group overflow-hidden bg-[#1e293b]/40 border border-white/5 backdrop-blur-xl p-6 sm:p-8 md:p-12 transition-all duration-500"
+          >
+            {/* Header */}
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 sm:mb-8">
+              <div>
+                <div className="flex items-center gap-3 mb-2">
+                  <span
+                    className={`px-3 py-1 text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-white bg-gradient-to-r ${event.color} shadow-lg`}
+                  >
+                    {event.subtitle}
+                  </span>
+                  <span className="text-[10px] sm:text-xs font-mono text-gray-500 uppercase tracking-widest">
+                    {event.date}
+                  </span>
+                </div>
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-white tracking-tighter uppercase group-hover:text-cyan-400 transition-colors">
+                  {event.title}
+                </h3>
+              </div>
 
-          {/* Avatar */}
-          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden border border-white/10 bg-[#1e293b] flex-shrink-0">
-            <img
-              src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${winner.name}`}
-              alt={winner.name}
-              className="w-full h-full object-cover"
-              referrerPolicy="no-referrer"
-            />
-          </div>
-
-          {/* Name */}
-          <div className="min-w-0">
-            <div className="text-sm sm:text-base md:text-lg font-black text-white uppercase tracking-tight truncate group-hover/winner:text-cyan-300 transition-colors">
-              {winner.name.substring(0, 3)}***{winner.name.slice(-2)}
+              {event.featured && (
+                <div className="flex items-center gap-2 text-amber-400">
+                  <i className="fas fa-star animate-pulse text-xs"></i>
+                  <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.2em]">
+                    Most Recent
+                  </span>
+                </div>
+              )}
             </div>
-            <div className="text-[10px] sm:text-[11px] font-bold text-white/45 uppercase tracking-[0.22em] mt-0.5">
-              Winner
-            </div>
-          </div>
-        </div>
 
-        {/* Right: Prize */}
-        <div className="text-right flex-shrink-0">
-          <div className="text-base sm:text-lg md:text-xl font-black text-cyan-300 tracking-tight tabular-nums">
-            {winner.prize}
-          </div>
-          <div className="text-[10px] sm:text-[11px] font-bold text-white/45 uppercase tracking-[0.22em] mt-0.5">
-            Prize
-          </div>
-        </div>
-      </motion.div>
-    ))}
-  </div>
-</div>
-
-{/* Background Icon */}
-<div className="absolute -bottom-10 -right-10 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity duration-700 pointer-events-none">
-  <i className={`fas fa-${event.icon.toLowerCase()} text-[200px]`}></i>
-</div>
-                  <div className="flex justify-center gap-2 mt-4">
-                    {pastEvents.map((_, i) => (
-                      <div key={i} className="w-1.5 h-1.5 rounded-full bg-white/10" />
-                    ))}
+            {/* Image */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+              className="mb-8 sm:mb-10"
+            >
+              <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/20">
+                <img
+                  src={event.image}
+                  alt={`${event.title} showcase`}
+                  className="w-full h-[160px] sm:h-[220px] md:h-[260px] object-cover"
+                  loading="lazy"
+                />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
+                <div className="absolute bottom-3 left-3">
+                  <div className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-[0.25em] bg-black/50 border border-white/10 text-white/90 backdrop-blur">
+                    Event Highlight
                   </div>
                 </div>
+              </div>
+            </motion.div>
 
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  className="mt-16 text-center"
-                >
-                  <p className="text-gray-500 text-xs font-sans uppercase tracking-[0.4em]">
-                    New events launching every month. Stay tuned.
-                  </p>
-                </motion.div>
-              </motion.div>
-            </section>
+            {/* Winners (BOLD + BIG + PRO) */}
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 to-transparent -ml-6 -mr-6 sm:-ml-12 sm:-mr-12 pointer-events-none" />
 
+              <h4 className="text-[10px] sm:text-xs font-black text-cyan-400 uppercase tracking-[0.32em] mb-4 relative z-10">
+                Top Winners Spotlight
+              </h4>
+
+              <div className="space-y-3 relative z-10">
+                {event.winners.map((winner, wIdx) => (
+                  <motion.div
+                    key={wIdx}
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: idx * 0.1 + wIdx * 0.08 }}
+                    whileHover={{
+                      scale: 1.015,
+                      backgroundColor: "rgba(0, 0, 0, 0.45)",
+                      boxShadow: "0 0 26px rgba(34, 211, 238, 0.18)",
+                      borderColor: "rgba(34, 211, 238, 0.9)",
+                    }}
+                    className="flex items-center justify-between px-4 py-3 sm:px-5 sm:py-4 bg-black/25 border border-white/10 border-l-[3px] border-l-cyan-400/70 backdrop-blur-sm transition-all duration-300"
+                  >
+                    <div className="flex items-center gap-3 sm:gap-4 min-w-0">
+                      <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0">
+                        <span className="text-[11px] sm:text-xs font-black tracking-widest text-white/80">
+                          {String(wIdx + 1).padStart(2, "0")}
+                        </span>
+                      </div>
+
+                      <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden border border-white/10 bg-[#1e293b] flex-shrink-0">
+                        <img
+                          src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${winner.name}`}
+                          alt={winner.name}
+                          className="w-full h-full object-cover"
+                          referrerPolicy="no-referrer"
+                        />
+                      </div>
+
+                      <div className="min-w-0">
+                        <div className="text-sm sm:text-base md:text-lg font-black text-white uppercase tracking-tight truncate">
+                          {winner.name.substring(0, 3)}***{winner.name.slice(-2)}
+                        </div>
+                        <div className="text-[10px] sm:text-[11px] font-bold text-white/50 uppercase tracking-[0.22em] mt-0.5">
+                          Winner
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="text-right flex-shrink-0">
+                      <div className="text-base sm:text-lg md:text-xl font-black text-cyan-300 tracking-tight tabular-nums">
+                        {winner.prize}
+                      </div>
+                      <div className="text-[10px] sm:text-[11px] font-bold text-white/50 uppercase tracking-[0.22em] mt-0.5">
+                        Prize
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            {/* Big Background Icon */}
+            <div className="absolute -bottom-10 -right-10 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity duration-700 pointer-events-none">
+              <i className={`fas fa-${event.icon.toLowerCase()} text-[200px]`}></i>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Dots (THIS MUST BE OUTSIDE THE CARD) */}
+      <div className="flex justify-center gap-2 mt-4">
+        {pastEvents.map((_, i) => (
+          <div key={i} className="w-1.5 h-1.5 rounded-full bg-white/10" />
+        ))}
+      </div>
+    </div>
+
+    {/* Bottom caption */}
+    <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="mt-16 text-center">
+      <p className="text-gray-500 text-xs font-sans uppercase tracking-[0.4em]">
+        New events launching every month. Stay tuned.
+      </p>
+    </motion.div>
+  </motion.div>
+</section>
      {/* CTA */}
 <section className="relative py-24 sm:py-32 px-4 overflow-hidden">
   <div className="absolute inset-0 bg-gradient-to-b from-[#0B1120] to-[#0f172a]" />
