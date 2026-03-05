@@ -913,7 +913,7 @@ const pastEvents = [
               </motion.div>
             </section>
 
-         {/* CTA */}
+        {/* CTA */}
 <section className="relative py-24 sm:py-32 px-4 overflow-hidden">
   <div className="absolute inset-0 bg-gradient-to-b from-[#0B1120] to-[#0f172a]" />
   <motion.div
@@ -948,8 +948,8 @@ const pastEvents = [
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
           className="mt-4 text-base sm:text-lg text-gray-300"
         >
-          Choose your activation tier. Rewards activate instantly after deposit
-         
+          Choose your activation tier. Rewards activate instantly after deposit.
+          <span className="text-white font-semibold"> (24-hour window for new members)</span>
         </motion.p>
 
         <motion.div
@@ -966,25 +966,27 @@ const pastEvents = [
             className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-6 shadow-[0_0_30px_rgba(255,255,255,0.06)] hover:bg-white/10 transition-colors"
             onMouseEnter={() => playSFX("click")}
           >
-            <div className="flex items-start justify-between gap-4">
-              <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wide bg-white/10 text-gray-200 border border-white/10">
-                  STARTER
-                </div>
-                <h3 className="mt-4 text-xl font-extrabold text-white">Deposit RM50</h3>
-                <p className="mt-1 text-sm text-gray-300">
-                  Activate <span className="text-cyan-400 font-bold">88 FREE TOKENS</span>
-                </p>
+            <div className="flex items-center justify-between mb-4">
+              <div className="px-3 py-1 rounded-full text-[11px] font-semibold tracking-wide bg-white/10 text-gray-200 border border-white/10">
+                STARTER
               </div>
-
               <div className="text-right">
                 <div className="text-3xl font-black text-white leading-none">88</div>
                 <div className="text-xs text-gray-400 tracking-wider mt-1">TOKENS</div>
               </div>
             </div>
 
+            <h3 className="text-xl font-extrabold text-white">Deposit RM50</h3>
+            <p className="mt-2 text-sm text-gray-300">
+              Activate <span className="text-cyan-400 font-bold">88 FREE TOKENS</span>
+            </p>
+
             <div className="mt-5 pt-5 border-t border-white/10 flex items-center justify-between">
-             
+              <div className="text-xs text-gray-400">
+                Window: <span className="text-gray-200 font-semibold">24 hours</span>
+              </div>
+              <div className="text-xs text-gray-300">Low risk start</div>
+            </div>
           </motion.div>
 
           {/* RM100 */}
@@ -994,44 +996,41 @@ const pastEvents = [
             className="relative overflow-hidden rounded-2xl border border-cyan-400/30 bg-gradient-to-br from-cyan-500/10 to-white/5 backdrop-blur-sm p-6 shadow-[0_0_45px_rgba(0,191,255,0.18)] hover:from-cyan-500/15 transition-colors"
             onMouseEnter={() => playSFX("click")}
           >
-            {/* badges row */}
-            <div className="flex items-center justify-between mb-4">
-              <div className="px-3 py-1 rounded-full text-[11px] font-semibold tracking-wide bg-cyan-500/10 text-cyan-300 border border-cyan-400/20">
-                BEST VALUE
-              </div>
-              <div className="px-3 py-1 rounded-full text-[11px] font-black tracking-wide bg-cyan-500/15 text-cyan-200 border border-cyan-400/30">
-                MOST CHOSEN
-              </div>
-            </div>
-
-            <div className="flex items-start justify-between gap-4">
-              {/* left */}
-              <div>
-                <h3 className="text-xl font-extrabold text-white">Deposit RM100</h3>
-                <p className="mt-1 text-sm text-gray-200">
-                  Activate <span className="text-cyan-400 font-black">168 FREE TOKENS</span>
-                </p>
-                <p className="mt-2 text-xs text-gray-300">
-                  <span className="text-white font-semibold">+80 tokens</span> vs RM50
-                </p>
-              </div>
-
-              {/* right */}
-              <div className="text-right">
-                <div className="text-3xl font-black text-white leading-none drop-shadow-[0_0_10px_rgba(34,211,238,0.35)]">
-                  168
+            {/* top badges + number */}
+            <div className="flex items-center justify-between gap-3 mb-4">
+              <div className="flex items-center gap-2">
+                <div className="px-3 py-1 rounded-full text-[11px] font-semibold tracking-wide bg-cyan-500/10 text-cyan-200 border border-cyan-400/20">
+                  BEST VALUE
                 </div>
+                <div className="px-3 py-1 rounded-full text-[11px] font-semibold tracking-wide bg-cyan-500/15 text-cyan-100 border border-cyan-400/30">
+                  MOST CHOSEN
+                </div>
+              </div>
+
+              <div className="text-right">
+                <div className="text-3xl font-black text-white leading-none">168</div>
                 <div className="text-xs text-cyan-200/80 tracking-wider mt-1">TOKENS</div>
               </div>
             </div>
 
+            <h3 className="text-xl font-extrabold text-white">Deposit RM100</h3>
+            <p className="mt-2 text-sm text-gray-200">
+              Activate <span className="text-cyan-400 font-black">168 FREE TOKENS</span>
+            </p>
+            <p className="mt-2 text-xs text-gray-300">
+              <span className="text-white font-semibold">+80 tokens</span> vs RM50
+            </p>
+
             <div className="mt-5 pt-5 border-t border-cyan-400/15 flex items-center justify-between">
-             
+              <div className="text-xs text-gray-300">
+                Window: <span className="text-white font-semibold">24 hours</span>
+              </div>
               <div className="text-xs text-cyan-200 font-semibold">Better value</div>
             </div>
           </motion.div>
         </motion.div>
 
+        {/* CTA Button */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
