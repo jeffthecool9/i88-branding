@@ -1070,16 +1070,13 @@ export default function App() {
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16 sm:mb-20">
                   <div className="md:col-span-4">
-                    <div className="flex items-center gap-2 mb-6 sm:mb-8">
-                      <div className="w-8 h-8 border-2 border-cyan-500 flex items-center justify-center">
-                        <span className="text-lg font-black text-white italic">
-                          i
-                        </span>
-                      </div>
-                      <span className="text-2xl font-black tracking-tighter text-white italic">
-                        i88
-                      </span>
-                    </div>
+                  <div className="flex items-center mb-6 sm:mb-8">
+  <img
+    src="/i88.png"   // <-- replace if your file name is different
+    alt="i88 Logo"
+    className="h-10 sm:h-12 w-auto object-contain"
+  />
+</div>
                     <p className="text-gray-500 text-sm sm:text-base font-sans max-w-md leading-relaxed mb-8">
                       i88 is the leading online gaming platform in Asia, providing a
                       secure and fair gaming experience for all players.
