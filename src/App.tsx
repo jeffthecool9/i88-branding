@@ -753,7 +753,7 @@ const pastEvents = [
               <LiveTransactions />
             </motion.div>
 
-          {/* Past Events */}
+        {/* Past Events */}
 <section className="relative py-24 bg-[#0f172a] overflow-hidden">
   <ExperienceBackground />
 
@@ -764,6 +764,7 @@ const pastEvents = [
     transition={{ duration: 1.2, ease: "easeOut" }}
     className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
   >
+    {/* Title */}
     <motion.div
       initial={{ opacity: 0, y: 15 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -779,6 +780,7 @@ const pastEvents = [
       </p>
     </motion.div>
 
+    {/* Carousel Container */}
     <div className="relative group/carousel">
       {/* Left Arrow */}
       <div className="absolute top-1/2 left-0 sm:-left-8 -translate-y-1/2 z-20 md:opacity-0 md:group-hover/carousel:opacity-100 transition-opacity duration-300">
@@ -800,7 +802,7 @@ const pastEvents = [
         </button>
       </div>
 
-      {/* Cards */}
+      {/* Cards Row */}
       <div
         ref={scrollContainerRef}
         className="flex overflow-x-auto gap-6 pb-12 snap-x snap-mandatory no-scrollbar scroll-smooth"
@@ -834,6 +836,7 @@ const pastEvents = [
                     {event.date}
                   </span>
                 </div>
+
                 <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-white tracking-tighter uppercase group-hover:text-cyan-400 transition-colors">
                   {event.title}
                 </h3>
@@ -873,7 +876,7 @@ const pastEvents = [
               </div>
             </motion.div>
 
-            {/* Winners (BOLD + BIG + PRO) */}
+            {/* Winners */}
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 to-transparent -ml-6 -mr-6 sm:-ml-12 sm:-mr-12 pointer-events-none" />
 
@@ -944,7 +947,7 @@ const pastEvents = [
         ))}
       </div>
 
-      {/* Dots (THIS MUST BE OUTSIDE THE CARD) */}
+      {/* Dots (OUTSIDE cards row, INSIDE carousel) */}
       <div className="flex justify-center gap-2 mt-4">
         {pastEvents.map((_, i) => (
           <div key={i} className="w-1.5 h-1.5 rounded-full bg-white/10" />
@@ -952,8 +955,13 @@ const pastEvents = [
       </div>
     </div>
 
-    {/* Bottom caption */}
-    <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="mt-16 text-center">
+    {/* Bottom caption (OUTSIDE carousel, INSIDE section wrapper) */}
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      className="mt-16 text-center"
+    >
       <p className="text-gray-500 text-xs font-sans uppercase tracking-[0.4em]">
         New events launching every month. Stay tuned.
       </p>
