@@ -959,39 +959,24 @@ const pastEvents = [
           transition={{ duration: 0.9, ease: "easeOut", delay: 0.3 }}
           className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-5 text-left"
         >
-          {/* RM50 */}
-          <motion.div
-            whileHover={{ y: -6 }}
-            transition={{ type: "spring", stiffness: 350, damping: 22 }}
-            className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-6 shadow-[0_0_30px_rgba(255,255,255,0.06)] hover:bg-white/10 transition-colors"
-            onMouseEnter={() => playSFX("click")}
-          >
-            <div className="flex items-center justify-between mb-4">
-              <div className="px-3 py-1 rounded-full text-[11px] font-semibold tracking-wide bg-white/10 text-gray-200 border border-white/10">
-                STARTER
-              </div>
-              <div className="text-right">
-                <div className="text-3xl font-black text-white leading-none">88</div>
-                <div className="text-xs text-gray-400 tracking-wider mt-1">TOKENS</div>
-              </div>
-            </div>
+        <h3 className="text-xl font-extrabold text-white">Deposit RM50</h3>
 
-            <h3 className="text-xl font-extrabold text-white">Deposit RM50</h3>
-            <p className="mt-2 text-sm text-gray-300">
-              Activate <span className="text-cyan-400 font-bold">88 FREE TOKENS</span>
-            </p>
+<p className="mt-2 text-sm text-gray-300">
+  Activate <span className="text-cyan-400 font-bold">88 FREE TOKENS</span>
+</p>
 
-            <div className="mt-5 pt-5 border-t border-white/10 flex items-center justify-between">
-            
-          </motion.div>
+</motion.div>
+        <h3 className="text-xl font-extrabold text-white">Deposit RM100</h3>
 
-          {/* RM100 */}
-          <motion.div
-            whileHover={{ y: -6 }}
-            transition={{ type: "spring", stiffness: 350, damping: 22 }}
-            className="relative overflow-hidden rounded-2xl border border-cyan-400/30 bg-gradient-to-br from-cyan-500/10 to-white/5 backdrop-blur-sm p-6 shadow-[0_0_45px_rgba(0,191,255,0.18)] hover:from-cyan-500/15 transition-colors"
-            onMouseEnter={() => playSFX("click")}
-          >
+<p className="mt-2 text-sm text-gray-200">
+  Activate <span className="text-cyan-400 font-black">168 FREE TOKENS</span>
+</p>
+
+<p className="mt-2 text-xs text-gray-300">
+  <span className="text-white font-semibold">+80 tokens</span> vs RM50
+</p>
+
+</motion.div>
             {/* top badges + number */}
             <div className="flex items-center justify-between gap-3 mb-4">
               <div className="flex items-center gap-2">
