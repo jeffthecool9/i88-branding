@@ -913,7 +913,7 @@ const pastEvents = [
               </motion.div>
             </section>
 
-        {/* CTA */}
+     {/* CTA */}
 <section className="relative py-24 sm:py-32 px-4 overflow-hidden">
   <div className="absolute inset-0 bg-gradient-to-b from-[#0B1120] to-[#0f172a]" />
   <motion.div
@@ -930,7 +930,7 @@ const pastEvents = [
       transition={{ duration: 1, ease: "easeOut" }}
       className="bg-gradient-to-br from-[#1e293b] to-[#0f172a] border border-cyan-500/30 rounded-none p-10 sm:p-16 text-center shadow-[0_0_50px_rgba(0,191,255,0.1)] relative overflow-hidden"
     >
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-3xl mx-auto text-center">
         <motion.h2
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -948,8 +948,7 @@ const pastEvents = [
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
           className="mt-4 text-base sm:text-lg text-gray-300"
         >
-          Choose your activation tier. Rewards activate instantly after deposit.
-          <span className="text-white font-semibold"> (24-hour window for new members)</span>
+          Choose a tier. Rewards activate instantly after deposit.
         </motion.p>
 
         <motion.div
@@ -959,33 +958,58 @@ const pastEvents = [
           transition={{ duration: 0.9, ease: "easeOut", delay: 0.3 }}
           className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-5 text-left"
         >
-        <h3 className="text-xl font-extrabold text-white">Deposit RM50</h3>
+          {/* RM50 */}
+          <motion.div
+            whileHover={{ y: -6 }}
+            transition={{ type: "spring", stiffness: 350, damping: 22 }}
+            className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-7 shadow-[0_0_30px_rgba(255,255,255,0.06)] hover:bg-white/10 transition-colors"
+            onMouseEnter={() => playSFX("click")}
+          >
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wide bg-white/10 text-gray-200 border border-white/10">
+                  STARTER
+                </div>
+                <h3 className="mt-4 text-xl font-extrabold text-white">Deposit RM50</h3>
+                <p className="mt-2 text-sm text-gray-300">
+                  Activate <span className="text-cyan-400 font-bold">88 FREE TOKENS</span>
+                </p>
+              </div>
 
-<p className="mt-2 text-sm text-gray-300">
-  Activate <span className="text-cyan-400 font-bold">88 FREE TOKENS</span>
-</p>
+              <div className="text-right">
+                <div className="text-3xl font-black text-white leading-none">88</div>
+                <div className="text-xs text-gray-400 tracking-wider mt-1">TOKENS</div>
+              </div>
+            </div>
+          </motion.div>
 
-</motion.div>
-        <h3 className="text-xl font-extrabold text-white">Deposit RM100</h3>
-
-<p className="mt-2 text-sm text-gray-200">
-  Activate <span className="text-cyan-400 font-black">168 FREE TOKENS</span>
-</p>
-
-<p className="mt-2 text-xs text-gray-300">
-  <span className="text-white font-semibold">+80 tokens</span> vs RM50
-</p>
-
-</motion.div>
-            {/* top badges + number */}
+          {/* RM100 */}
+          <motion.div
+            whileHover={{ y: -6 }}
+            transition={{ type: "spring", stiffness: 350, damping: 22 }}
+            className="relative overflow-hidden rounded-2xl border border-cyan-400/30 bg-gradient-to-br from-cyan-500/10 to-white/5 backdrop-blur-sm p-7 shadow-[0_0_45px_rgba(0,191,255,0.18)] hover:from-cyan-500/15 transition-colors"
+            onMouseEnter={() => playSFX("click")}
+          >
             <div className="flex items-center justify-between gap-3 mb-4">
               <div className="flex items-center gap-2">
-                <div className="px-3 py-1 rounded-full text-[11px] font-semibold tracking-wide bg-cyan-500/10 text-cyan-200 border border-cyan-400/20">
+                <span className="px-3 py-1 rounded-full text-[11px] font-semibold tracking-wide bg-cyan-500/10 text-cyan-200 border border-cyan-400/20">
                   BEST VALUE
-                </div>
-                <div className="px-3 py-1 rounded-full text-[11px] font-semibold tracking-wide bg-cyan-500/15 text-cyan-100 border border-cyan-400/30">
+                </span>
+                <span className="px-3 py-1 rounded-full text-[11px] font-semibold tracking-wide bg-cyan-500/15 text-cyan-100 border border-cyan-400/25">
                   MOST CHOSEN
-                </div>
+                </span>
+              </div>
+              <span className="text-[11px] font-bold text-cyan-200/80 tracking-wider">
+                +80 vs RM50
+              </span>
+            </div>
+
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <h3 className="text-xl font-extrabold text-white">Deposit RM100</h3>
+                <p className="mt-2 text-sm text-gray-200">
+                  Activate <span className="text-cyan-400 font-black">168 FREE TOKENS</span>
+                </p>
               </div>
 
               <div className="text-right">
@@ -993,13 +1017,6 @@ const pastEvents = [
                 <div className="text-xs text-cyan-200/80 tracking-wider mt-1">TOKENS</div>
               </div>
             </div>
-
-            <h3 className="text-xl font-extrabold text-white">Deposit RM100</h3>
-            <p className="mt-2 text-sm text-gray-200">
-              Activate <span className="text-cyan-400 font-black">168 FREE TOKENS</span>
-            </p>
-        
-             
           </motion.div>
         </motion.div>
 
