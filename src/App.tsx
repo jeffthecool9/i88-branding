@@ -650,14 +650,6 @@ const pastEvents = [
   featured: false,
   desc: "A festive board game experience where players traveled through a winter map to claim luxury physical prizes.",
 },
-      winners: [
-        { name: "rolex_owner", prize: "Rolex Cosmograph Daytona" },
-        { name: "cruise_lucky", prize: "Premium Cruise 2 Pax" },
-        { name: "apple_fan", prize: "iPhone 17 Pro Max" },
-      ],
-      featured: false,
-      desc: "A festive board game experience where players traveled through a winter map to claim luxury physical prizes.",
-    },
   ];
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
