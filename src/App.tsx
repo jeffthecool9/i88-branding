@@ -634,6 +634,10 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
 
+  // ✅ SCROLL PROGRESS BAR (BIG VISUAL DIFFERENCE)
+  const { scrollYProgress } = useScroll();
+  const progressBar = useSpring(scrollYProgress, { stiffness: 120, damping: 25 });
+
 const pastEvents = [
   {
     id: 1,
