@@ -1072,7 +1072,7 @@ export default function App() {
                   <div className="md:col-span-4">
                   <div className="flex items-center mb-6 sm:mb-8">
   <img
-    src="/i88.png"   // <-- replace if your file name is different
+    src="/i882.png"   // <-- replace if your file name is different
     alt="i88 Logo"
     className="h-10 sm:h-12 w-auto object-contain"
   />
