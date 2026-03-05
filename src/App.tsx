@@ -1075,32 +1075,31 @@ const pastEvents = [
   </div>
 </section>
 
-            {/* Footer */}
-            <footer className="bg-[#0B1120] border-t border-white/5 py-12 sm:py-20">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16 sm:mb-20">
-                  <div className="md:col-span-4">
-                  <div className="flex items-center mb-6 sm:mb-8">
-  <img
-    src="/i882.png"   // <-- replace if your file name is different
-    alt="i88 Logo"
-    className="h-10 sm:h-12 w-auto object-contain"
-  />
-</div>
-                    <p className="text-gray-500 text-sm sm:text-base font-sans max-w-md leading-relaxed mb-8">
-                      i88 is the leading online gaming platform in Asia, providing a
-                      secure and fair gaming experience for all players.
-                    </p>
-                  </div>
-                </div>
+           {/* Footer */}
+<footer className="bg-[#0B1120] border-t border-white/5 py-12 sm:py-20">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-                <div className="pt-8 sm:pt-12 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center gap-6">
-                  <p className="text-xs sm:text-sm text-gray-600 font-sans">
-                    © 2026 i88 Gaming Group. All rights reserved.
-                  </p>
-                </div>
-              </div>
-            </footer>
+    <div className="flex flex-col items-center text-center">
+
+      <img
+        src="/i882.png"
+        alt="i88 Logo"
+        className="h-10 sm:h-12 w-auto object-contain mb-6"
+      />
+
+      <p className="text-gray-400 text-base sm:text-lg leading-relaxed max-w-2xl">
+        i88 is the leading online gaming platform in Asia,
+        providing a secure and fair gaming experience for all players.
+      </p>
+
+      <p className="text-gray-500 text-sm mt-10">
+        © 2026 i88 Gaming Group. All rights reserved.
+      </p>
+
+    </div>
+
+  </div>
+</footer>
           </motion.div>
         )}
       </AnimatePresence>
