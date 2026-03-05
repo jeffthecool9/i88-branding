@@ -39,3 +39,12 @@
   font-size: 18px;
   line-height: 1.6;
 }
+footer {
+  width: 100%;
+}
+
+.footer-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
