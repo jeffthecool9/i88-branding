@@ -606,40 +606,34 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
 
-  const pastEvents = [
-    {
-      id: 1,
-      title: "The 8 Immortals Treasure",
-      subtitle: "CNY Special Event",
-      date: "Feb 2026",
-      icon: "Coins",
-      color: "from-red-600 to-amber-500",
-      accent: "#ef4444",
-      prizes: ["RM38,888 Free Credit Pool", "Limited Edition Gold Tokens", "Angpow Surprises"],
-      winners: [
-        { name: "ami**9*", prize: "RM18,888" },
-        { name: "lucky**w*", prize: "RM3,888" },
-        { name: "u*z***zi*", prize: "RM2,888" },
-      ],
-      featured: true,
-      desc: "Our most recent lunar celebration where 8 lucky immortals shared a massive credit pool.",
-    },
-    {
-      id: 2,
-      title: "Xmas Monopoly Mini Game",
-      subtitle: "Christmas 2025",
-      date: "Dec 2025",
-      icon: "Gift",
-      color: "from-blue-600 to-cyan-400",
-      accent: "#00BFFF",
-      prizes: [
-        "Rolex Luxury Watch",
-        "iPhone 17 Pro Max",
-        "iPad Pro",
-        "Cruise Tickets",
-        "Apple Watch",
-        "TnG eWallet Credits",
-      ],
+ const pastEvents = [
+  {
+    id: 1,
+    title: "The 8 Immortals Treasure",
+    subtitle: "CNY Special Event",
+    date: "Feb 2026",
+    icon: "Coins",
+    color: "from-red-600 to-amber-500",
+    accent: "#ef4444",
+    image: "/cny.png", // ✅ ADD THIS (put your cny image in /public)
+    winners: [...],
+    featured: true,
+    desc: "...",
+  },
+  {
+    id: 2,
+    title: "Xmas Monopoly Mini Game",
+    subtitle: "Christmas 2025",
+    date: "Dec 2025",
+    icon: "Gift",
+    color: "from-blue-600 to-cyan-400",
+    accent: "#00BFFF",
+    image: "/xmas.png", // ✅ ADD THIS
+    winners: [...],
+    featured: false,
+    desc: "...",
+  },
+];
       winners: [
         { name: "rolex_owner", prize: "Rolex Cosmograph Daytona" },
         { name: "cruise_lucky", prize: "Premium Cruise 2 Pax" },
@@ -946,8 +940,8 @@ export default function App() {
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
           className="mt-4 text-base sm:text-lg text-gray-300"
         >
-          Choose your activation tier. Rewards activate instantly after deposit.
-          <span className="text-white font-semibold"> (24-hour window for new members)</span>
+          Choose your activation tier. Rewards activate instantly after deposit
+         
         </motion.p>
 
         <motion.div
