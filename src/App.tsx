@@ -424,6 +424,7 @@ const PaymentRiver = () => {
     { name: "CIMB", src: "/cimb.png", scale: 0.95 },
  { name: "FPX", src: "/fpx.jpg", scale: 0.9 },
    { name: "DuitNow", src: "/duitnow.png", scale: 0.9 },
+     { name: "PublicBank", src: "/publicbank.png", scale: 0.9 },
     {
       name: "Bitcoin",
       src: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/1200px-Bitcoin.svg.png",
