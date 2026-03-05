@@ -22,10 +22,8 @@ const playSFX = (type: "click" | "alert" | "success") => {
   };
 
   const audio = new Audio(sounds[type]);
-  audio.volume = 0.2; // Keep it subtle
-  audio.play().catch(() => {
-    // Ignore errors (usually browser blocking autoplay until interaction)
-  });
+  audio.volume = 0.2;
+  audio.play().catch(() => {});
 };
 
 const CyberBackground = () => {
@@ -35,7 +33,6 @@ const CyberBackground = () => {
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {/* Abstract Grid with Fade */}
       <div
         className="absolute inset-0 opacity-[0.03]"
         style={{
@@ -47,7 +44,6 @@ const CyberBackground = () => {
         }}
       />
 
-      {/* Floating Glows with Parallax */}
       <motion.div
         style={{ y: y1 }}
         animate={{
@@ -78,7 +74,6 @@ const CyberBackground = () => {
         className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-blue-600/20 rounded-full blur-[140px]"
       />
 
-      {/* Drifting Particles */}
       {[...Array(8)].map((_, i) => (
         <motion.div
           key={i}
@@ -111,11 +106,13 @@ const ExperienceBackground = () => {
     target: ref,
     offset: ["start end", "end start"],
   });
-
   const y = useTransform(scrollYProgress, [0, 1], [-50, 50]);
 
   return (
-    <div ref={ref} className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div
+      ref={ref}
+      className="absolute inset-0 overflow-hidden pointer-events-none"
+    >
       <motion.div
         style={{ y }}
         className="absolute inset-0 opacity-[0.02]"
@@ -125,45 +122,6 @@ const ExperienceBackground = () => {
           backgroundSize: "40px 40px",
         }}
       />
-    </div>
-  );
-};
-
-const TrustBackground = () => {
-  const ref = useRef<HTMLDivElement | null>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], [-40, 40]);
-
-  return (
-    <div ref={ref} className="absolute inset-0 overflow-hidden pointer-events-none">
-      <motion.div style={{ y }} className="absolute inset-0">
-        {[...Array(15)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-cyan-400/20 rounded-full"
-            initial={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              opacity: 0,
-            }}
-            animate={{
-              y: [0, -30],
-              x: [0, 10],
-              opacity: [0, 0.4, 0],
-            }}
-            transition={{
-              duration: Math.random() * 5 + 5,
-              repeat: Infinity,
-              ease: "linear",
-              delay: Math.random() * 5,
-            }}
-          />
-        ))}
-      </motion.div>
     </div>
   );
 };
@@ -245,7 +203,6 @@ const LiveTransactions = () => {
     target: ref,
     offset: ["start end", "end start"],
   });
-
   const yBg = useTransform(scrollYProgress, [0, 1], [-30, 30]);
 
   const malaysianNames = [
@@ -282,15 +239,11 @@ const LiveTransactions = () => {
   ];
 
   const depositPool = [100, 100, 100, 200, 200, 300, 500, 1000];
-
-  const getSpins = (deposit: number) => {
-    return deposit >= 200 ? 258 : 128;
-  };
+  const getSpins = (deposit: number) => (deposit >= 200 ? 258 : 128);
 
   const generateMemberActivity = (timeStr?: string) => {
     const deposit = depositPool[Math.floor(Math.random() * depositPool.length)];
     const spins = getSpins(deposit);
-
     return {
       id: Math.random().toString(36).substr(2, 9),
       user: malaysianNames[Math.floor(Math.random() * malaysianNames.length)],
@@ -328,7 +281,10 @@ const LiveTransactions = () => {
       ref={ref as any}
       className="py-12 sm:py-20 bg-[#0B1120] relative overflow-hidden border-t border-white/5"
     >
-      <motion.div style={{ y: yBg }} className="absolute inset-0 opacity-[0.03] pointer-events-none">
+      <motion.div
+        style={{ y: yBg }}
+        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+      >
         <div
           className="absolute top-0 left-0 w-full h-full"
           style={{
@@ -412,7 +368,9 @@ const LiveTransactions = () => {
                         <span className="text-[9px] sm:text-[10px] font-bold text-gray-500 uppercase tracking-wider">
                           {tx.time}
                         </span>
-                        <span className="text-[9px] text-gray-700 sm:hidden">•</span>
+                        <span className="text-[9px] text-gray-700 sm:hidden">
+                          •
+                        </span>
                         <span className="text-[9px] sm:hidden font-bold text-gray-400">
                           Deposited RM {tx.deposit.toLocaleString()}
                         </span>
@@ -520,7 +478,11 @@ const PaymentRiver = () => {
     return 50;
   };
 
-  const velocityOffset = useTransform(scrollVelocity, [-2000, 2000], getVelocityRange());
+  const velocityOffset = useTransform(
+    scrollVelocity,
+    [-2000, 2000],
+    getVelocityRange()
+  );
   const xParallax = useSpring(velocityOffset, { stiffness: 100, damping: 30 });
 
   return (
@@ -733,7 +695,8 @@ export default function App() {
   const scroll = (direction: "left" | "right") => {
     if (!scrollContainerRef.current) return;
     const { scrollLeft, clientWidth } = scrollContainerRef.current;
-    const scrollTo = direction === "left" ? scrollLeft - clientWidth : scrollLeft + clientWidth;
+    const scrollTo =
+      direction === "left" ? scrollLeft - clientWidth : scrollLeft + clientWidth;
     scrollContainerRef.current.scrollTo({ left: scrollTo, behavior: "smooth" });
   };
 
@@ -749,7 +712,7 @@ export default function App() {
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
           >
-            {/* Hero Stats Section */}
+            {/* Hero Stats */}
             <section className="relative pt-24 pb-12 sm:pt-32 sm:pb-20 overflow-hidden">
               <CyberBackground />
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -780,14 +743,14 @@ export default function App() {
               </div>
             </section>
 
-            {/* Payment Partners Section */}
+            {/* Payment */}
             <section className="py-8 sm:py-12 bg-[#0B1120] border-y border-white/5 overflow-hidden">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <PaymentRiver />
               </div>
             </section>
 
-            {/* Live Transactions Section */}
+            {/* Live */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -797,7 +760,7 @@ export default function App() {
               <LiveTransactions />
             </motion.div>
 
-            {/* Past Events & Winners Section */}
+            {/* Past Events */}
             <section className="relative py-24 bg-[#0f172a] overflow-hidden">
               <ExperienceBackground />
 
@@ -972,7 +935,11 @@ export default function App() {
                   </div>
                 </div>
 
-                <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="mt-16 text-center">
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  className="mt-16 text-center"
+                >
                   <p className="text-gray-500 text-xs font-sans uppercase tracking-[0.4em]">
                     New events launching every month. Stay tuned.
                   </p>
@@ -980,7 +947,7 @@ export default function App() {
               </motion.div>
             </section>
 
-            {/* CTA Section (FIXED - single section only) */}
+            {/* CTA (FIXED: badge cannot overlap) */}
             <section className="relative py-24 sm:py-32 px-4 overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-b from-[#0B1120] to-[#0f172a]" />
               <motion.div
@@ -1015,8 +982,12 @@ export default function App() {
                       transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
                       className="mt-4 text-base sm:text-lg text-gray-300"
                     >
-                      Choose your activation tier. Rewards activate instantly after deposit.
-                      <span className="text-white font-semibold"> (24-hour window for new members)</span>
+                      Choose your activation tier. Rewards activate instantly after
+                      deposit.
+                      <span className="text-white font-semibold">
+                        {" "}
+                        (24-hour window for new members)
+                      </span>
                     </motion.p>
 
                     <motion.div
@@ -1026,6 +997,7 @@ export default function App() {
                       transition={{ duration: 0.9, ease: "easeOut", delay: 0.3 }}
                       className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-5 text-left"
                     >
+                      {/* RM50 */}
                       <motion.div
                         whileHover={{ y: -6 }}
                         transition={{ type: "spring", stiffness: 350, damping: 22 }}
@@ -1037,61 +1009,91 @@ export default function App() {
                             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wide bg-white/10 text-gray-200 border border-white/10">
                               STARTER
                             </div>
-                            <h3 className="mt-4 text-xl font-extrabold text-white">Deposit RM50</h3>
+                            <h3 className="mt-4 text-xl font-extrabold text-white">
+                              Deposit RM50
+                            </h3>
                             <p className="mt-1 text-sm text-gray-300">
-                              Activate <span className="text-cyan-400 font-bold">88 FREE SPINS</span>
+                              Activate{" "}
+                              <span className="text-cyan-400 font-bold">
+                                88 FREE SPINS
+                              </span>
                             </p>
                           </div>
                           <div className="text-right">
-                            <div className="text-3xl font-black text-white leading-none">88</div>
-                            <div className="text-xs text-gray-400 tracking-wider mt-1">SPINS</div>
+                            <div className="text-3xl font-black text-white leading-none">
+                              88
+                            </div>
+                            <div className="text-xs text-gray-400 tracking-wider mt-1">
+                              SPINS
+                            </div>
                           </div>
                         </div>
 
                         <div className="mt-5 pt-5 border-t border-white/10 flex items-center justify-between">
                           <div className="text-xs text-gray-400">
-                            Window: <span className="text-gray-200 font-semibold">24 hours</span>
+                            Window:{" "}
+                            <span className="text-gray-200 font-semibold">
+                              24 hours
+                            </span>
                           </div>
                           <div className="text-xs text-gray-300">Low risk start</div>
                         </div>
                       </motion.div>
 
+                      {/* RM100 (FIXED: no absolute badge) */}
                       <motion.div
                         whileHover={{ y: -6 }}
                         transition={{ type: "spring", stiffness: 350, damping: 22 }}
                         className="group relative overflow-hidden rounded-2xl border border-cyan-400/30 bg-gradient-to-br from-cyan-500/10 to-white/5 backdrop-blur-sm p-6 shadow-[0_0_45px_rgba(0,191,255,0.18)] hover:from-cyan-500/15 transition-colors"
                         onMouseEnter={() => playSFX("click")}
                       >
-                        <div className="absolute top-5 right-5">
-                          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-black tracking-wide bg-cyan-500/15 text-cyan-200 border border-cyan-400/30">
-                            MOST CHOSEN
-                          </div>
-                        </div>
-
                         <div className="flex items-start justify-between gap-4">
+                          {/* Left */}
                           <div>
                             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wide bg-cyan-500/10 text-cyan-200 border border-cyan-400/20">
                               BEST VALUE
                             </div>
-                            <h3 className="mt-4 text-xl font-extrabold text-white">Deposit RM100</h3>
+                            <h3 className="mt-4 text-xl font-extrabold text-white">
+                              Deposit RM100
+                            </h3>
                             <p className="mt-1 text-sm text-gray-200">
-                              Activate <span className="text-cyan-400 font-black">168 FREE SPINS</span>
+                              Activate{" "}
+                              <span className="text-cyan-400 font-black">
+                                168 FREE SPINS
+                              </span>
                             </p>
                             <p className="mt-2 text-xs text-gray-300">
-                              <span className="text-white font-semibold">+80 spins</span> vs RM50
+                              <span className="text-white font-semibold">
+                                +80 spins
+                              </span>{" "}
+                              vs RM50
                             </p>
                           </div>
-                          <div className="text-right">
-                            <div className="text-3xl font-black text-white leading-none">168</div>
-                            <div className="text-xs text-cyan-200/80 tracking-wider mt-1">SPINS</div>
+
+                          {/* Right */}
+                          <div className="text-right flex flex-col items-end">
+                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-black tracking-wide bg-cyan-500/15 text-cyan-200 border border-cyan-400/30 mb-2">
+                              MOST CHOSEN
+                            </div>
+                            <div className="text-3xl font-black text-white leading-none">
+                              168
+                            </div>
+                            <div className="text-xs text-cyan-200/80 tracking-wider mt-1">
+                              SPINS
+                            </div>
                           </div>
                         </div>
 
                         <div className="mt-5 pt-5 border-t border-cyan-400/15 flex items-center justify-between">
                           <div className="text-xs text-gray-300">
-                            Window: <span className="text-white font-semibold">24 hours</span>
+                            Window:{" "}
+                            <span className="text-white font-semibold">
+                              24 hours
+                            </span>
                           </div>
-                          <div className="text-xs text-cyan-200 font-semibold">Better value</div>
+                          <div className="text-xs text-cyan-200 font-semibold">
+                            Better value
+                          </div>
                         </div>
                       </motion.div>
                     </motion.div>
@@ -1128,14 +1130,17 @@ export default function App() {
                   <div className="md:col-span-4">
                     <div className="flex items-center gap-2 mb-6 sm:mb-8">
                       <div className="w-8 h-8 border-2 border-cyan-500 flex items-center justify-center">
-                        <span className="text-lg font-black text-white italic">i</span>
+                        <span className="text-lg font-black text-white italic">
+                          i
+                        </span>
                       </div>
                       <span className="text-2xl font-black tracking-tighter text-white italic">
                         i88
                       </span>
                     </div>
                     <p className="text-gray-500 text-sm sm:text-base font-sans max-w-md leading-relaxed mb-8">
-                      i88 is the leading online gaming platform in Asia, providing a secure and fair gaming experience for all players.
+                      i88 is the leading online gaming platform in Asia, providing a
+                      secure and fair gaming experience for all players.
                     </p>
                   </div>
                 </div>
