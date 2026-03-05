@@ -822,7 +822,7 @@ export default function App() {
   <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/20">
     {/* NOTE: replace src with your image path */}
     <img
-      src="/events/xmas-monopoly-showcase.jpg" // <-- REPLACE THIS
+      src="/xmas.png" // <-- REPLACE THIS
       alt={`${event.title} showcase`}
       className="w-full h-[160px] sm:h-[220px] md:h-[260px] object-cover"
       loading="lazy"
