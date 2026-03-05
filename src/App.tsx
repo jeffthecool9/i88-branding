@@ -12,7 +12,35 @@ import {
   useVelocity,
   AnimatePresence,
 } from "motion/react";
+// Scroll Reveal Component
+function ScrollReveal({
+  children,
+  className = "",
+  delay = 0,
+  y = 18,
+  once = true,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+  y?: number;
+  once?: boolean;
+}) {
+  const ref = React.useRef<HTMLDivElement | null>(null);
 
+  return (
+    <motion.div
+      ref={ref}
+      className={className}
+      initial={{ opacity: 0, y, filter: "blur(6px)" }}
+      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      viewport={{ once }}
+      transition={{ duration: 0.7, ease: "easeOut", delay }}
+    >
+      {children}
+    </motion.div>
+  );
+}
 // Sound Utility
 const playSFX = (type: "click" | "alert" | "success") => {
   const sounds = {
