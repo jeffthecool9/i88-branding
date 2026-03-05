@@ -1017,12 +1017,7 @@ export default function App() {
                                 168 FREE SPINS
                               </span>
                             </p>
-                            <p className="mt-2 text-xs text-gray-300">
-                              <span className="text-white font-semibold">
-                                +80 spins
-                              </span>{" "}
-                              vs RM50
-                            </p>
+                           
                           </div>
 
                           {/* Right */}
