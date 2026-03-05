@@ -1111,7 +1111,7 @@ export default function App() {
                         onClick={() => playSFX("success")}
                         className="bg-cyan-500 hover:bg-cyan-400 text-black font-black text-lg md:text-xl px-12 py-5 rounded-full uppercase tracking-widest transition-all shadow-[0_0_20px_rgba(0,191,255,0.3)]"
                       >
-                        Claim Now
+                       Start Winning Now
                       </motion.button>
 
                       <p className="mt-8 text-xs text-gray-500 font-sans uppercase tracking-[0.2em]">
