@@ -292,10 +292,10 @@ const LiveTransactions = () => {
           className="text-center mb-12"
         >
           <h2 className="text-2xl font-bold text-white">
-            <AnimatedUnderline>Live Member Activity</AnimatedUnderline>
+            <AnimatedUnderline>Recent Joiners</AnimatedUnderline>
           </h2>
           <p className="mt-2 text-gray-400 text-sm font-sans">
-            Real-time deposits unlocking Free Spins
+            Real-time deposits unlocking Free Tokens
           </p>
         </motion.div>
 
@@ -316,7 +316,7 @@ const LiveTransactions = () => {
                 Deposit
               </span>
               <span className="text-right text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em]">
-                Free Spins
+                Free Tokens
               </span>
             </div>
 
@@ -374,7 +374,7 @@ const LiveTransactions = () => {
 
                   <div className="text-right whitespace-nowrap">
                     <div className="text-sm sm:text-lg md:text-xl font-black text-cyan-400 font-sans tracking-tighter">
-                      {tx.spins} Free Spins
+                      {tx.spins} Free Tokens
                     </div>
                     <div className="text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.2em] mt-0.5 text-gray-500">
                       {tx.deposit >= 200 ? "Max Cap" : "RM100 Tier"}
