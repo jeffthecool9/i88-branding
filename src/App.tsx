@@ -823,12 +823,12 @@ const pastEvents = [
 >
   <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/20">
     {/* NOTE: replace src with your image path */}
-    <img
-      src="/xmas.png" // <-- REPLACE THIS
-      alt={`${event.title} showcase`}
-      className="w-full h-[160px] sm:h-[220px] md:h-[260px] object-cover"
-      loading="lazy"
-    />
+   <img
+  src={event.image} // ✅ uses image field from each event
+  alt={`${event.title} showcase`}
+  className="w-full h-[160px] sm:h-[220px] md:h-[260px] object-cover"
+  loading="lazy"
+/>
 
     {/* Optional: subtle overlay so text around it still feels premium */}
     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
