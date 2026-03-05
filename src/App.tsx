@@ -385,9 +385,7 @@ const LiveTransactions = () => {
             </AnimatePresence>
           </div>
 
-          <div className="mt-4 text-center text-[10px] sm:text-xs text-gray-500 uppercase tracking-[0.25em]">
-            Deposit RM100 = 128 Spins • Deposit RM200+ = 258 Spins (Max)
-          </div>
+          
         </div>
       </div>
     </section>
