@@ -1002,12 +1002,10 @@ export default function App() {
                         className="group relative overflow-hidden rounded-2xl border border-cyan-400/30 bg-gradient-to-br from-cyan-500/10 to-white/5 backdrop-blur-sm p-6 shadow-[0_0_45px_rgba(0,191,255,0.18)] hover:from-cyan-500/15 transition-colors"
                         onMouseEnter={() => playSFX("click")}
                       >
-                        <div className="flex items-start justify-between gap-4">
-                          {/* Left */}
-                          <div>
-                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wide bg-cyan-500/10 text-cyan-200 border border-cyan-400/20">
-                              BEST VALUE
-                            </div>
+                       <div className="flex items-center justify-between mb-4">
+  <div className="px-3 py-1 rounded-full text-[11px] font-semibold tracking-wide bg-cyan-500/10 text-cyan-300 border border-cyan-400/20">
+    BEST VALUE
+  </div>
                             <h3 className="mt-4 text-xl font-extrabold text-white">
                               Deposit RM100
                             </h3>
@@ -1022,9 +1020,10 @@ export default function App() {
 
                           {/* Right */}
                           <div className="text-right flex flex-col items-end">
-                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-black tracking-wide bg-cyan-500/15 text-cyan-200 border border-cyan-400/30 mb-2">
-                              MOST CHOSEN
-                            </div>
+                           <div className="text-[10px] font-semibold uppercase tracking-wider text-cyan-300/80">
+    Most Chosen
+  </div>
+</div>
                             <div className="text-3xl font-black text-white leading-none">
                               168
                             </div>
