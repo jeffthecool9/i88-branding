@@ -1047,15 +1047,7 @@ export default function App() {
                         </div>
 
                         <div className="mt-5 pt-5 border-t border-cyan-400/15 flex items-center justify-between">
-                          <div className="text-xs text-gray-300">
-                            Window:{" "}
-                            <span className="text-white font-semibold">
-                              24 hours
-                            </span>
-                          </div>
-                          <div className="text-xs text-cyan-200 font-semibold">
-                            Better value
-                          </div>
+                  
                         </div>
                       </motion.div>
                     </motion.div>
