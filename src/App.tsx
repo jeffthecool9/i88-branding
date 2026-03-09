@@ -271,24 +271,40 @@ const LiveTransactions = () => {
 
   const [activity, setActivity] = useState<any[]>([]);
 
-  useEffect(() => {
-    const initial: any[] = [];
-    for (let i = 0; i < 7; i++) {
-      initial.push(generateMemberActivity(`${(i + 1) * 3} mins ago`));
-    }
-    setActivity(initial);
+useEffect(() => {
+  const initial: any[] = [
+    {
+      id: Math.random().toString(36).substr(2, 9),
+      user: "trial_user1",
+      deposit: 30,
+      spins: 0,
+      time: "Just now",
+    },
+    {
+      id: Math.random().toString(36).substr(2, 9),
+      user: "trial_user2",
+      deposit: 30,
+      spins: 0,
+      time: "2 mins ago",
+    },
+  ];
 
-    const interval = setInterval(() => {
-      setActivity((prev) => {
-        const newEntry = generateMemberActivity();
-        playSFX("alert");
-        return [newEntry, ...prev.slice(0, 6)];
-      });
-    }, 12000);
+  for (let i = 0; i < 5; i++) {
+    initial.push(generateMemberActivity(`${(i + 1) * 3 + 2} mins ago`));
+  }
 
-    return () => clearInterval(interval);
-  }, []);
+  setActivity(initial);
 
+  const interval = setInterval(() => {
+    setActivity((prev) => {
+      const newEntry = generateMemberActivity();
+      playSFX("alert");
+      return [newEntry, ...prev.slice(0, 6)];
+    });
+  }, 12000);
+
+  return () => clearInterval(interval);
+}, []);
   const maskUser = (user: string) => user.substring(0, 5) + "***";
   const recentActivity = activity.slice(0, 10);
 
@@ -343,10 +359,13 @@ const LiveTransactions = () => {
               <span className="hidden sm:block text-center text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em]">
                 Deposit
               </span>
-              <span className="text-right text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em]">
-                Free Tokens
-              </span>
-            </div>
+             <div
+  className={`text-sm sm:text-lg md:text-xl font-black font-sans tracking-tighter ${
+    tx.spins > 0 ? "text-cyan-400" : "text-gray-500"
+  }`}
+>
+  {tx.spins > 0 ? `${tx.spins} Free Tokens`: "No Bonus"}
+</div>
 
             <AnimatePresence mode="popLayout">
               {recentActivity.map((tx, idx) => (
