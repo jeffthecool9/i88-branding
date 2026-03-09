@@ -1106,11 +1106,12 @@ const pastEvents = [
 
     <div className="flex flex-col items-center text-center">
 
-      <img
-        src="/i882.png"
-        alt="i88 Logo"
-        className="h-10 sm:h-12 w-auto object-contain mb-6"
-      />
+     <img
+  src="/i882.png"
+  alt="i88 Logo"
+  className="mx-auto mb-6 w-20 sm:w-24 md:w-28 lg:w-32 opacity-95 brightness-110 
+  drop-shadow-[0_0_12px_rgba(56,189,248,0.45)]"
+/>
 
       <p className="text-gray-400 text-base sm:text-lg leading-relaxed max-w-2xl">
         i88 is the leading online gaming platform in Asia,
