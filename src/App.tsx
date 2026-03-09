@@ -254,8 +254,13 @@ const LiveTransactions = () => {
     "najib_boss",
   ];
 
-  const depositPool = [50, 50, 100, 100, 200, 300, 500, 900, 500, 600, 50, 50];
-  const getSpins = (deposit: number) => (deposit >= 100 ? 168 : 88);
+  const depositPool = [50, 100, 100, 200, 200, 300, 500, 1000];
+
+  const getSpins = (deposit: number) => {
+    if (deposit >= 100) return 168;
+    if (deposit >= 50) return 88;
+    return 0;
+  };
 
   const generateMemberActivity = (timeStr?: string) => {
     const deposit = depositPool[Math.floor(Math.random() * depositPool.length)];
@@ -271,40 +276,41 @@ const LiveTransactions = () => {
 
   const [activity, setActivity] = useState<any[]>([]);
 
-useEffect(() => {
-  const initial: any[] = [
-    {
-      id: Math.random().toString(36).substr(2, 9),
-      user: "trial_user1",
-      deposit: 30,
-      spins: 0,
-      time: "Just now",
-    },
-    {
-      id: Math.random().toString(36).substr(2, 9),
-      user: "trial_user2",
-      deposit: 30,
-      spins: 0,
-      time: "2 mins ago",
-    },
-  ];
+  useEffect(() => {
+    const initial: any[] = [
+      {
+        id: Math.random().toString(36).substr(2, 9),
+        user: "trial_user1",
+        deposit: 30,
+        spins: 0,
+        time: "Just now",
+      },
+      {
+        id: Math.random().toString(36).substr(2, 9),
+        user: "trial_user2",
+        deposit: 30,
+        spins: 0,
+        time: "2 mins ago",
+      },
+    ];
 
-  for (let i = 0; i < 5; i++) {
-    initial.push(generateMemberActivity(`${(i + 1) * 3 + 2} mins ago`));
-  }
+    for (let i = 0; i < 5; i++) {
+      initial.push(generateMemberActivity(`${(i + 1) * 3 + 2} mins ago`));
+    }
 
-  setActivity(initial);
+    setActivity(initial);
 
-  const interval = setInterval(() => {
-    setActivity((prev) => {
-      const newEntry = generateMemberActivity();
-      playSFX("alert");
-      return [newEntry, ...prev.slice(0, 6)];
-    });
-  }, 12000);
+    const interval = setInterval(() => {
+      setActivity((prev) => {
+        const newEntry = generateMemberActivity();
+        playSFX("alert");
+        return [newEntry, ...prev.slice(0, 6)];
+      });
+    }, 12000);
 
-  return () => clearInterval(interval);
-}, []);
+    return () => clearInterval(interval);
+  }, []);
+
   const maskUser = (user: string) => user.substring(0, 5) + "***";
   const recentActivity = activity.slice(0, 10);
 
@@ -359,13 +365,10 @@ useEffect(() => {
               <span className="hidden sm:block text-center text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em]">
                 Deposit
               </span>
-             <div
-  className={`text-sm sm:text-lg md:text-xl font-black font-sans tracking-tighter ${
-    tx.spins > 0 ? "text-cyan-400" : "text-gray-500"
-  }`}
->
-  {tx.spins > 0 ? `${tx.spins} Free Tokens`: "No Bonus"}
-</div>
+              <span className="text-right text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em]">
+                Free Tokens
+              </span>
+            </div>
 
             <AnimatePresence mode="popLayout">
               {recentActivity.map((tx, idx) => (
@@ -403,9 +406,7 @@ useEffect(() => {
                         <span className="text-[9px] sm:text-[10px] font-bold text-gray-500 uppercase tracking-wider">
                           {tx.time}
                         </span>
-                        <span className="text-[9px] text-gray-700 sm:hidden">
-                          •
-                        </span>
+                        <span className="text-[9px] text-gray-700 sm:hidden">•</span>
                         <span className="text-[9px] sm:hidden font-bold text-gray-400">
                           Deposited RM {tx.deposit.toLocaleString()}
                         </span>
@@ -420,17 +421,18 @@ useEffect(() => {
                   </div>
 
                   <div className="text-right whitespace-nowrap">
-                    <div className="text-sm sm:text-lg md:text-xl font-black text-cyan-400 font-sans tracking-tighter">
-                      {tx.spins} Free Tokens
+                    <div
+                      className={`text-sm sm:text-lg md:text-xl font-black font-sans tracking-tighter ${
+                        tx.spins > 0 ? "text-cyan-400" : "text-gray-500"
+                      }`}
+                    >
+                      {tx.spins > 0 ? `${tx.spins} Free Tokens` : "No Bonus"}
                     </div>
-               
                   </div>
                 </motion.div>
               ))}
             </AnimatePresence>
           </div>
-
-          
         </div>
       </div>
     </section>
