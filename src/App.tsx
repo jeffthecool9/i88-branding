@@ -254,7 +254,7 @@ const LiveTransactions = () => {
     "najib_boss",
   ];
 
-  const depositPool = [50, 100, 100, 200, 200, 300, 500, 1000];
+  const depositPool = [50, 50, 100, 100, 200, 300, 500, 900, 500, 600, 50, 50];
   const getSpins = (deposit: number) => (deposit >= 100 ? 168 : 88);
 
   const generateMemberActivity = (timeStr?: string) => {
