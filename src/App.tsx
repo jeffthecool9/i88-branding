@@ -255,7 +255,7 @@ const LiveTransactions = () => {
   ];
 
   const depositPool = [100, 100, 100, 200, 200, 300, 500, 1000];
-  const getSpins = (deposit: number) => (deposit >= 200 ? 258 : 128);
+  const getSpins = (deposit: number) => (deposit >= 200 ? 168 : 88);
 
   const generateMemberActivity = (timeStr?: string) => {
     const deposit = depositPool[Math.floor(Math.random() * depositPool.length)];
