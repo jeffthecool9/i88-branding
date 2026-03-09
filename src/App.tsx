@@ -265,6 +265,7 @@ const LiveTransactions = () => {
   const generateMemberActivity = (timeStr?: string) => {
     const deposit = depositPool[Math.floor(Math.random() * depositPool.length)];
     const spins = getSpins(deposit);
+
     return {
       id: Math.random().toString(36).substr(2, 9),
       user: malaysianNames[Math.floor(Math.random() * malaysianNames.length)],
@@ -276,23 +277,23 @@ const LiveTransactions = () => {
 
   const [activity, setActivity] = useState<any[]>([]);
 
-useEffect(() => {
-  const initial: any[] = [
-    {
-      id: Math.random().toString(36).substr(2, 9),
-      user: malaysianNames[Math.floor(Math.random() * malaysianNames.length)],
-      deposit: 30,
-      spins: 0,
-     time: randomTime(),
-    },
-    {
-      id: Math.random().toString(36).substr(2, 9),
-      user: malaysianNames[Math.floor(Math.random() * malaysianNames.length)],
-      deposit: 30,
-      spins: 0,
-     time: randomTime(),
-    },
-  ];
+  useEffect(() => {
+    const initial: any[] = [
+      {
+        id: Math.random().toString(36).substr(2, 9),
+        user: malaysianNames[Math.floor(Math.random() * malaysianNames.length)],
+        deposit: 30,
+        spins: 0,
+        time: "Just now",
+      },
+      {
+        id: Math.random().toString(36).substr(2, 9),
+        user: malaysianNames[Math.floor(Math.random() * malaysianNames.length)],
+        deposit: 30,
+        spins: 0,
+        time: "2 mins ago",
+      },
+    ];
 
     for (let i = 0; i < 5; i++) {
       initial.push(generateMemberActivity(`${(i + 1) * 3 + 2} mins ago`));
@@ -300,24 +301,16 @@ useEffect(() => {
 
     setActivity(initial);
 
- const interval = setInterval(() => {
-  setActivity((prev) => {
-    const isLowDeposit = Math.random() < 0.15;
+    const interval = setInterval(() => {
+      setActivity((prev) => {
+        const newEntry = generateMemberActivity();
+        playSFX("alert");
+        return [newEntry, ...prev.slice(0, 6)];
+      });
+    }, 12000);
 
-    const newEntry = isLowDeposit
-      ? {
-          id: Math.random().toString(36).substr(2, 9),
-          user: malaysianNames[Math.floor(Math.random() * malaysianNames.length)],
-          deposit: 30,
-          spins: 0,
-          time: "Just now",
-        }
-      : generateMemberActivity();
-
-    playSFX("alert");
-    return [newEntry, ...prev.slice(0, 6)];
-  });
-}, 12000);
+    return () => clearInterval(interval);
+  }, []);
 
   const maskUser = (user: string) => user.substring(0, 5) + "***";
   const recentActivity = activity.slice(0, 10);
