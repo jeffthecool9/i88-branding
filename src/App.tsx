@@ -300,16 +300,24 @@ useEffect(() => {
 
     setActivity(initial);
 
-    const interval = setInterval(() => {
-      setActivity((prev) => {
-        const newEntry = generateMemberActivity();
-        playSFX("alert");
-        return [newEntry, ...prev.slice(0, 6)];
-      });
-    }, 12000);
+ const interval = setInterval(() => {
+  setActivity((prev) => {
+    const isLowDeposit = Math.random() < 0.15;
 
-    return () => clearInterval(interval);
-  }, []);
+    const newEntry = isLowDeposit
+      ? {
+          id: Math.random().toString(36).substr(2, 9),
+          user: malaysianNames[Math.floor(Math.random() * malaysianNames.length)],
+          deposit: 30,
+          spins: 0,
+          time: "Just now",
+        }
+      : generateMemberActivity();
+
+    playSFX("alert");
+    return [newEntry, ...prev.slice(0, 6)];
+  });
+}, 12000);
 
   const maskUser = (user: string) => user.substring(0, 5) + "***";
   const recentActivity = activity.slice(0, 10);
