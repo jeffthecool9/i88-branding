@@ -876,7 +876,7 @@ const pastEvents = [
               </div>
             </motion.div>
 
-            {/* Winners */}
+                     {/* Winners */}
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 to-transparent -ml-6 -mr-6 sm:-ml-12 sm:-mr-12 pointer-events-none" />
 
@@ -898,9 +898,10 @@ const pastEvents = [
                       boxShadow: "0 0 26px rgba(34, 211, 238, 0.18)",
                       borderColor: "rgba(34, 211, 238, 0.9)",
                     }}
-                    className="flex items-center justify-between px-4 py-3 sm:px-5 sm:py-4 bg-black/25 border border-white/10 border-l-[3px] border-l-cyan-400/70 backdrop-blur-sm transition-all duration-300"
+                    className="flex items-center justify-between gap-3 px-4 py-3 sm:px-5 sm:py-4 bg-black/25 border border-white/10 border-l-[3px] border-l-cyan-400/70 backdrop-blur-sm transition-all duration-300"
                   >
-                    <div className="flex items-center gap-3 sm:gap-4 min-w-0">
+                    {/* LEFT SIDE */}
+                    <div className="flex items-center gap-3 sm:gap-4 min-w-0 flex-1">
                       <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0">
                         <span className="text-[11px] sm:text-xs font-black tracking-widest text-white/80">
                           {String(wIdx + 1).padStart(2, "0")}
@@ -916,7 +917,7 @@ const pastEvents = [
                         />
                       </div>
 
-                      <div className="min-w-0">
+                      <div className="min-w-0 flex-1">
                         <div className="text-sm sm:text-base md:text-lg font-black text-white uppercase tracking-tight truncate">
                           {winner.name.substring(0, 3)}***{winner.name.slice(-2)}
                         </div>
@@ -926,8 +927,9 @@ const pastEvents = [
                       </div>
                     </div>
 
-                    <div className="text-right flex-shrink-0">
-                      <div className="text-base sm:text-lg md:text-xl font-black text-cyan-300 tracking-tight tabular-nums">
+                    {/* RIGHT SIDE */}
+                    <div className="text-right flex-shrink-0 w-[120px] sm:w-[170px] md:w-[220px]">
+                      <div className="text-sm sm:text-base md:text-xl font-black text-cyan-300 tracking-tight leading-tight break-words">
                         {winner.prize}
                       </div>
                       <div className="text-[10px] sm:text-[11px] font-bold text-white/50 uppercase tracking-[0.22em] mt-0.5">
@@ -938,7 +940,6 @@ const pastEvents = [
                 ))}
               </div>
             </div>
-
             {/* Big Background Icon */}
             <div className="absolute -bottom-10 -right-10 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity duration-700 pointer-events-none">
               <i className={`fas fa-${event.icon.toLowerCase()} text-[200px]`}></i>
