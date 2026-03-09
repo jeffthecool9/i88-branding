@@ -276,23 +276,23 @@ const LiveTransactions = () => {
 
   const [activity, setActivity] = useState<any[]>([]);
 
-  useEffect(() => {
-    const initial: any[] = [
-      {
-        id: Math.random().toString(36).substr(2, 9),
-        user: "trial_user1",
-        deposit: 30,
-        spins: 0,
-        time: "Just now",
-      },
-      {
-        id: Math.random().toString(36).substr(2, 9),
-        user: "trial_user2",
-        deposit: 30,
-        spins: 0,
-        time: "2 mins ago",
-      },
-    ];
+useEffect(() => {
+  const initial: any[] = [
+    {
+      id: Math.random().toString(36).substr(2, 9),
+      user: malaysianNames[Math.floor(Math.random() * malaysianNames.length)],
+      deposit: 30,
+      spins: 0,
+     time: randomTime(),
+    },
+    {
+      id: Math.random().toString(36).substr(2, 9),
+      user: malaysianNames[Math.floor(Math.random() * malaysianNames.length)],
+      deposit: 30,
+      spins: 0,
+     time: randomTime(),
+    },
+  ];
 
     for (let i = 0; i < 5; i++) {
       initial.push(generateMemberActivity(`${(i + 1) * 3 + 2} mins ago`));
