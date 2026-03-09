@@ -277,40 +277,51 @@ const LiveTransactions = () => {
 
   const [activity, setActivity] = useState<any[]>([]);
 
-  useEffect(() => {
-    const initial: any[] = [
-      {
-        id: Math.random().toString(36).substr(2, 9),
-        user: malaysianNames[Math.floor(Math.random() * malaysianNames.length)],
-        deposit: 30,
-        spins: 0,
-        time: "Just now",
-      },
-      {
-        id: Math.random().toString(36).substr(2, 9),
-        user: malaysianNames[Math.floor(Math.random() * malaysianNames.length)],
-        deposit: 30,
-        spins: 0,
-        time: "2 mins ago",
-      },
-    ];
+useEffect(() => {
+  const initial: any[] = [
+    {
+      id: Math.random().toString(36).substr(2, 9),
+      user: malaysianNames[Math.floor(Math.random() * malaysianNames.length)],
+      deposit: 30,
+      spins: 0,
+      time: "Just now",
+    },
+    {
+      id: Math.random().toString(36).substr(2, 9),
+      user: malaysianNames[Math.floor(Math.random() * malaysianNames.length)],
+      deposit: 30,
+      spins: 0,
+      time: "2 mins ago",
+    },
+  ];
 
-    for (let i = 0; i < 5; i++) {
-      initial.push(generateMemberActivity(`${(i + 1) * 3 + 2} mins ago`));
-    }
+  for (let i = 0; i < 5; i++) {
+    initial.push(generateMemberActivity(`${(i + 1) * 3 + 2} mins ago`));
+  }
 
-    setActivity(initial);
+  setActivity(initial);
 
-    const interval = setInterval(() => {
+  let timeoutId: ReturnType<typeof setTimeout>;
+
+  const scheduleNextUpdate = () => {
+    const randomDelay = Math.floor(Math.random() * (50000 - 10000 + 1)) + 10000; 
+    // random 10s to 50s
+
+    timeoutId = setTimeout(() => {
       setActivity((prev) => {
         const newEntry = generateMemberActivity();
         playSFX("alert");
         return [newEntry, ...prev.slice(0, 6)];
       });
-    }, 12000);
 
-    return () => clearInterval(interval);
-  }, []);
+      scheduleNextUpdate();
+    }, randomDelay);
+  };
+
+  scheduleNextUpdate();
+
+  return () => clearTimeout(timeoutId);
+}, []);
 
   const maskUser = (user: string) => user.substring(0, 5) + "***";
   const recentActivity = activity.slice(0, 10);
