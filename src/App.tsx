@@ -773,7 +773,7 @@ const pastEvents = [
       className="text-center mb-16"
     >
       <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tighter">
-        <AnimatedUnderline>Past Events</AnimatedUnderline>
+        <AnimatedUnderline>Past Big Events</AnimatedUnderline>
       </h2>
       <p className="mt-4 text-gray-400 font-sans text-lg">
         Celebrating our past winners and events
