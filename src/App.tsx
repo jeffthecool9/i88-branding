@@ -699,17 +699,16 @@ const pastEvents = [
   accent: "#00BFFF",
   image: "/xmas.png",
   prizes: [
-    "Rolex Luxury Watch",
-    "iPhone 17 Pro Max",
-    "iPad Pro",
-    "Cruise Tickets",
+    "Blancpain X Swatch",
+    "iPhone 17 Pro",
+    "iPad Air",
     "Apple Watch",
     "TnG eWallet Credits",
   ],
   winners: [
-    { name: "rolex_owner", prize: "Rolex Cosmograph Daytona" },
-    { name: "cruise_lucky", prize: "iPhone 17 Pro Max" },
-    { name: "apple_fan", prize: "iPad Pro" },
+    { name: "rolex_owner", prize: "Blancpain X Swatch" },
+    { name: "cruise_lucky", prize: "iPhone 17 Pro " },
+    { name: "apple_fan", prize: "iPad Air" },
   ],
   featured: false,
   desc: "A festive board game experience where players traveled through a winter map to claim luxury physical prizes.",
@@ -1095,12 +1094,12 @@ const pastEvents = [
               <div>
                 <h3 className="text-xl font-extrabold text-white">Deposit RM100</h3>
                 <p className="mt-2 text-sm text-gray-200">
-                  Activate <span className="text-cyan-400 font-black">168 FREE TOKENS</span>
+                  Activate <span className="text-cyan-400 font-black">188 FREE TOKENS</span>
                 </p>
               </div>
 
               <div className="text-right">
-                <div className="text-3xl font-black text-white leading-none">168</div>
+                <div className="text-3xl font-black text-white leading-none">188</div>
                 <div className="text-xs text-cyan-200/80 tracking-wider mt-1">TOKENS</div>
               </div>
             </div>
