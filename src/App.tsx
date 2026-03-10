@@ -254,10 +254,10 @@ const LiveTransactions = () => {
     "najib_boss",
   ];
 
-  const depositPool = [50, 100, 100, 200, 200, 300, 500, 1000];
+  const depositPool = [50, 50, 100, 100, 100, 200, 200, 300, 500, 1000, 200, 1500, 100, 50, 50, 50];
 
   const getSpins = (deposit: number) => {
-    if (deposit >= 100) return 168;
+    if (deposit >= 100) return 188;
     if (deposit >= 50) return 88;
     return 0;
   };
