@@ -658,8 +658,8 @@ const pastEvents = [
     image: "/cny.png",
     prizes: ["RM38,888 Free Credit Pool", "Limited Edition Gold Tokens", "Angpow Surprises"],
     winners: [
-      { name: "ami**9*", prize: "RM18,888" },
-      { name: "lucky**w*", prize: "RM3,888" },
+      { name: "ami**9*", prize: "RM38,888" },
+      { name: "lucky**w*", prize: "RM38,888" },
       { name: "u*z***zi*", prize: "RM2,888" },
     ],
     featured: true,
