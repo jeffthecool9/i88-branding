@@ -441,7 +441,7 @@ const LiveTransactions = () => {
 
                   <div className="hidden sm:flex justify-center">
                     <span className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em] border px-4 py-1.5 rounded-none transition-all duration-500 text-white/80 border-white/5 bg-white/5">
-                      $ {tx.deposit.toLocaleString()}
+                      RM {tx.deposit.toLocaleString()}
                     </span>
                   </div>
 
@@ -466,11 +466,11 @@ const LiveTransactions = () => {
 
 const PaymentRiver = () => {
   const logos = [
-    { name: "Maybank", src: "/paynow.jpg", scale: 1 },
-    { name: "CIMB", src: "/uob.png", scale: 1 },
-    { name: "FPX", src: "/posb.jpg", scale: 1 },
-    { name: "DuitNow", src: "/ocbc.jpg", scale: 1 },
-    { name: "PublicBank", src: "/dbs.png", scale: 1 },
+    { name: "Maybank", src: "/maybank.jpg", scale: 1 },
+    { name: "CIMB", src: "/cimb.png", scale: 1 },
+    { name: "FPX", src: "/fpx.jpg", scale: 1 },
+    { name: "DuitNow", src: "/duitnow.png", scale: 1 },
+    { name: "PublicBank", src: "/publicbank.png", scale: 1 },
     {
       name: "Bitcoin",
       src: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/1200px-Bitcoin.svg.png",
@@ -675,9 +675,9 @@ export default function App() {
         "Angpow Surprises",
       ],
       winners: [
-        { name: "ami**9*", prize: "$38,888" },
-        { name: "lucky**w*", prize: "$38,888" },
-        { name: "u*z***zi*", prize: "$38,888" },
+        { name: "ami**9*", prize: "RM38,888" },
+        { name: "lucky**w*", prize: "RM38,888" },
+        { name: "u*z***zi*", prize: "RM38,888" },
       ],
       featured: true,
       desc: "Our most recent lunar celebration where 8 lucky immortals shared a massive credit pool.",
@@ -692,16 +692,15 @@ export default function App() {
       accent: "#00BFFF",
       image: "/xmas.png",
       prizes: [
-        "Rolex Luxury Watch",
-        "iPhone 17 Pro Max",
-        "iPad Pro",
-        "Cruise Tickets",
+        "Swiss Luxury Watch",
+        "iPhone 17 Pro",
+        "iPad Air",
         "Apple Watch",
       ],
       winners: [
-        { name: "rolex_owner", prize: "Rolex Cosmograph Daytona" },
-        { name: "cruise_lucky", prize: "iPhone 17 Pro Max" },
-        { name: "apple_fan", prize: "iPad Pro" },
+        { name: "rolex_owner", prize: "Swiss Luxury Watch" },
+        { name: "cruise_lucky", prize: "iPhone 17 Pro" },
+        { name: "apple_fan", prize: "iPad Air" },
       ],
       featured: false,
       desc: "A festive board game experience where players traveled through a winter map to claim luxury physical prizes.",
@@ -1060,7 +1059,7 @@ export default function App() {
                       }}
                       className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-5 text-left"
                     >
-                      {/* $50 */}
+                      {/* RM50 */}
                       <motion.div
                         whileHover={{ y: -6 }}
                         transition={{ type: "spring", stiffness: 350, damping: 22 }}
@@ -1085,7 +1084,7 @@ export default function App() {
                             >
                               Deposit
                               <br />
-                              <span className="inline-block mt-1">$50</span>
+                              <span className="inline-block mt-1">RM50</span>
                             </h3>
 
                             <p className="mt-3 text-[15px] md:text-[16px] font-semibold text-[#d3dceb] leading-snug">
@@ -1116,7 +1115,7 @@ export default function App() {
                         </div>
                       </motion.div>
 
-                      {/* $100 */}
+                      {/* RM100 */}
                       <motion.div
                         whileHover={{ y: -6 }}
                         transition={{ type: "spring", stiffness: 350, damping: 22 }}
@@ -1148,7 +1147,7 @@ export default function App() {
                             >
                               Deposit
                               <br />
-                              <span className="inline-block mt-1">$100</span>
+                              <span className="inline-block mt-1">RM100</span>
                             </h3>
 
                             <p className="mt-3 text-[15px] md:text-[16px] font-semibold text-[#d7e8f4] leading-snug">
