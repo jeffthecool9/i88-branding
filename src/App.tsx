@@ -228,6 +228,14 @@ const PaymentLogo = ({ logo }: { logo: PayLogo }) => {
 const AirPodsSpotlight = () => {
   return (
     <section className="relative overflow-hidden bg-[#03111D] h-[80vh] min-h-[520px]">
+      {/* LOGO */}
+<div className="absolute top-6 left-1/2 -translate-x-1/2 z-20">
+  <img
+    src="/i882.png"
+    alt="i88 logo"
+    className="h-10 sm:h-12 w-auto object-contain opacity-90"
+  />
+</div>
       
       {/* FULLSCREEN VIDEO */}
       <div className="absolute inset-0">
