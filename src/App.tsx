@@ -230,20 +230,10 @@ const AirPodsSpotlight = () => {
     <section className="relative overflow-hidden bg-[#03111D] py-24 sm:py-32">
       {/* extended spotlight outside the video */}
       <div className="pointer-events-none absolute inset-0">
-{/* STRONGER CORE LIGHT (main brightness) */}
-<div className="absolute left-1/2 top-0 h-[48%] w-[260px] -translate-x-1/2 
-bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.55)_0%,rgba(200,225,255,0.35)_18%,rgba(120,170,255,0.18)_38%,rgba(40,90,180,0.08)_60%,transparent_80%)] 
-blur-[12px]" />
-
-{/* WIDER LIGHT SPREAD */}
-<div className="absolute left-1/2 top-0 h-[52%] w-[600px] -translate-x-1/2 
-bg-[radial-gradient(ellipse_at_top,rgba(160,200,255,0.22)_0%,rgba(90,150,255,0.12)_30%,transparent_70%)] 
-blur-[32px]" />
-
-{/* LIGHT SHAFT (vertical beam) */}
-<div className="absolute left-1/2 top-0 h-[58%] w-[140px] -translate-x-1/2 
-bg-gradient-to-b from-white/25 via-cyan-200/15 to-transparent 
-blur-[20px]" />
+        <div className="absolute left-1/2 top-0 h-[58%] w-[260px] -translate-x-1/2 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.55)_0%,rgba(200,225,255,0.35)_18%,rgba(120,170,255,0.18)_38%,rgba(40,90,180,0.08)_60%,transparent_80%)] blur-[12px]" />
+        <div className="absolute left-1/2 top-0 h-[65%] w-[600px] -translate-x-1/2 bg-[radial-gradient(ellipse_at_top,rgba(160,200,255,0.22)_0%,rgba(90,150,255,0.12)_30%,transparent_70%)] blur-[32px]" />
+        <div className="absolute left-1/2 top-0 h-[75%] w-[140px] -translate-x-1/2 bg-gradient-to-b from-white/25 via-cyan-200/15 to-transparent blur-[20px]" />
+      </div>
 
       {/* video layer */}
       <div className="absolute inset-0 flex items-center justify-center">
@@ -254,21 +244,14 @@ blur-[20px]" />
           playsInline
           preload="metadata"
           poster="/airpod.jpg"
-          className="h-full max-h-[620px] w-auto object-contain opacity-95"
+          className="h-full max-h-[620px] w-auto object-contain opacity-100 contrast-110 brightness-110"
         >
           <source src="/airpodvid.mp4" type="video/mp4" />
         </video>
 
-        {/* top blend to merge page bg + video */}
         <div className="absolute inset-x-0 top-0 h-56 bg-gradient-to-b from-[#03111D] via-[#03111D]/88 to-transparent" />
-
-        {/* bottom blend */}
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#03111D] via-[#03111D]/82 to-transparent" />
-
-        {/* very light global dark overlay */}
-        <div className="absolute inset-0 bg-[#03111D]/18" />
-
-        {/* spotlight continuation exactly around airpod area */}
+        <div className="absolute inset-0 bg-[#03111D]/8" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_52%,rgba(205,225,255,0.16)_0%,rgba(120,160,230,0.10)_18%,rgba(40,80,160,0.04)_34%,transparent_54%)]" />
       </div>
 
