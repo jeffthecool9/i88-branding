@@ -227,7 +227,7 @@ const PaymentLogo = ({ logo }: { logo: PayLogo }) => {
 };
 const AirPodsSpotlight = () => {
   return (
-    <section className="relative overflow-hidden bg-[#06263D] py-24 sm:py-32">
+    <section className="relative overflow-hidden bg-[#041423] py-24 sm:py-32">
       {/* video layer */}
       <div className="absolute inset-0 flex items-center justify-center">
         <video
@@ -237,22 +237,19 @@ const AirPodsSpotlight = () => {
           playsInline
           preload="metadata"
           poster="/airpod.jpg"
-          className="h-full max-h-[520px] w-auto object-contain opacity-95"
+          className="h-full max-h-[620px] w-auto object-contain opacity-95"
         >
           <source src="/airpodvid.mp4" type="video/mp4" />
         </video>
 
         {/* top blend */}
-        <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-[#06263D] via-[#06263D]/85 to-transparent" />
+        <div className="absolute inset-x-0 top-0 h-56 bg-gradient-to-b from-[#041423] via-[#041423]/92 to-transparent" />
 
         {/* bottom blend */}
-        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#06263D] via-[#06263D]/80 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#041423] via-[#041423]/85 to-transparent" />
 
-        {/* soft global dark overlay */}
-        <div className="absolute inset-0 bg-[#06263D]/28" />
-
-        {/* subtle spotlight */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_18%,rgba(255,255,255,0.10),transparent_26%),radial-gradient(circle_at_50%_22%,rgba(0,191,255,0.10),transparent_56%)]" />
+        {/* darker global overlay */}
+        <div className="absolute inset-0 bg-[#041423]/35" />
       </div>
 
       {/* CTA */}
@@ -261,7 +258,7 @@ const AirPodsSpotlight = () => {
           href="#recent-joiners"
           whileHover={{
             scale: 1.05,
-            boxShadow: "0 0 28px rgba(34, 211, 238, 0.22)",
+            boxShadow: "0 0 24px rgba(34, 211, 238, 0.18)",
           }}
           whileTap={{ scale: 0.96 }}
           onClick={() => playSFX("click")}
