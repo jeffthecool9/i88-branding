@@ -238,7 +238,7 @@ const AirPodsSpotlight = () => {
           playsInline
           preload="metadata"
           poster="/airpod.jpg"
-          className="h-full w-full object-contain scale-135 sm:scale-140 brightness-125 contrast-110 saturate-110"
+          className="h-full w-full object-contain scale-135 sm:scale-140"
         >
           <source src="/airpodvid.mp4" type="video/mp4" />
         </video>
