@@ -239,7 +239,6 @@ const AirPodsSpotlight = () => {
         <div className="flex flex-col items-center text-center">
           {/* Product visual */}
           <div className="relative mb-12 sm:mb-16">
-            {/* Ambient product glow */}
             <motion.div
               animate={{
                 opacity: [0.25, 0.5, 0.25],
@@ -253,14 +252,12 @@ const AirPodsSpotlight = () => {
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 sm:w-80 sm:h-80 bg-cyan-400/20 rounded-full blur-[90px]"
             />
 
-            {/* Rising once */}
             <motion.div
               initial={{ y: 100, opacity: 0, scale: 0.92 }}
               whileInView={{ y: 0, opacity: 1, scale: 1 }}
               viewport={{ once: true, amount: 0.35 }}
               transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
             >
-              {/* Floating forever */}
               <motion.img
                 src="/airpod.png"
                 alt="AirPods Pro"
@@ -277,7 +274,6 @@ const AirPodsSpotlight = () => {
               />
             </motion.div>
 
-            {/* Bottom light platform */}
             <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-56 h-6 bg-cyan-400/10 rounded-[100%] blur-2xl" />
           </div>
 
@@ -301,17 +297,18 @@ const AirPodsSpotlight = () => {
               Win an AirPods Pro. Scroll down to see how to claim your reward
             </p>
 
-            <motion.button
+            <motion.a
+              href="#recent-joiners"
               whileHover={{
                 scale: 1.05,
                 boxShadow: "0 0 30px rgba(34, 211, 238, 0.35)",
               }}
               whileTap={{ scale: 0.95 }}
               onClick={() => playSFX("click")}
-              className="bg-white text-black font-black text-lg px-10 py-4 rounded-full uppercase tracking-widest transition-all hover:bg-cyan-300"
+              className="inline-flex items-center justify-center bg-white text-black font-black text-lg px-10 py-4 rounded-full uppercase tracking-widest transition-all hover:bg-cyan-300"
             >
-              Start Winning
-            </motion.button>
+              See How to Claim
+            </motion.a>
           </motion.div>
         </div>
       </div>
@@ -433,9 +430,10 @@ const LiveTransactions = () => {
 
   return (
     <section
-      ref={ref as any}
-      className="py-14 sm:py-20 bg-[#0B1120] relative overflow-hidden border-t border-white/5"
-    >
+  id="recent-joiners"
+  ref={ref as any}
+  className="py-14 sm:py-20 bg-[#0B1120] relative overflow-hidden border-t border-white/5"
+>
       <motion.div
         style={{ y: yBg }}
         className="absolute inset-0 opacity-[0.05] pointer-events-none"
@@ -768,10 +766,6 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   const { scrollYProgress } = useScroll();
-  const progressBar = useSpring(scrollYProgress, {
-    stiffness: 120,
-    damping: 25,
-  });
 
   const pastEvents = [
     {
@@ -872,22 +866,32 @@ export default function App() {
               </div>
             </section>
 
-            {/* Payment */}
-            <section className="py-8 sm:py-12 bg-[#0B1120] border-y border-white/5 overflow-hidden">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <PaymentRiver />
-              </div>
-            </section>
+           {/* Payment */}
+<section className="py-8 sm:py-12 bg-[#0B1120] border-y border-white/5 overflow-hidden">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <PaymentRiver />
+  </div>
+</section>
 
-            {/* Live */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 1, ease: "easeOut" }}
-            >
-              <LiveTransactions />
-            </motion.div>
+{/* AirPods Spotlight */}
+<motion.div
+  initial={{ opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, amount: 0.2 }}
+  transition={{ duration: 1, ease: "easeOut" }}
+>
+  <AirPodsSpotlight />
+</motion.div>
+
+{/* Live */}
+<motion.div
+  initial={{ opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, amount: 0.2 }}
+  transition={{ duration: 1, ease: "easeOut" }}
+>
+  <LiveTransactions />
+</motion.div>
 
             {/* Past Events */}
             <section className="relative py-24 bg-[#0f172a] overflow-hidden">
