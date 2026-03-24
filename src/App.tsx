@@ -227,90 +227,54 @@ const PaymentLogo = ({ logo }: { logo: PayLogo }) => {
 };
 const AirPodsSpotlight = () => {
   return (
-    <section className="relative overflow-hidden bg-[#0B1120] py-24 sm:py-32">
-      {/* cinematic background */}
+    <section className="relative overflow-hidden bg-[#0B1120] py-20 sm:py-28">
+      {/* background glow only for this section */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-1/2 top-0 h-full w-full max-w-5xl -translate-x-1/2 bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.10)_0%,rgba(0,191,255,0.10)_18%,transparent_65%)] opacity-80" />
-        <div className="absolute left-1/2 top-0 h-[70%] w-[2px] -translate-x-1/2 bg-gradient-to-b from-cyan-300/40 via-cyan-400/20 to-transparent blur-[1px]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(0,191,255,0.06),transparent_55%)]" />
+        <div className="absolute left-1/2 top-0 h-full w-full max-w-6xl -translate-x-1/2 bg-[radial-gradient(circle_at_50%_10%,rgba(0,191,255,0.14)_0%,rgba(0,191,255,0.08)_22%,transparent_65%)]" />
+        <div className="absolute left-1/2 top-0 h-[75%] w-[2px] -translate-x-1/2 bg-gradient-to-b from-cyan-300/35 via-cyan-400/15 to-transparent blur-[1px]" />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center text-center">
-          {/* product visual */}
-          <div className="relative mb-12 sm:mb-16">
-            <motion.div
-              animate={{
-                opacity: [0.2, 0.45, 0.2],
-                scale: [1, 1.06, 1],
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              className="absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-400/20 blur-[90px] sm:h-80 sm:w-80"
-            />
+      <div className="relative z-10 mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div className="relative flex justify-center">
+          {/* outer glow */}
+          <div className="absolute inset-x-8 top-10 h-[70%] rounded-[40px] bg-cyan-400/10 blur-3xl sm:inset-x-16" />
 
-            <motion.div
-              initial={{ y: 80, opacity: 0, scale: 0.96 }}
-              whileInView={{ y: 0, opacity: 1, scale: 1 }}
-              viewport={{ once: true, amount: 0.35 }}
-              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-              className="relative z-10"
+          {/* video card */}
+          <div className="relative w-full max-w-3xl rounded-[32px] border border-white/10 bg-white/5 p-3 shadow-[0_25px_80px_rgba(0,0,0,0.45)] backdrop-blur-sm">
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              poster="/airpod.jpg"
+              className="w-full rounded-[26px] object-cover"
             >
-              <div className="overflow-hidden rounded-[28px] border border-white/10 bg-white/5 p-2 shadow-[0_25px_60px_rgba(0,0,0,0.45)] backdrop-blur-sm">
-                <video
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  preload="metadata"
-                  className="w-64 rounded-[22px] object-contain sm:w-80 md:w-[420px]"
+              <source src="/airpodvid.mp4" type="video/mp4" />
+            </video>
+
+            {/* floating CTA */}
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center">
+              <div className="translate-y-1/2 pointer-events-auto">
+                <motion.a
+                  href="#recent-joiners"
+                  whileHover={{
+                    scale: 1.05,
+                    boxShadow: "0 0 28px rgba(34, 211, 238, 0.35)",
+                  }}
+                  whileTap={{ scale: 0.96 }}
+                  onClick={() => playSFX("click")}
+                  className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-base font-black uppercase tracking-[0.22em] text-black transition-all hover:bg-cyan-300 sm:px-12 sm:py-5 sm:text-lg"
                 >
-                  <source src="/airpodvid.mp4" type="video/mp4" />
-                </video>
+                  Win Now
+                </motion.a>
               </div>
-            </motion.div>
-
-            <div className="absolute -bottom-8 left-1/2 h-6 w-56 -translate-x-1/2 rounded-[100%] bg-cyan-400/10 blur-2xl" />
+            </div>
           </div>
-
-          {/* text content */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="max-w-3xl"
-          >
-            <h2 className="mb-4 text-4xl font-black uppercase tracking-tighter leading-[0.95] text-white sm:text-6xl md:text-7xl">
-              Play It,
-              <br />
-              <span className="bg-gradient-to-r from-white via-cyan-200 to-cyan-400 bg-clip-text text-transparent">
-                Get It
-              </span>
-            </h2>
-
-            <p className="mx-auto mb-10 max-w-2xl text-lg font-medium tracking-wide text-[#b9c7d9] sm:text-xl">
-              Unlock your AirPods Pro reward when you complete the required
-              steps
-            </p>
-
-            <motion.a
-              href="#recent-joiners"
-              whileHover={{
-                scale: 1.05,
-                boxShadow: "0 0 30px rgba(34, 211, 238, 0.35)",
-              }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => playSFX("click")}
-              className="inline-flex items-center justify-center rounded-full bg-white px-10 py-4 text-lg font-black uppercase tracking-widest text-black transition-all hover:bg-cyan-300"
-            >
-              See How to Claim
-            </motion.a>
-          </motion.div>
         </div>
+
+        {/* spacing below so the floating button does not crash into next section */}
+        <div className="h-16 sm:h-20" />
       </div>
     </section>
   );
