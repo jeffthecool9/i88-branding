@@ -259,7 +259,7 @@ const AirPodsSpotlight = () => {
               transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
             >
               <motion.img
-                src="/airpod.png"
+                src="/airpod.jpg"
                 alt="AirPods Pro"
                 className="w-64 sm:w-80 md:w-[420px] h-auto relative z-10 drop-shadow-[0_25px_60px_rgba(0,0,0,0.5)]"
                 animate={{
