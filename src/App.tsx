@@ -342,11 +342,11 @@ const LiveTransactions = () => {
   return (
     <section
       ref={ref as any}
-      className="py-12 sm:py-20 bg-[#0B1120] relative overflow-hidden border-t border-white/5"
+      className="py-14 sm:py-20 bg-[#0B1120] relative overflow-hidden border-t border-white/5"
     >
       <motion.div
         style={{ y: yBg }}
-        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        className="absolute inset-0 opacity-[0.05] pointer-events-none"
       >
         <div
           className="absolute top-0 left-0 w-full h-full"
@@ -358,100 +358,114 @@ const LiveTransactions = () => {
         />
       </motion.div>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-       <motion.div
-  initial={{ opacity: 0, y: 15 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  viewport={{ once: true }}
-  transition={{ duration: 0.8, ease: "easeOut" }}
-  className="text-center mb-12"
->
-  <h2 className={sectionTitle3DClass}>
-    <AnimatedUnderline>Recent Joiners</AnimatedUnderline>
-  </h2>
-  <p className="mt-2 text-[#bcd3ea] text-sm font-sans">
-    Real-time deposits unlocking Free Tokens
-  </p>
-</motion.div>
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="text-center mb-12"
+        >
+          <h2 className={sectionTitle3DClass}>
+            <AnimatedUnderline>Recent Joiners</AnimatedUnderline>
+          </h2>
+          <p className="mt-2 text-[#bcd3ea] text-sm font-sans">
+            Real-time deposits unlocking Free Tokens
+          </p>
+        </motion.div>
 
-        <div className="max-w-2xl mx-auto">
-          <div className="flex items-center gap-2 mb-4 px-2">
-            <div className="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-pulse" />
+        <div className="max-w-4xl mx-auto">
+          <div className="flex items-center gap-3 mb-6 px-1">
+            <div className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_10px_rgba(34,211,238,0.6)]" />
             <h3 className={sectionTitleCyan3DClass}>Recent Joins & Deposits</h3>
           </div>
 
-          <div className="rounded-none overflow-hidden border border-white/5">
-            <div className="p-4 sm:p-5 grid grid-cols-2 sm:grid-cols-3 items-center gap-4 bg-white/5 border-b border-white/10">
-              <span className="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em]">
-                Member
-              </span>
-              <span className="hidden sm:block text-center text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em]">
-                Deposit
-              </span>
-              <span className="text-right text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em]">
-                Free Tokens
-              </span>
-            </div>
-
+          <div className="space-y-4">
             <AnimatePresence mode="popLayout">
               {recentActivity.map((tx, idx) => (
                 <motion.div
                   key={tx.id}
                   layout
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
+                  initial={{ opacity: 0, y: 18, scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -10, scale: 0.96 }}
                   transition={{
                     type: "spring",
-                    stiffness: 500,
-                    damping: 30,
-                    opacity: { duration: 0.2 },
+                    stiffness: 420,
+                    damping: 28,
+                    opacity: { duration: 0.22 },
                   }}
-                  className={`p-3 sm:p-5 flex sm:grid sm:grid-cols-3 items-center justify-between gap-4 hover:bg-white/5 transition-all duration-300 group border-b border-white/5 last:border-0 ${
-                    idx % 2 === 0 ? "bg-[#1e293b]/40" : "bg-[#1e293b]/10"
-                  } backdrop-blur-sm`}
+                  className="group relative"
                 >
-                  <div className="flex items-center gap-3 min-w-0">
-                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden border border-white/10 bg-[#0B1120] flex-shrink-0 hidden xs:flex">
-                      <img
-                        src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${tx.user}`}
-                        alt={tx.user}
-                        className="w-full h-full object-cover"
-                        referrerPolicy="no-referrer"
-                      />
+                  <div
+                    className={`relative overflow-hidden rounded-[22px] border transition-all duration-500 ${
+                      idx % 2 === 0
+                        ? "bg-gradient-to-r from-[#0E1A2D] via-[#0A1630] to-[#0B1A35]"
+                        : "bg-gradient-to-r from-[#0B1628] via-[#09152D] to-[#0A1732]"
+                    } border-white/10 shadow-[0_12px_36px_rgba(0,0,0,0.35)] group-hover:border-cyan-300/35 group-hover:shadow-[0_0_30px_rgba(0,191,255,0.14)]`}
+                  >
+                    <div className="absolute inset-0 rounded-[22px] border border-cyan-400/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] pointer-events-none" />
+
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                      <div className="absolute inset-0 bg-[linear-gradient(115deg,transparent_20%,rgba(255,255,255,0.05)_45%,transparent_70%)]" />
                     </div>
 
-                    <div className="flex flex-col min-w-0">
-                      <span className="text-sm sm:text-base md:text-lg font-black text-white uppercase tracking-tight group-hover:text-cyan-400 transition-colors drop-shadow-[0_0_8px_rgba(34,211,238,0.2)]">
-                        {maskUser(tx.user)}
-                      </span>
-                      <div className="flex items-center gap-2 mt-0.5">
-                        <span className="text-[9px] sm:text-[10px] font-bold text-gray-500 uppercase tracking-wider">
-                          {tx.time}
-                        </span>
-                        <span className="text-[9px] text-gray-700 sm:hidden">
-                          •
-                        </span>
-                        <span className="text-[9px] sm:hidden font-bold text-gray-400">
-                          Deposited $ {tx.deposit.toLocaleString()}
-                        </span>
+                    <div className="grid grid-cols-1 md:grid-cols-[1.3fr_0.75fr_1fr] items-center gap-5 px-5 py-5 sm:px-6 sm:py-6">
+                      {/* LEFT */}
+                      <div className="min-w-0 flex items-center gap-4">
+                        <div className="relative hidden sm:flex w-12 h-12 rounded-2xl overflow-hidden border border-white/10 bg-[#0B1120] flex-shrink-0 shadow-[0_8px_20px_rgba(0,0,0,0.35)]">
+                          <img
+                            src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${tx.user}`}
+                            alt={tx.user}
+                            className="w-full h-full object-cover"
+                            referrerPolicy="no-referrer"
+                          />
+                        </div>
+
+                        <div className="min-w-0">
+                          <div className="text-[26px] sm:text-[30px] md:text-[34px] leading-none font-black uppercase tracking-tight bg-gradient-to-b from-white via-[#f5fbff] to-[#8de9ff] bg-clip-text text-transparent [text-shadow:0_1px_0_rgba(255,255,255,0.05),0_8px_18px_rgba(0,191,255,0.12)]">
+                            {maskUser(tx.user)}
+                          </div>
+
+                          <div className="mt-2 flex items-center gap-2">
+                            <span className="text-[10px] sm:text-[11px] font-bold text-white/40 uppercase tracking-[0.22em]">
+                              {tx.time}
+                            </span>
+                            <span className="sm:hidden text-white/20">•</span>
+                            <span className="sm:hidden text-[10px] font-bold text-white/55 uppercase tracking-[0.18em]">
+                              RM {tx.deposit.toLocaleString()}
+                            </span>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
 
-                  <div className="hidden sm:flex justify-center">
-                    <span className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em] border px-4 py-1.5 rounded-none transition-all duration-500 text-white/80 border-white/5 bg-white/5">
-                      RM {tx.deposit.toLocaleString()}
-                    </span>
-                  </div>
+                      {/* CENTER */}
+                      <div className="hidden md:flex justify-center">
+                        <div className="relative px-5 py-3 rounded-2xl bg-white/[0.04] border border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
+                          <div className="absolute inset-0 rounded-2xl border border-cyan-400/8 pointer-events-none" />
+                          <span className="text-[13px] lg:text-[14px] font-black uppercase tracking-[0.24em] text-white/80">
+                            RM {tx.deposit.toLocaleString()}
+                          </span>
+                        </div>
+                      </div>
 
-                  <div className="text-right whitespace-nowrap">
-                    <div
-                      className={`text-sm sm:text-lg md:text-xl font-black font-sans tracking-tighter ${
-                        tx.spins > 0 ? cyanShineClass : "text-gray-500"
-                      }`}
-                    >
-                      {tx.spins > 0 ? `${tx.spins} Free Tokens` : "No Bonus"}
+                      {/* RIGHT */}
+                      <div className="text-left md:text-right">
+                        {tx.spins > 0 ? (
+                          <div className="leading-none">
+                            <div className="text-[30px] sm:text-[34px] md:text-[40px] font-black tracking-tight bg-gradient-to-r from-[#8ef4ff] via-[#53e3ff] to-[#00cfff] bg-clip-text text-transparent drop-shadow-[0_0_14px_rgba(0,191,255,0.28)]">
+                              {tx.spins}
+                            </div>
+                            <div className="mt-1 text-[13px] sm:text-[15px] md:text-[16px] font-black uppercase tracking-[0.06em] text-cyan-300">
+                              Free Tokens
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="text-sm sm:text-base font-black uppercase tracking-[0.14em] text-white/35">
+                            No Bonus
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </motion.div>
