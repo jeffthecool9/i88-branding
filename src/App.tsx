@@ -227,65 +227,64 @@ const PaymentLogo = ({ logo }: { logo: PayLogo }) => {
 };
 const AirPodsSpotlight = () => {
   return (
-    <section className="relative py-24 sm:py-32 bg-[#0B1120] overflow-hidden">
-      {/* Apple-style cinematic spotlight */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-full bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.12)_0%,rgba(0,191,255,0.10)_18%,transparent_65%)] opacity-80" />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[2px] h-[70%] bg-gradient-to-b from-cyan-300/40 via-cyan-400/20 to-transparent blur-[1px]" />
+    <section className="relative overflow-hidden bg-[#0B1120] py-24 sm:py-32">
+      {/* cinematic background */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute left-1/2 top-0 h-full w-full max-w-5xl -translate-x-1/2 bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.10)_0%,rgba(0,191,255,0.10)_18%,transparent_65%)] opacity-80" />
+        <div className="absolute left-1/2 top-0 h-[70%] w-[2px] -translate-x-1/2 bg-gradient-to-b from-cyan-300/40 via-cyan-400/20 to-transparent blur-[1px]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(0,191,255,0.06),transparent_55%)]" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center text-center">
-          {/* Product visual */}
+          {/* product visual */}
           <div className="relative mb-12 sm:mb-16">
             <motion.div
               animate={{
-                opacity: [0.25, 0.5, 0.25],
-                scale: [1, 1.08, 1],
+                opacity: [0.2, 0.45, 0.2],
+                scale: [1, 1.06, 1],
               }}
               transition={{
                 duration: 4,
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 sm:w-80 sm:h-80 bg-cyan-400/20 rounded-full blur-[90px]"
+              className="absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-400/20 blur-[90px] sm:h-80 sm:w-80"
             />
 
             <motion.div
-              initial={{ y: 100, opacity: 0, scale: 0.92 }}
+              initial={{ y: 80, opacity: 0, scale: 0.96 }}
               whileInView={{ y: 0, opacity: 1, scale: 1 }}
               viewport={{ once: true, amount: 0.35 }}
-              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+              className="relative z-10"
             >
-              <motion.img
-                src="/airpod.jpg"
-                alt="AirPods Pro"
-                className="w-64 sm:w-80 md:w-[420px] h-auto relative z-10 drop-shadow-[0_25px_60px_rgba(0,0,0,0.5)]"
-                animate={{
-                  y: [-10, 10, -10],
-                  rotate: [-1.2, 1.2, -1.2],
-                }}
-                transition={{
-                  duration: 6,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              />
+              <div className="overflow-hidden rounded-[28px] border border-white/10 bg-white/5 p-2 shadow-[0_25px_60px_rgba(0,0,0,0.45)] backdrop-blur-sm">
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  className="w-64 rounded-[22px] object-contain sm:w-80 md:w-[420px]"
+                >
+                  <source src="/airpodvid.mp4" type="video/mp4" />
+                </video>
+              </div>
             </motion.div>
 
-            <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-56 h-6 bg-cyan-400/10 rounded-[100%] blur-2xl" />
+            <div className="absolute -bottom-8 left-1/2 h-6 w-56 -translate-x-1/2 rounded-[100%] bg-cyan-400/10 blur-2xl" />
           </div>
 
-          {/* Text content */}
+          {/* text content */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.35 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
             className="max-w-3xl"
           >
-            <h2 className="text-4xl sm:text-6xl md:text-7xl font-black text-white uppercase tracking-tighter leading-[0.95] mb-4">
+            <h2 className="mb-4 text-4xl font-black uppercase tracking-tighter leading-[0.95] text-white sm:text-6xl md:text-7xl">
               Play It,
               <br />
               <span className="bg-gradient-to-r from-white via-cyan-200 to-cyan-400 bg-clip-text text-transparent">
@@ -293,8 +292,9 @@ const AirPodsSpotlight = () => {
               </span>
             </h2>
 
-            <p className="text-lg sm:text-xl text-[#b9c7d9] font-medium mb-10 tracking-wide max-w-2xl mx-auto">
-              Win an AirPods Pro. Scroll down to see how to claim your reward
+            <p className="mx-auto mb-10 max-w-2xl text-lg font-medium tracking-wide text-[#b9c7d9] sm:text-xl">
+              Unlock your AirPods Pro reward when you complete the required
+              steps
             </p>
 
             <motion.a
@@ -305,7 +305,7 @@ const AirPodsSpotlight = () => {
               }}
               whileTap={{ scale: 0.95 }}
               onClick={() => playSFX("click")}
-              className="inline-flex items-center justify-center bg-white text-black font-black text-lg px-10 py-4 rounded-full uppercase tracking-widest transition-all hover:bg-cyan-300"
+              className="inline-flex items-center justify-center rounded-full bg-white px-10 py-4 text-lg font-black uppercase tracking-widest text-black transition-all hover:bg-cyan-300"
             >
               See How to Claim
             </motion.a>
