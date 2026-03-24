@@ -233,7 +233,7 @@ const AirPodsSpotlight = () => {
   <img
     src="/i882.png"
     alt="i88 logo"
-    className="h-10 sm:h-12 w-auto object-contain opacity-90"
+    className="h-28 sm:h-32 w-auto object-contain opacity-95 drop-shadow-[0_0_16px_rgba(255,255,255,0.35)]"
   />
 </div>
       
