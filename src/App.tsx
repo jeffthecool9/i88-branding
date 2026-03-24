@@ -243,12 +243,6 @@ const AirPodsSpotlight = () => {
           <source src="/airpodvid.mp4" type="video/mp4" />
         </video>
 
-        {/* DARK OVERLAY (IMPORTANT for contrast) */}
-        <div className="absolute inset-0 bg-[#03111D]/40" />
-
-        {/* SPOTLIGHT OVERLAY */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(255,255,255,0.18)_0%,rgba(120,170,255,0.10)_25%,transparent_60%)]" />
-
         {/* TOP BLEND */}
         <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#03111D] to-transparent" />
 
