@@ -228,53 +228,44 @@ const PaymentLogo = ({ logo }: { logo: PayLogo }) => {
 const AirPodsSpotlight = () => {
   return (
     <section className="relative overflow-hidden bg-[#0B1120] py-20 sm:py-28">
-      {/* background glow only for this section */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-1/2 top-0 h-full w-full max-w-6xl -translate-x-1/2 bg-[radial-gradient(circle_at_50%_10%,rgba(0,191,255,0.14)_0%,rgba(0,191,255,0.08)_22%,transparent_65%)]" />
-        <div className="absolute left-1/2 top-0 h-[75%] w-[2px] -translate-x-1/2 bg-gradient-to-b from-cyan-300/35 via-cyan-400/15 to-transparent blur-[1px]" />
+      {/* background video inside this section only */}
+      <div className="absolute inset-0">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster="/airpod.jpg"
+          className="h-full w-full object-cover"
+        >
+          <source src="/airpodvid.mp4" type="video/mp4" />
+        </video>
+
+        {/* dark overlay so button stays readable */}
+        <div className="absolute inset-0 bg-[#0B1120]/40" />
+
+        {/* optional premium glow */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(0,191,255,0.18),transparent_55%)]" />
+
+        {/* subtle bottom fade */}
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0B1120] via-[#0B1120]/70 to-transparent" />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        <div className="relative flex justify-center">
-          {/* outer glow */}
-          <div className="absolute inset-x-8 top-10 h-[70%] rounded-[40px] bg-cyan-400/10 blur-3xl sm:inset-x-16" />
-
-          {/* video card */}
-          <div className="relative w-full max-w-3xl rounded-[32px] border border-white/10 bg-white/5 p-3 shadow-[0_25px_80px_rgba(0,0,0,0.45)] backdrop-blur-sm">
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              poster="/airpod.jpg"
-              className="w-full rounded-[26px] object-cover"
-            >
-              <source src="/airpodvid.mp4" type="video/mp4" />
-            </video>
-
-            {/* floating CTA */}
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center">
-              <div className="translate-y-1/2 pointer-events-auto">
-                <motion.a
-                  href="#recent-joiners"
-                  whileHover={{
-                    scale: 1.05,
-                    boxShadow: "0 0 28px rgba(34, 211, 238, 0.35)",
-                  }}
-                  whileTap={{ scale: 0.96 }}
-                  onClick={() => playSFX("click")}
-                  className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-base font-black uppercase tracking-[0.22em] text-black transition-all hover:bg-cyan-300 sm:px-12 sm:py-5 sm:text-lg"
-                >
-                  Win Now
-                </motion.a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* spacing below so the floating button does not crash into next section */}
-        <div className="h-16 sm:h-20" />
+      {/* content layer */}
+      <div className="relative z-10 mx-auto flex min-h-[420px] max-w-5xl items-end justify-center px-4 sm:min-h-[520px] sm:px-6 lg:px-8">
+        <motion.a
+          href="#recent-joiners"
+          whileHover={{
+            scale: 1.05,
+            boxShadow: "0 0 28px rgba(34, 211, 238, 0.28)",
+          }}
+          whileTap={{ scale: 0.96 }}
+          onClick={() => playSFX("click")}
+          className="mb-4 inline-flex items-center justify-center rounded-full bg-white px-10 py-4 text-base font-black uppercase tracking-[0.22em] text-black transition-all hover:bg-cyan-300 sm:mb-6 sm:px-14 sm:py-5 sm:text-lg"
+        >
+          Win Now
+        </motion.a>
       </div>
     </section>
   );
