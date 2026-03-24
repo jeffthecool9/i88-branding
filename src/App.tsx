@@ -230,15 +230,20 @@ const AirPodsSpotlight = () => {
     <section className="relative overflow-hidden bg-[#03111D] py-24 sm:py-32">
       {/* extended spotlight outside the video */}
       <div className="pointer-events-none absolute inset-0">
-        {/* narrow bright core beam */}
-        <div className="absolute left-1/2 top-0 h-[58%] w-[240px] -translate-x-1/2 bg-[radial-gradient(ellipse_at_top,rgba(190,215,255,0.30)_0%,rgba(130,170,230,0.18)_28%,rgba(50,95,170,0.08)_52%,transparent_78%)] blur-[10px]" />
+{/* STRONGER CORE LIGHT (main brightness) */}
+<div className="absolute left-1/2 top-0 h-[48%] w-[260px] -translate-x-1/2 
+bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.55)_0%,rgba(200,225,255,0.35)_18%,rgba(120,170,255,0.18)_38%,rgba(40,90,180,0.08)_60%,transparent_80%)] 
+blur-[12px]" />
 
-        {/* wider soft spill */}
-        <div className="absolute left-1/2 top-0 h-[62%] w-[560px] -translate-x-1/2 bg-[radial-gradient(ellipse_at_top,rgba(120,170,255,0.16)_0%,rgba(60,110,200,0.10)_30%,rgba(10,30,60,0.00)_75%)] blur-[28px]" />
+{/* WIDER LIGHT SPREAD */}
+<div className="absolute left-1/2 top-0 h-[52%] w-[600px] -translate-x-1/2 
+bg-[radial-gradient(ellipse_at_top,rgba(160,200,255,0.22)_0%,rgba(90,150,255,0.12)_30%,transparent_70%)] 
+blur-[32px]" />
 
-        {/* faint vertical shaft to connect beam downwards */}
-        <div className="absolute left-1/2 top-0 h-[70%] w-[120px] -translate-x-1/2 bg-gradient-to-b from-white/10 via-cyan-200/8 to-transparent blur-[18px]" />
-      </div>
+{/* LIGHT SHAFT (vertical beam) */}
+<div className="absolute left-1/2 top-0 h-[58%] w-[140px] -translate-x-1/2 
+bg-gradient-to-b from-white/25 via-cyan-200/15 to-transparent 
+blur-[20px]" />
 
       {/* video layer */}
       <div className="absolute inset-0 flex items-center justify-center">
