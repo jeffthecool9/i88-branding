@@ -227,9 +227,9 @@ const PaymentLogo = ({ logo }: { logo: PayLogo }) => {
 };
 const AirPodsSpotlight = () => {
   return (
-    <section className="relative overflow-hidden bg-[#0B1120] py-24 sm:py-32">
+    <section className="relative overflow-hidden bg-[#071224] py-24 sm:py-32">
       
-      {/* background video (contained, not full zoom) */}
+      {/* video layer */}
       <div className="absolute inset-0 flex items-center justify-center">
         <video
           autoPlay
@@ -238,35 +238,38 @@ const AirPodsSpotlight = () => {
           playsInline
           preload="metadata"
           poster="/airpod.jpg"
-          className="h-full max-h-[520px] w-auto object-contain opacity-90"
+          className="h-full max-h-[520px] w-auto object-contain opacity-95"
         >
           <source src="/airpodvid.mp4" type="video/mp4" />
         </video>
 
-        {/* overlay for readability */}
-        <div className="absolute inset-0 bg-[#0B1120]/55" />
+        {/* TOP BLEND (this fixes your issue) */}
+        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#071224] via-[#071224]/80 to-transparent" />
 
-        {/* top glow */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_10%,rgba(0,191,255,0.18),transparent_55%)]" />
+        {/* BOTTOM BLEND */}
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#071224] via-[#071224]/80 to-transparent" />
+
+        {/* global soft dark overlay */}
+        <div className="absolute inset-0 bg-[#071224]/40" />
+
+        {/* subtle center glow */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(0,191,255,0.15),transparent_55%)]" />
       </div>
 
-      {/* content layer */}
+      {/* CTA */}
       <div className="relative z-10 mx-auto flex min-h-[520px] max-w-5xl items-end justify-center px-4 sm:px-6 lg:px-8">
-        
-        {/* CTA LOWER POSITION */}
         <motion.a
           href="#recent-joiners"
           whileHover={{
             scale: 1.05,
-            boxShadow: "0 0 28px rgba(34, 211, 238, 0.28)",
+            boxShadow: "0 0 28px rgba(34, 211, 238, 0.25)",
           }}
           whileTap={{ scale: 0.96 }}
           onClick={() => playSFX("click")}
-          className="mb-2 sm:mb-4 inline-flex items-center justify-center rounded-full bg-white px-10 py-4 text-base font-black uppercase tracking-[0.22em] text-black transition-all hover:bg-cyan-300 sm:px-14 sm:py-5 sm:text-lg"
+          className="mb-4 inline-flex items-center justify-center rounded-full bg-white px-10 py-4 text-base font-black uppercase tracking-[0.22em] text-black transition-all hover:bg-cyan-300 sm:px-14 sm:py-5 sm:text-lg"
         >
           Win Now
         </motion.a>
-
       </div>
     </section>
   );
