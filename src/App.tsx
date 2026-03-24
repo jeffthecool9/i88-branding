@@ -227,7 +227,19 @@ const PaymentLogo = ({ logo }: { logo: PayLogo }) => {
 };
 const AirPodsSpotlight = () => {
   return (
-    <section className="relative overflow-hidden bg-[#041423] py-24 sm:py-32">
+    <section className="relative overflow-hidden bg-[#03111D] py-24 sm:py-32">
+      {/* extended spotlight outside the video */}
+      <div className="pointer-events-none absolute inset-0">
+        {/* narrow bright core beam */}
+        <div className="absolute left-1/2 top-0 h-[58%] w-[240px] -translate-x-1/2 bg-[radial-gradient(ellipse_at_top,rgba(190,215,255,0.30)_0%,rgba(130,170,230,0.18)_28%,rgba(50,95,170,0.08)_52%,transparent_78%)] blur-[10px]" />
+
+        {/* wider soft spill */}
+        <div className="absolute left-1/2 top-0 h-[62%] w-[560px] -translate-x-1/2 bg-[radial-gradient(ellipse_at_top,rgba(120,170,255,0.16)_0%,rgba(60,110,200,0.10)_30%,rgba(10,30,60,0.00)_75%)] blur-[28px]" />
+
+        {/* faint vertical shaft to connect beam downwards */}
+        <div className="absolute left-1/2 top-0 h-[70%] w-[120px] -translate-x-1/2 bg-gradient-to-b from-white/10 via-cyan-200/8 to-transparent blur-[18px]" />
+      </div>
+
       {/* video layer */}
       <div className="absolute inset-0 flex items-center justify-center">
         <video
@@ -242,14 +254,17 @@ const AirPodsSpotlight = () => {
           <source src="/airpodvid.mp4" type="video/mp4" />
         </video>
 
-        {/* top blend */}
-        <div className="absolute inset-x-0 top-0 h-56 bg-gradient-to-b from-[#041423] via-[#041423]/92 to-transparent" />
+        {/* top blend to merge page bg + video */}
+        <div className="absolute inset-x-0 top-0 h-56 bg-gradient-to-b from-[#03111D] via-[#03111D]/88 to-transparent" />
 
         {/* bottom blend */}
-        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#041423] via-[#041423]/85 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#03111D] via-[#03111D]/82 to-transparent" />
 
-        {/* darker global overlay */}
-        <div className="absolute inset-0 bg-[#041423]/35" />
+        {/* very light global dark overlay */}
+        <div className="absolute inset-0 bg-[#03111D]/18" />
+
+        {/* spotlight continuation exactly around airpod area */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_52%,rgba(205,225,255,0.16)_0%,rgba(120,160,230,0.10)_18%,rgba(40,80,160,0.04)_34%,transparent_54%)]" />
       </div>
 
       {/* CTA */}
