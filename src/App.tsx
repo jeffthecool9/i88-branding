@@ -238,7 +238,7 @@ const AirPodsSpotlight = () => {
           playsInline
           preload="metadata"
           poster="/airpod.jpg"
-          className="h-full w-full object-cover"
+          className="h-full w-full object-contain scale-90 sm:scale-95"
         >
           <source src="/airpodvid.mp4" type="video/mp4" />
         </video>
@@ -257,7 +257,7 @@ const AirPodsSpotlight = () => {
       </div>
 
       {/* CTA */}
-      <div className="relative z-10 flex h-full items-end justify-center pb-10">
+      <div className="relative z-10 flex h-full items-end justify-center pb-4 sm:pb-6">
         <motion.a
           href="#recent-joiners"
           whileHover={{
