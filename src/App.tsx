@@ -227,17 +227,10 @@ const PaymentLogo = ({ logo }: { logo: PayLogo }) => {
 };
 const AirPodsSpotlight = () => {
   return (
-    <section className="relative overflow-hidden bg-[#03111D] py-16 sm:py-20">
+    <section className="relative overflow-hidden bg-[#03111D] h-[80vh] min-h-[520px]">
       
-      {/* spotlight */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-1/2 top-0 h-[45%] w-[240px] -translate-x-1/2 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.55)_0%,rgba(200,225,255,0.35)_18%,rgba(120,170,255,0.18)_38%,rgba(40,90,180,0.08)_60%,transparent_80%)] blur-[12px]" />
-        <div className="absolute left-1/2 top-0 h-[52%] w-[520px] -translate-x-1/2 bg-[radial-gradient(ellipse_at_top,rgba(160,200,255,0.22)_0%,rgba(90,150,255,0.12)_30%,transparent_70%)] blur-[28px]" />
-        <div className="absolute left-1/2 top-0 h-[55%] w-[120px] -translate-x-1/2 bg-gradient-to-b from-white/25 via-cyan-200/15 to-transparent blur-[18px]" />
-      </div>
-
-      {/* video */}
-      <div className="absolute inset-0 flex items-start justify-center pt-2 sm:pt-4">
+      {/* FULLSCREEN VIDEO */}
+      <div className="absolute inset-0">
         <video
           autoPlay
           muted
@@ -245,33 +238,39 @@ const AirPodsSpotlight = () => {
           playsInline
           preload="metadata"
           poster="/airpod.jpg"
-          className="h-full max-h-[700px] w-auto object-contain opacity-100 contrast-110 brightness-110"
+          className="h-full w-full object-cover"
         >
           <source src="/airpodvid.mp4" type="video/mp4" />
         </video>
 
-        {/* blends */}
-        <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#03111D] via-[#03111D]/90 to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-[#03111D] via-[#03111D]/85 to-transparent" />
-        <div className="absolute inset-0 bg-[#03111D]/6" />
+        {/* DARK OVERLAY (IMPORTANT for contrast) */}
+        <div className="absolute inset-0 bg-[#03111D]/40" />
+
+        {/* SPOTLIGHT OVERLAY */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(255,255,255,0.18)_0%,rgba(120,170,255,0.10)_25%,transparent_60%)]" />
+
+        {/* TOP BLEND */}
+        <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#03111D] to-transparent" />
+
+        {/* BOTTOM BLEND */}
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#03111D] to-transparent" />
       </div>
 
       {/* CTA */}
-      <div className="relative z-10 mx-auto flex min-h-[420px] max-w-5xl items-end justify-center px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 flex h-full items-end justify-center pb-10">
         <motion.a
           href="#recent-joiners"
           whileHover={{
             scale: 1.05,
-            boxShadow: "0 0 20px rgba(34, 211, 238, 0.15)",
+            boxShadow: "0 0 25px rgba(34, 211, 238, 0.2)",
           }}
           whileTap={{ scale: 0.96 }}
           onClick={() => playSFX("click")}
-          className="mb-2 inline-flex items-center justify-center rounded-full bg-white px-10 py-4 text-base font-black uppercase tracking-[0.22em] text-black transition-all hover:bg-cyan-300 sm:px-14 sm:py-5 sm:text-lg"
+          className="inline-flex items-center justify-center rounded-full bg-white px-10 py-4 text-base font-black uppercase tracking-[0.22em] text-black transition-all hover:bg-cyan-300 sm:px-14 sm:py-5 sm:text-lg"
         >
           Win Now
         </motion.a>
       </div>
-
     </section>
   );
 };
